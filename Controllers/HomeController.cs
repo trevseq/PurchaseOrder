@@ -211,23 +211,23 @@ namespace PurchaseOrder.Controllers
                             where itm.PurchaseNumber == poNumber
                             select itm);
 
-             //   int vendorID = data.Vendor;
+                int vendorID = data.Vendor;
 
-                //vendorInformation = (from v in db.Vendors
-                //                     where v.Id == vendorID
-                //                     select new
-                //                     {
-                //                         v.Address1
-                //                     }).FirstOrDefault();
+                vendorInformation = (from v in db.Vendors
+                                     where v.Id == vendorID
+                                     select new
+                                     {
+                                         v.Address1
+                                     }).FirstOrDefault();
 
-                //vendorContact = (from c in db.Vendors_Contact
-                //                 where c.VendorId == vendorID
-                //                 select new
-                //                 {
-                //                     c.Name,
-                //                     c.Phone,
-                //                     c.Fax
-                //                 }).FirstOrDefault();
+                vendorContact = (from c in db.Vendors_Contact
+                                 where c.VendorId == vendorID
+                                 select new
+                                 {
+                                     c.Name,
+                                     c.Phone,
+                                     c.Fax
+                                 }).FirstOrDefault();
             }
 
 

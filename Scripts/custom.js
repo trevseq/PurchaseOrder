@@ -182,8 +182,6 @@ $(document).ready(function () {
             var vendorInfo = args.vendorInformation;
             var vendContact = args.vendorContact;
 
-            alert(po);
-
             var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val());
             var row = "<tr name='invRow'><td><span name='spProduct'>" + "product here" + "</span></td><td><span name='spPartNo'>" + "part no here" + "</span></td><td><span name='spDescription'>" + "desc here" + "</span></td><td>" + "<span name='spQuantity'>" + "quan here" + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spPrice'>" + "price here" + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spShipping'>" + "ship here" + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spTax'>" + "tax here" + "</span>" + "<td class='text-right'>" + "$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
             $('#tblItemizedList').find("tbody").append(row);
@@ -193,7 +191,7 @@ $(document).ready(function () {
 
             
         });
-        var ajxRequestor = $.ajaxl({ type: "GET", dataType: "JSON", url: pathName + "Home/GetRequestor", cache: false });
+        var ajxRequestor = $.ajax({ type: "GET", dataType: "JSON", url: pathName + "Home/GetRequestor", cache: false });
         ajxRequestor.done(function (args) {
             // Populate fields
             $("#lblReqName").text(args.FirstName + " " + args.LastName);
