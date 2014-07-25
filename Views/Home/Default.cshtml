@@ -1,0 +1,393 @@
+﻿<!-- ko with: home -->
+<div class="col-lg-6 floatPos" id="mainForm">
+    <div class="row">
+        <form id="form1" class="form-horizontal" role="form">
+            <fieldset>
+                <h2>Order Item</h2>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">P.O. Number</label>
+                    <div class="col-sm-4">
+                        <input id="txtPONum" type="text" placeholder="P.O. Number" value="312341234" class="form-control validate[required]">
+                    </div>
+                    <label class="col-sm-2 control-label" for="textinput">Date Requested</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="txtDateRequested" placeholder="Date" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Priority</label>
+                    <div class="col-sm-4">
+                        <select id="cboPriority" class="form-control validate[required]" name="priority">
+                            <option value="Low">Low</option>
+                            <option value="Normal" selected>Normal</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                    <label class="col-sm-2 control-label" for="textinput">Date Required</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="txtDateRequired" placeholder="Date" class="form-control" name="dateRequired">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Terms</label>
+                    <div class="col-sm-4">
+                        <select id="cboPaymentTerms" class="form-control validate[required]" name="terms"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <textarea id="txtJustification" placeholder="Justification" class="form-control" style="height:85px" name="justification"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <form id="form2" class="form-horizontal" role="form">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2" for="textinput">Product</label>
+                    <div class="col-sm-5">
+                        <input id="txtProduct" type="text" placeholder="Product" class="form-control validate[required]" />
+                    </div>
+                    <label class="col-sm-2" for="textinput">Part No.</label>
+                    <div class="col-sm-3">
+                        <input id="txtPartNo" type="text" placeholder="Part No." class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="textinput">Description</label>
+                    <div class="col-sm-5">
+                        <input id="txtDescription" type="text" placeholder="Description" class="form-control" />
+                    </div>
+                    <label class="col-sm-2" for="textinput">Quantity</label>
+                    <div class="col-sm-3">
+                        <input id="txtQuantity" type="text" placeholder="Quantity" class="form-control validate[requred,custom[integer]]" value="1" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="textinput">Price</label>
+                    <div class="col-sm-2">
+                        <input id="txtPrice" type="text" placeholder="" class="form-control validate[required,custom[number]]" value="" />
+                    </div>
+                    <label class="col-sm-2" for="textinput">Shipping</label>
+                    <div class="col-sm-2">
+                        <input id="txtShipping" type="text" placeholder="" class="form-control validate[required,custom[number]]" value="" />
+                    </div>
+                    <label class="col-sm-2" for="textinput">Tax</label>
+                    <div class="col-sm-2">
+                        <input id="txtTax" type="text" placeholder="" class="form-control validate[required,custom[number]]" value="" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="pull-right">
+                            <button id="addItem" class="btn btn-primary">Add Item</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <form id="form3" class="form-horizontal" role="form">
+            <fieldset>
+                <hr />
+                <h2>Requestor</h2>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Manager</label>
+                    <div class="col-sm-10">
+                        <select id="cboManager" class="form-control" name="manager"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Name</label>
+                    <div class="col-sm-10">
+                        <input id="txtReqName" data-requestorid="" type="text" placeholder="Name" class="form-control validate[required]" name="requestor">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Title</label>
+                    <div class="col-sm-10">
+                        <input id="txtReqTitle" type="text" placeholder="Title" class="form-control validate[required]">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Email</label>
+                    <div class="col-sm-10">
+                        <input id="txtReqEmail" type="text" placeholder="Email" class="form-control validate[required,custom[email]]">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Office</label>
+                    <div class="col-sm-4">
+                        <input id="txtOffice" type="text" placeholder="Office" class="form-control">
+                    </div>
+                    <label class="col-sm-2 control-label" for="textinput">Department</label>
+                    <div class="col-sm-4">
+                        <input id="txtDepartment" type="text" placeholder="Department" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Phone</label>
+                    <div class="col-sm-4">
+                        <input id="txtReqPhone" type="text" placeholder="Phone" class="form-control validate[required,custom[phone]]">
+                    </div>
+                    <label class="col-sm-2 control-label" for="textinput">Fax</label>
+                    <div class="col-sm-4">
+                        <input id="txtReqFax" type="text" placeholder="Fax" class="form-control validate[required,custom[phone]]">
+                    </div>
+                </div>
+                <hr />
+                <h2>Vendor</h2>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Company Name</label>
+                    <div class="col-sm-10">
+                        <select id="cboVendors" class="form-control validate[required]" name="vendor"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Product Type</label>
+                    <div class="col-sm-10">
+                        <select id="cboProductType" class="form-control" name="productType"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtVContactName" placeholder="Vendor Contact Name" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Title</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtVContactTitle" placeholder="Vendor Contact Title" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Address</label>
+                    <div class="col-sm-10">
+                        <textarea id="txtVContactAddress" placeholder="Address" class="form-control" style="height:70px"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Phone</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="txtVContactPhone" placeholder="Phone" class="form-control">
+                    </div>
+
+                    <label class="col-sm-2 control-label" for="textinput">Extension</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="txtVContactExtension" placeholder="Extension" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Fax</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtVContactFax" placeholder="Fax" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput">Hyperlink</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtVContactHyperlink" placeholder="Insert Hyperlink" class="form-control">
+                    </div>
+                </div>
+                <hr />
+                <h2>Billing/Shipping</h2>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="textinput">Billing Address</label>
+                    <label class="col-sm-4 col-sm-offset-2 control-label" for="textinput">Shipping Address</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <textarea id="txtBillAddress" placeholder="Address" name="billingAddress" class="form-control validate[required]" style="height:70px">Kasowitz, Benson, Torres, &amp; Friedman LLP &#10;1633 Broadway &#10;New York, New York, 10019</textarea>
+                    </div>
+                    <div class="col-sm-6">
+                        <textarea id="txtShipAddress" placeholder="Address" name="shippingAddress" class="form-control validate[required]" style="height:70px">Kasowitz, Benson, Torres, &amp; Friedman LLP &#10;Attn: &#10;1633 Broadway &#10;New York, New York, 10019</textarea>
+                    </div>
+                </div>
+                <hr />
+                <h2>Manager Signature</h2>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="textinput"></label>
+                    <div class="col-sm-10">
+                        <input id="txtSig" type="text" name="signedBy" placeholder="Manager's Signature" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-default">Cancel</button>
+                            <button id="btnSubmit" type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="comment"/>
+            </fieldset>
+        </form>
+    </div><!-- /.row -->
+</div>
+<div class="col-md-5 col-md-offset-1 fixedPos">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <br />
+                    <div class="col-xs-6">
+                        <img src="/Images/logo.jpg" style="height:104px;width:314px" />
+                    </div>
+                    <div class="col-xs-5 pull-right">
+                        <div>
+                            <strong>Requisitioned By:</strong>
+                            <div id="lblReqName" class="pull-right"></div>
+                        </div>
+                        <div>
+                            <strong>Email:</strong>
+                            <div id="lblReqEmail" class="pull-right"></div>
+                        </div>
+                        <div>
+                            <strong>Terms:</strong>
+                            <div id="lblPaymentTerms" class="pull-right"></div>
+                        </div>
+                        <div>
+                            <strong>Comment:</strong>
+                            <div id="lblComment" class="pull-right editable" contenteditable="true" data-placeholder='Comment here...'></div>
+                        </div>
+                        <div>
+                            <strong>PO #:</strong>
+                            <div id="lblPONum" class="pull-right"></div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <strong>Vendor:</strong>
+                        <strong>Contact:</strong>
+                    </div>
+                    <div class="col-xs-4">
+                        <div id="lblVendors"></div>
+                        <div id="lblVContactName"></div>
+                        <div id="lblVContactAddress"></div>
+                    </div>
+                    <div class="col-xs-5 col-sm-offset-1">
+                        <strong>Ship To:</strong>
+                        <div id="lblShipAddress"></div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-xs-2">
+                        <strong>Phone:</strong>
+                        <strong>Fax:</strong>
+                    </div>
+                    <div class="col-xs-4">
+                        <div id="lblVContactPhone"></div>
+                        <div id="lblVContactFax"></div>
+                    </div>
+                    <div class="col-xs-5 col-sm-offset-1">
+                        <strong>Order Date:</strong>
+                        <div id="invoiceOrderDate">@System.DateTime.Today.ToLongDateString()</div>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Order summary</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table border="0" class="table table-condensed" id="tblItemizedList">
+                                <thead>
+                                    <tr><td> </td>
+                                        <td><strong>Item</strong></td>
+                                        <td style="display:none" class="text-center"><strong>Part Number</strong></td>
+                                        <td style="display:none" class="text-center"><strong>Description</strong></td>
+                                        <td class="text-center"><strong>Quantity</strong></td>
+                                        <td class="text-center"><strong>Cost/Unit</strong></td>
+                                        <td class="text-center"><strong>Shipping</strong></td>
+                                        <td class="text-center"><strong>Tax</strong></td>
+                                        <td class="text-right"><strong>Cost</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td> </td>
+                                        <td> </td>
+                                        <td style="display:none"> </td>
+                                        <td style="display:none"> </td>
+                                        <td> </td>
+                                        <td> </td>
+                                        <td> </td>
+                                        <td> </td>
+                                        <td> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="thick-line"></td>
+                                        <td class="thick-line"></td>
+                                        <td style="display:none" class="thick-line"></td>
+                                        <td style="display:none" class="thick-line"></td>
+                                        <td class="thick-line"></td>
+                                        <td class="thick-line"></td>
+                                        <td class="thick-line"></td>
+                                        <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                        <td class="thick-line text-right" id="subTotal"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td style="display:none" class="no-line"></td>
+                                        <td style="display:none" class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line text-center"><strong>Shipping</strong></td>
+                                        <td class="no-line text-right" id="shipTotal"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td style="display:none" class="no-line"></td>
+                                        <td style="display:none" class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line text-center"><strong>Tax</strong></td>
+                                        <td class="no-line text-right" id="taxTotal"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td style="display:none" class="no-line"></td>
+                                        <td style="display:none" class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td style="display:none" class="no-line"></td>
+                                        <td style="display:none" class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line text-center"><strong>Total</strong></td>
+                                        <td class="no-line text-right" id="grandTotal"></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <p id="lblJustification"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
