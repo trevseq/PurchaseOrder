@@ -182,8 +182,10 @@ $(document).ready(function () {
             var vendorInfo = args.vendorInformation;
             var vendContact = args.vendorContact;
 
+            alert(po);
+
             var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val());
-            var row = "<tr name='invRow'><td><img src='/Images/delete-32x32.png' style='height:20px;width:20px;cursor:pointer' /></td><td><span name='spProduct'>" + "product here" + "</span></td><td style='display:none'><span name='spPartNo'>" + "part no here" + "</span></td><td style='display:none'><span name='spDescription'>" + "desc here" + "</span></td><td class='text-center'>" + "<span name='spQuantity'>" + "quan here" + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spPrice'>" + "price here" + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spShipping'>" + "ship here" + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spTax'>" + "tax here" + "</span>" + "<td class='text-right'>" + "$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
+            var row = "<tr name='invRow'><td><span name='spProduct'>" + "product here" + "</span></td><td><span name='spPartNo'>" + "part no here" + "</span></td><td><span name='spDescription'>" + "desc here" + "</span></td><td>" + "<span name='spQuantity'>" + "quan here" + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spPrice'>" + "price here" + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spShipping'>" + "ship here" + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spTax'>" + "tax here" + "</span>" + "<td class='text-right'>" + "$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
             $('#tblItemizedList').find("tbody").append(row);
             UpdateItems();
 
