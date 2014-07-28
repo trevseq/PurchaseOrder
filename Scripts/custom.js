@@ -17,11 +17,6 @@ $(document).ready(function () {
         var ajxVend = $.ajax({ type: "GET", dataType: "JSON", url: pathName + "Home/GetVendors", cache: false });
         ajxVend.done(function (args) {
             var options = $.map(args, function (e) {
-                //var s = JSON.stringify(e).replace("{", "");
-                //s = s.replace("}", "");
-                //s = s.replace(new RegExp("\"", "g"), "\'");
-
-
                 return "<option value=\"" + e.Id + "\" data-address=\"" + e.Address1 + "\"  data-site=\"" + e.Website + "\">" + e.Name + "</option>";
             }).join("");
 
@@ -50,7 +45,6 @@ $(document).ready(function () {
         
         var ajxRequestor = $.ajax({ type: "GET", dataType: "JSON", url: pathName + "Home/GetRequestor", cache: false, async: false });
         ajxRequestor.done(function (args) {
-           
             // Populate requestor section:
             $("#txtReqName").data("requestorid", args.EmployeeID);
             $("#txtReqName").val(args.FirstName + " " + args.LastName);
@@ -149,7 +143,6 @@ $(document).ready(function () {
                 $('#txtVContactExtension').val(args.Ext);
                 $('#txtVContactFax').val(args.Fax);
 
-
                 if (args.Name != null) {
                     (args.Title != null) ? $('#lblVContactName').text(args.Name + " (" + args.Title + ")") : $('#lblVContactName').text(args.Name);
                 }
@@ -183,11 +176,7 @@ $(document).ready(function () {
             $('#tblItemizedList').find("tbody").append(row);
             UpdateItems();
 
-
-
             //$("#invoiceOrderDate").text(args.data.OrderDate);
-
-            
         });
         var ajxRequestor = $.ajax({ type: "GET", dataType: "JSON", url: pathName + "Home/GetRequestor", cache: false });
         ajxRequestor.done(function (args) {
@@ -199,21 +188,16 @@ $(document).ready(function () {
 
 
 function AddItems() {
-
     //Validate form inputs
     var formValid = $('#form2').validationEngine('validate', { autoPositionUpdate: true });
     isValidated = true;
 
     if (formValid != false) {
-
         var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val());
         var row = "<tr name='invRow'><td><img src='/Images/delete-32x32.png' style='height:20px;width:20px;cursor:pointer' /></td><td><span name='spProduct'>" + $('#txtProduct').val() +"</span></td><td style='display:none'><span name='spPartNo'>" + $('#txtPartNo').val() +"</span></td><td style='display:none'><span name='spDescription'>" + $('#txtDescription').val() + "</span></td><td class='text-center'>" + "<span name='spQuantity'>" + $('#txtQuantity').val() + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spPrice'>" + $('#txtPrice').val() + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spShipping'>" + $('#txtShipping').val() + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spTax'>" + $('#txtTax').val() + "</span>" + "<td class='text-right'>" + "$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
         $('#tblItemizedList').find("tbody").append(row);
 
         UpdateItems();
-
-        // send form vals to database
-
 
         // clear form vals
         $('#txtProduct').val("");
@@ -234,7 +218,6 @@ function UpdateItems() {
         price += parseFloat($(this).find("span[name='spPrice']").text()) * parseInt($(this).find("span[name='spQuantity']").text());
         shipping += parseFloat($(this).find("span[name='spShipping']").text());
         tax += parseFloat($(this).find("span[name='spTax']").text());
-
     });
     $("#subTotal").text("$" + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
     $("#shipTotal").text("$" + shipping.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
@@ -243,9 +226,7 @@ function UpdateItems() {
 }
 
 function Submit() {
-
     //var mainParams = $("#mainForm").serialize();
-
     // Validate form inputs
     var form1Valid = $('#form1').validationEngine('validate', { autoPositionUpdate: true });
     var form3Valid = $('#form3').validationEngine('validate', { autoPositionUpdate: true });

@@ -26,19 +26,20 @@ namespace PurchaseOrder.Controllers
             // Get requestor ID aka(EmployeeID)
             string u = Helper.GetEmployeeId(System.Environment.UserName);
             // GEt Requestor information base on id.
-            string query = string.Format("SELECT e.[EmployeeID]" +
-      ",e.[LastName]" +
-      ",e.[FirstName] " +
-      ",t.[Title]" +
-      ",d.[Department]" +
-      ",e.[Location]" +
-      ",e.[WorkPhone]" +
-      ",e.[WorkFax]" +
-      ",e.[WorkEmail]" +
-      ",e.[RoomNumber]  " +
-      "FROM [ADP_Feed].[dbo].[Employees] e " +
-      "join Departments d on e.Department = d.DepartmentID " +
-      "join Titles t on e.JobTitle = t.TitleID where EmployeeID={0}", u);
+            string query = string.Format(
+                "SELECT e.[EmployeeID]" +
+                ",e.[LastName]" +
+                ",e.[FirstName] " +
+                ",t.[Title]" +
+                ",d.[Department]" +
+                ",e.[Location]" +
+                ",e.[WorkPhone]" +
+                ",e.[WorkFax]" +
+                ",e.[WorkEmail]" +
+                ",e.[RoomNumber]  " +
+                "FROM [ADP_Feed].[dbo].[Employees] e " +
+                "join Departments d on e.Department = d.DepartmentID " +
+                "join Titles t on e.JobTitle = t.TitleID where EmployeeID={0}", u);
 
             SqlDataAdapter adp = new SqlDataAdapter(query, new SqlConnection(ConfigurationManager.ConnectionStrings["PurchaseOrder.Properties.Settings.ADPFeed"].ConnectionString));
             DataTable tb = new DataTable();
