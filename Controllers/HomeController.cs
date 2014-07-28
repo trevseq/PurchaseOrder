@@ -116,7 +116,20 @@ namespace PurchaseOrder.Controllers
             };
         }
 
-        public ActionResult SavePOForm(string priority, string terms, string dateRequested, string dateRequired, string justification, string manager, int requestorId, int vendor, string productType, string billingAddress, string shippingAddress, string comment, string signedBy)
+        public ActionResult SavePOForm(
+            int requestorId,
+            int vendor,
+            string priority = null,
+            string terms = null,
+            string dateRequested = null,
+            string dateRequired = null,
+            string justification = null,
+            string manager = null,
+            string productType = null,
+            string billingAddress = null,
+            string shippingAddress = null,
+            string comment = null,
+            string signedBy = null)
         {
             var db = new PurchaseOrdersEntities();
             var po = db.PurchaseOrders.Add(new Models.PurchaseOrder());

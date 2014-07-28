@@ -244,7 +244,7 @@ function UpdateItems() {
 
 function Submit() {
 
-    var mainParams = $("#mainForm").serialize();
+    //var mainParams = $("#mainForm").serialize();
 
     // Validate form inputs
     var form1Valid = $('#form1').validationEngine('validate', { autoPositionUpdate: true });
@@ -258,8 +258,8 @@ function Submit() {
         var dateRequested = $('#txtDateRequested').val();
         var dateRequired = $('#txtDateRequired').val();
         var justification = $('#txtJustification').val();
-        var manager = $('#cboManager').val();
-        var requestorId = $('#txtReqName').data("requestorId");
+        var manager = ($('#cboManager').val().length > 0) ? $('#cboManager').val() : "";
+        var requestorId = $('#txtReqName').data("requestorid");
         var vendor = $('#cboVendors').val();
         var productType = $('#cboProductType').val();
         var billingAddress = $('#txtBillAddress').val();
