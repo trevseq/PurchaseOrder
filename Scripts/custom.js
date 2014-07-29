@@ -172,7 +172,15 @@ $(document).ready(function () {
         ajxVend.done(function (args) {
 
             var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val());
-            var row = "<tr name='invRow'><td><span name='spProduct'>" + "product here" + "</span></td><td><span name='spPartNo'>" + "part no here" + "</span></td><td><span name='spDescription'>" + "desc here" + "</span></td><td>" + "<span name='spQuantity'>" + "quan here" + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spPrice'>" + "price here" + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spShipping'>" + "ship here" + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spTax'>" + "tax here" + "</span>" + "<td class='text-right'>" + "$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
+            var row = "<tr name='invRow'><td><span name='spProduct'>" +
+                "product here" + "</span></td><td><span name='spPartNo'>" +
+                "part no here" + "</span></td><td><span name='spDescription'>" +
+                "desc here" + "</span></td><td>" + "<span name='spQuantity'>" +
+                "quan here" + "</span>" + "</td><td class='text-right'>" +
+                "$" + "<span name='spPrice'>" + "price here" + "</span>" + "</td><td class='text-right'>" +
+                "$" + "<span name='spShipping'>" + "ship here" + "</span>" + "</td><td class='text-right'>" +
+                "$" + "<span name='spTax'>" + "tax here" + "</span>" + "<td class='text-right'>" +
+                "$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
             $('#tblItemizedList').find("tbody").append(row);
             UpdateItems();
 
@@ -194,7 +202,14 @@ function AddItems() {
 
     if (formValid != false) {
         var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val());
-        var row = "<tr name='invRow'><td><img src='/Images/delete-32x32.png' style='height:20px;width:20px;cursor:pointer' /></td><td><span name='spProduct'>" + $('#txtProduct').val() +"</span></td><td style='display:none'><span name='spPartNo'>" + $('#txtPartNo').val() +"</span></td><td style='display:none'><span name='spDescription'>" + $('#txtDescription').val() + "</span></td><td class='text-center'>" + "<span name='spQuantity'>" + $('#txtQuantity').val() + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spPrice'>" + $('#txtPrice').val() + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spShipping'>" + $('#txtShipping').val() + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spTax'>" + $('#txtTax').val() + "</span>" + "<td class='text-right'>" + "$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
+        var row = "<tr name='invRow'><td><img src='/Images/delete-32x32.png' style='height:20px;width:20px;cursor:pointer' /></td><td><span name='spProduct'>" +
+            $('#txtProduct').val() + "</span></td><td style='display:none'><span name='spPartNo'>" +
+            $('#txtPartNo').val() + "</span></td><td style='display:none'><span name='spDescription'>" +
+            $('#txtDescription').val() + "</span></td><td class='text-center'>" + "<span name='spQuantity'>" +
+            $('#txtQuantity').val() + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spPrice'>" +
+            $('#txtPrice').val() + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spShipping'>" +
+            $('#txtShipping').val() + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spTax'>" +
+            $('#txtTax').val() + "</span>" + "<td class='text-right'>" + "$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
         $('#tblItemizedList').find("tbody").append(row);
 
         UpdateItems();
@@ -248,7 +263,19 @@ function Submit() {
         var comment = $('#lblComment').text();
         var signedBy = $('#txtSig').val();
 
-        var mainParams = "priority=" + priority + "&terms=" + terms + "&dateRequested=" + dateRequested + "&dateRequired=" + dateRequired + "&justification=" + justification + "&manager=" + manager + "&requestorId=" + requestorId + "&vendor=" + vendor + "&productType=" + productType + "&billingAddress=" + billingAddress + "&shippingAddress=" + shippingAddress + "&comment=" + comment + "&signedBy=" + signedBy;
+        var mainParams = "priority=" + priority +
+            "&terms=" + terms +
+            "&dateRequested=" + dateRequested +
+            "&dateRequired=" + dateRequired +
+            "&justification=" + justification +
+            "&manager=" + manager +
+            "&requestorId=" + requestorId +
+            "&vendor=" + vendor +
+            "&productType=" + productType +
+            "&billingAddress=" + billingAddress +
+            "&shippingAddress=" + shippingAddress +
+            "&comment=" + comment +
+            "&signedBy=" + signedBy;
 
         // Save PO form data.
         var x = $.ajax({ type: "GET", url: pathName + "home/SavePOForm?" + mainParams, datatype: "JSON", async: false, cache: false });
@@ -267,7 +294,13 @@ function Submit() {
             var shipping = $(this).find("span[name='spShipping']").text();
             var tax = $(this).find("span[name='spTax']").text();
 
-            var params = "&product=" + product + "&partNumber=" + partNumber + "&description=" + description + "&quantity=" + quantity + "&price=" + price + "&shipping=" + shipping + "&tax=" + tax;
+            var params = "&product=" + product +
+                "&partNumber=" + partNumber +
+                "&description=" + description +
+                "&quantity=" + quantity +
+                "&price=" + price +
+                "&shipping=" + shipping +
+                "&tax=" + tax;
 
             x = $.ajax({ type: "GET", url: pathName + "home/SaveOrderedItems?purchaseNumber=" + purchaseNumber + params, datatype: "JSON", async: false, cache: false });
             x.done(function (args) {
