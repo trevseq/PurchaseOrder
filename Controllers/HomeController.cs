@@ -18,9 +18,6 @@ namespace PurchaseOrder.Controllers
             return View();
         }
 
-
-
-
         public ActionResult GetRequestor()
         {
             // Get requestor ID aka(EmployeeID)
@@ -168,7 +165,15 @@ namespace PurchaseOrder.Controllers
             };
         }
 
-        public ActionResult SaveOrderedItems(int purchaseNumber, string product, string partNumber, string description, int quantity, string price, string shipping, string tax)
+        public ActionResult SaveOrderedItems(
+            int purchaseNumber, 
+            string product, 
+            string partNumber, 
+            string description, 
+            int quantity, 
+            string price, 
+            string shipping, 
+            string tax)
         {
             bool _success = false;
             try
@@ -208,9 +213,6 @@ namespace PurchaseOrder.Controllers
                 int poNumber = int.Parse(Request.QueryString["purchaseNumber"]);
                 var db = new PurchaseOrdersEntities();
 
-                // USE JOIN HERE INSTEAD OF SEPARATE CALLS TO DATABASES
-                // LINQ JOIN documentation: http://code.msdn.microsoft.com/LINQ-Join-Operators-dabef4e9
-
                 data = (from p in db.PurchaseOrders
                         join v in db.Vendors on p.Vendor equals v.Id
                         join c in db.Vendors_Contact on p.Vendor equals c.VendorId
@@ -233,46 +235,6 @@ namespace PurchaseOrder.Controllers
                 subItems = (from i in db.PurchaseOrderItems
                             where i.PurchaseNumber == poNumber
                             select i);
-                
-                
-                
-
-                // old
-                //data = (from p in db.PurchaseOrders
-                //        where p.PurchaseNumber == poNumber
-                //        select new
-                //        {
-                //            p.Priority,
-                //            p.Terms,
-                //            p.Justification,
-                //            p.RequestorId,
-                //            p.Vendor,
-                //            p.ShippingAddress,
-                //            p.Comment,
-                //            p.OrderDate
-                //        }).FirstOrDefault();
-                
-                //subItems = (from itm in db.PurchaseOrderItems
-                //            where itm.PurchaseNumber == poNumber
-                //            select itm);
-
-                //int vendorID = data.Vendor;
-
-                //vendorInformation = (from v in db.Vendors
-                //                     where v.Id == vendorID
-                //                     select new
-                //                     {
-                //                         v.Address1
-                //                     }).FirstOrDefault();
-
-                //vendorContact = (from c in db.Vendors_Contact
-                //                 where c.VendorId == vendorID
-                //                 select new
-                //                 {
-                //                     c.Name,
-                //                     c.Phone,
-                //                     c.Fax
-                //                 }).FirstOrDefault();
             }
 
 

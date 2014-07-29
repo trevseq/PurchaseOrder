@@ -241,11 +241,9 @@ function UpdateItems() {
 }
 
 function Submit() {
-    //var mainParams = $("#mainForm").serialize();
     // Validate form inputs
     var form1Valid = $('#form1').validationEngine('validate', { autoPositionUpdate: true });
     var form3Valid = $('#form3').validationEngine('validate', { autoPositionUpdate: true });
-    isValidated = true;
     var formValid = form1Valid && form3Valid;
     var purchaseNumber = 0;
     if (formValid != false) {

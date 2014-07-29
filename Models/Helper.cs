@@ -15,9 +15,6 @@ namespace PurchaseOrder.Models
             return date;
         }
 
-
-
-
         public static string GetEmployeeId(string userName)
         {
             string s = null;
@@ -38,18 +35,5 @@ namespace PurchaseOrder.Models
 
             return s;
         }
-
-
-        //public static bool IsAdmin(HttpContextBase ctx)
-        //{
-        //    bool hasAccess = false;
-
-        //        var db = new PurchaseOrdersEntities();
-
-        //    ctx.User.Identity.Name=
-        //        var o = db.POAppAccesses;
-
-        //        return hasAccess;
-        //}
     }
 }
