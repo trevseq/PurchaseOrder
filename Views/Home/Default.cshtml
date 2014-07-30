@@ -1,6 +1,9 @@
 ﻿<!-- ko with: home -->
+
+<!--Main web form-->
 <div class="col-lg-6 floatPos" id="mainForm">
     <div class="row">
+        <!--General order info section-->
         <form id="form1" class="form-horizontal" role="form">
             <fieldset>
                 <h2>Order Item</h2>
@@ -41,6 +44,7 @@
                 </div>
             </fieldset>
         </form>
+        <!--Item purchase section-->
         <form id="form2" class="form-horizontal" role="form">
             <fieldset>
                 <div class="form-group">
@@ -87,6 +91,7 @@
                 </div>
             </fieldset>
         </form>
+        <!--Requestor information section-->
         <form id="form3" class="form-horizontal" role="form">
             <fieldset>
                 <hr />
@@ -223,8 +228,9 @@
                 <input type="hidden" name="comment"/>
             </fieldset>
         </form>
-    </div><!-- /.row -->
+    </div>
 </div>
+<!--Invoice preview-->
 <div class="col-md-5 col-md-offset-1 fixedPos">
     <div class="container">
         <div class="row">
@@ -299,6 +305,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
+                            <!--Itemized list of products to be purchased-->
                             <table border="0" class="table table-condensed" id="tblItemizedList">
                                 <thead>
                                     <tr><td> </td>

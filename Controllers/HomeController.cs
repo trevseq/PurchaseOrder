@@ -9,7 +9,6 @@ using System.Data;
 
 namespace PurchaseOrder.Controllers
 {
-    //[Authorize]
     public class HomeController : Controller
     {
         public ActionResult Default()
@@ -22,7 +21,7 @@ namespace PurchaseOrder.Controllers
         {
             // Get requestor ID aka(EmployeeID)
             string u = Helper.GetEmployeeId(System.Environment.UserName);
-            // GEt Requestor information base on id.
+            // GEt Requestor information based on employee id
             string query = string.Format(
                 "SELECT e.[EmployeeID]" +
                 ",e.[LastName]" +
@@ -61,12 +60,18 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-
+        /// <summary>
+        /// Displays the print preview page
+        /// </summary>
+        /// <returns>Print Preview HTML view</returns>
         public ActionResult PrintPreview()
         {
             return View("PrintPreview");
         }
-
+        /// <summary>
+        /// Handles ajax requests for list of vendors
+        /// </summary>
+        /// <returns>JsonResult with vendor data</returns>
         public ActionResult GetVendors()
         {
             var db = new PurchaseOrdersEntities();
@@ -78,7 +83,11 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-
+        /// <summary>
+        /// Handles ajax requests for a specific vendor's contact rep
+        /// </summary>
+        /// <param name="VId">Vendor ID</param>
+        /// <returns>JsonResult with vendor contact data</returns>
         public ActionResult GetVendorContact(int? VId)
         {
             var db = new PurchaseOrdersEntities();
@@ -91,6 +100,10 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+        /// <summary>
+        /// Handles ajax requests for list of payment term types
+        /// </summary>
+        /// <returns>JsonResult with payment terms data</returns>
         public ActionResult GetPaymentTerms()
         {
             var db = new PurchaseOrdersEntities();
@@ -102,6 +115,10 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+        /// <summary>
+        /// Handles ajax requests for list of product types
+        /// </summary>
+        /// <returns>JsonResult with product types data</returns>
         public ActionResult GetProductType()
         {
             var db = new PurchaseOrdersEntities();
@@ -113,7 +130,7 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-
+        
         public ActionResult SavePOForm(
             int requestorId,
             int vendor,
