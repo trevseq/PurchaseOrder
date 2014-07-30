@@ -71,7 +71,9 @@ $(document).ready(function () {
         // Populate Invoice 
         $('#lblPONum').text($('#txtPONum').val());
         $('#lblJustification').text($('#txtJustification').val());
-        $("#lblShipAddress").text($("#txtShipAddress").val().replace("&#10;", "\n"));
+        $("#lblShipAddress").text($('#txtShipAddress').val().replace("&#10;", "\n"));
+        $('#lblReqName').text($('#txtReqName').val());
+        $('#lblReqEmail').text($('#txtReqEmail').val());
 
 
         // Datepickers
@@ -267,7 +269,7 @@ function Submit() {
         var comment = $('#lblComment').text();
         var signedBy = $('#txtSig').val();
 
-        var mainParams = "priority=" + priority +
+        var initParams = "priority=" + priority +
             "&terms=" + terms +
             "&dateRequested=" + dateRequested +
             "&dateRequired=" + dateRequired +
@@ -282,11 +284,22 @@ function Submit() {
             "&signedBy=" + signedBy;
 
         // Save PO form data.
-        var x = $.ajax({ type: "GET", url: pathName + "home/SavePOForm?" + mainParams, datatype: "JSON", async: false, cache: false });
-        x.done(function (args) {
-            purchaseNumber = args;
+        $.ajax({
+            type: "GET",
+            url: pathName + "home/SavePOForm?" + initParams,
+            datatype: "JSON",
+            async: false,
+            cache: false,
+            success: function (data) {
+                alert(data);
+            }
         });
 
+        //// Save PO form data.
+        //var x = $.ajax({ type: "GET", url: pathName + "home/SavePOForm?" + mainParams, datatype: "JSON", async: false, cache: false });
+        //x.done(function (args) {
+        //    purchaseNumber = args;
+        //});
 
         // Loop over collection and save each row to database with an ajax call
         $("tr[name='invRow']").each(function () {
@@ -306,9 +319,12 @@ function Submit() {
                 "&shipping=" + shipping +
                 "&tax=" + tax;
 
-            x = $.ajax({ type: "GET", url: pathName + "home/SaveOrderedItems?purchaseNumber=" + purchaseNumber + params, datatype: "JSON", async: false, cache: false });
-            x.done(function (args) {
-
+            $.ajax({
+                type: "GET",
+                url: pathName + "home/SaveOrderedItems?purchaseNumber=" + purchaseNumber + params,
+                datatype: "JSON",
+                async: false,
+                cache: false
             });
         });
 
