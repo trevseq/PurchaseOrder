@@ -13,49 +13,68 @@ var isValidated = false;
 
 
 $(document).ready(function () {
+    // Form page
     if (location.pathname.toLowerCase().indexOf("printpreview") == -1) {
-        var ajxVend = $.ajax({ type: "GET", dataType: "JSON", url: pathName + "Home/GetVendors", cache: false });
-        ajxVend.done(function (args) {
-            var options = $.map(args, function (e) {
-                return "<option value=\"" + e.Id + "\" data-address=\"" + e.Address1 + "\"  data-site=\"" + e.Website + "\">" + e.Name + "</option>";
-            }).join("");
-
-            $("#cboVendors").html("<option value=\"\" selected=\"\">Select...</option>" + options);
+        // Vendors dropdown list
+        $.ajax({
+            type: "GET",
+            dataType: "JSON",
+            url: pathName + "Home/GetVendors",
+            cache: false,
+            success: function (data) {
+                var options = $.map(data, function (e) {
+                    return "<option value=\"" + e.Id + "\" data-address=\"" + e.Address1 + "\"  data-site=\"" + e.Website + "\">" + e.Name + "</option>";
+                }).join("");
+                $("#cboVendors").html("<option value=\"\" selected=\"\">Select...</option>" + options);
+            }
         });
-
-        var ajxPayTerms = $.ajax({ type: "GET", dataType: "JSON", url: pathName + "Home/GetPaymentTerms", cache: false });
-        ajxPayTerms.done(function (args) {
-            var options = $.map(args, function (e) {
-                return "<option value=\"" + e.Value + "\">" + e.Name + "</option>";
-            }).join("");
-
-            $("#cboPaymentTerms").html("<option value=\"\" selected=\"\">Select...</option>" + options);
-
+        // Payment terms dropdown list
+        $.ajax({
+            type: "GET",
+            dataType: "JSON",
+            url: pathName + "Home/GetPaymentTerms",
+            cache: false,
+            success: function (data) {
+                var options = $.map(data, function (e) {
+                    return "<option value=\"" + e.Value + "\">" + e.Name + "</option>";
+                }).join("");
+                $("#cboPaymentTerms").html("<option value=\"\" selected=\"\">Select...</option>" + options);
+            }
         });
+        // Product types dropdown list
+        $.ajax({
+            type: "GET",
+            dataType: "JSON",
+            url: pathName + "Home/GetProductType",
+            cache: false,
+            success: function (data) {
+                var options = $.map(data, function (e) {
+                    return "<option value=\"" + e.Id + "\">" + e.Name + "</option>";
+                }).join("");
 
-        var ajxProdType = $.ajax({ type: "GET", dataType: "JSON", url: pathName + "Home/GetProductType", cache: false });
-        ajxProdType.done(function (args) {
-            var options = $.map(args, function (e) {
-                return "<option value=\"" + e.Id + "\">" + e.Name + "</option>";
-            }).join("");
+                $("#cboProductType").html("<option value=\"\" selected=\"\">Select...</option>" + options);
 
-            $("#cboProductType").html("<option value=\"\" selected=\"\">Select...</option>" + options);
-
+            }
         });
-        
-        var ajxRequestor = $.ajax({ type: "GET", dataType: "JSON", url: pathName + "Home/GetRequestor", cache: false, async: false });
-        ajxRequestor.done(function (args) {
-            // Populate requestor section:
-            $("#txtReqName").data("requestorid", args.EmployeeID);
-            $("#txtReqName").val(args.FirstName + " " + args.LastName);
-            $("#txtReqTitle").val(args.Title);
-            $("#txtReqEmail").val(args.Email);
-            $("#txtOffice").val(args.Room);
-            $("#txtDepartment").val(args.Department);
-            $("#txtReqPhone").val(args.Phone);
-            $("#txtReqFax").val(args.Fax);
+        // Fetch requestor info
+        $.ajax({
+            type: "GET",
+            dataType: "JSON",
+            url: pathName + "Home/GetRequestor",
+            cache: false,
+            async: false,
+            success: function (data) {
+                // Populate requestor section:
+                $("#txtReqName").data("requestorid", data.EmployeeID);
+                $("#txtReqName").val(data.FirstName + " " + data.LastName);
+                $("#txtReqTitle").val(data.Title);
+                $("#txtReqEmail").val(data.Email);
+                $("#txtOffice").val(data.Room);
+                $("#txtDepartment").val(data.Department);
+                $("#txtReqPhone").val(data.Phone);
+                $("#txtReqFax").val(data.Fax);
+            }
         });
-
 
         // Populate shipping address field
         var shipAdr = "Kasowitz, Benson, Torres, & Friedman LLP" +
@@ -66,7 +85,6 @@ $(document).ready(function () {
             "\n" +
             "New York, New York, 10019";
         $("#txtShipAddress").val(shipAdr);
-        
 
         // Populate Invoice 
         $('#lblPONum').text($('#txtPONum').val());
@@ -75,11 +93,9 @@ $(document).ready(function () {
         $('#lblReqName').text($('#txtReqName').val());
         $('#lblReqEmail').text($('#txtReqEmail').val());
 
-
         // Datepickers
         $('#txtDateRequested').datepicker();
         $('#txtDateRequired').datepicker();
-
 
         // Wire click events to re-validate controls.
         $("[type='text'],[type='date'],[type='number'],[type='email'],[type='textarea']").blur(function () {
@@ -94,29 +110,36 @@ $(document).ready(function () {
             }
         });
 
-
-        // Update Invoice
+        // Update invoice ship address based on textarea value
         $("#txtShipAddress").blur(function (evt) {
             var id = evt.target.id.replace("txt", "lbl");
             $('#' + id).text($(evt.target).val());
         });
+
+        // Update invoice labels based on dropdown values
         $("select").change(function (evt) {
             var id = evt.target.id.replace("cbo", "lbl");
             $('#' + id).html($(evt.target).val());
         });
+
+        // Add order item button
         $('#addItem').click(function (e) {
             AddItems();
             e.preventDefault();
         });
+
+        // Submit form button
         $("#btnSubmit").click(function (e) {
             Submit();
             e.preventDefault();
         });
+
         // Delete Row button
         $(document).delegate("img[src$='delete-32x32.png']", "click", function (e) {
             $(this).closest("tr").remove();
             UpdateItems();
         });
+
         $('#cboVendors').change(function () {
             $('#txtVContactName').val("");
             $('#txtVContactTitle').val("");
@@ -133,36 +156,39 @@ $(document).ready(function () {
             $('#lblVContactExtension').text("");
             $('#lblVContactFax').text("");
 
-
             var address = $("#cboVendors option:selected").data("address");
-            var site = $("#cboVendors option:selected").data("site");
 
             $('#txtVContactAddress').val(address);
-            $('#txtVContactHyperlink').val(site);
+            $('#txtVContactHyperlink').val($("#cboVendors option:selected").data("site"));
             $('#lblVendors').text($("#cboVendors option:selected").text());
             (address.length > 0) ? $('#lblVContactAddress').text(address) : "";
 
-            var vendId = $('#cboVendors').val();
-            var ajxContact = $.ajax({ type: "GET", dataType: "JSON", url: pathName + "Home/GetVendorContact?VId=" + vendId, cache: false });
-            ajxContact.done(function (args) {
-                $('#txtVContactName').val(args.Name);
-                $('#txtVContactTitle').val(args.Title);
-                $('#txtVContactPhone').val(args.Phone);
-                $('#txtVContactExtension').val(args.Ext);
-                $('#txtVContactFax').val(args.Fax);
+            // Fetch vendor contact info
+            $.ajax({
+                type: "GET",
+                dataType: "JSON",
+                url: pathName + "Home/GetVendorContact?VId" + $('#cboVendors').val(),
+                cache: false,
+                success: function (data) {
+                    $('#txtVContactName').val(data.Name);
+                    $('#txtVContactTitle').val(data.Title);
+                    $('#txtVContactPhone').val(data.Phone);
+                    $('#txtVContactExtension').val(data.Ext);
+                    $('#txtVcontactFax').val(data.Fax);
 
-                if (args.Name != null) {
-                    (args.Title != null) ? $('#lblVContactName').text(args.Name + " (" + args.Title + ")") : $('#lblVContactName').text(args.Name);
+                    if (data.Name != null) {
+                        (data.Title != null) ? $('#lblVContactName').text(data.Name + " (" + data.Title + ")") : $('#lblVContactName').text(data.Name);
+                    }
+                    (data.Ext != null) ? $('#lblVContactPhone').text(data.Phone + ":" + data.Ext) : $('#lblVContactPhone').text(data.Phone);
+                    (data.Fax != null) ? $('#lblVContactFax').text(data.Fax) : "";
                 }
-                (args.Ext != null) ? $('#lblVContactPhone').text(args.Phone + ":" + args.Ext) : $('#lblVContactPhone').text(args.Phone);
-                (args.Fax != null) ? $('#lblVContactFax').text(args.Fax) : "";
-                //$('#lblVContactFax').text(args.Fax);
             });
         });
+
+        // Invoice comment area (acts like text input with placeholder attribute set)
         $("#lblComment").change(function () {
             $("div[name='comment']").val($("#lblComment").val());
         });
-        // Div that acts like text input with placeholder (for comments)
         (function ($) {
             $(document).on('change keydown keypress input', 'div[data-placeholder]', function () {
                 if (this.textContent) {
@@ -174,35 +200,46 @@ $(document).ready(function () {
             });
         })(jQuery);
     }
+
+    // Print preview page
     else if (location.pathname.toLowerCase().indexOf("printpreview") > -1) {
-        // Print preview
-        var ajxVend = $.ajax({ type: "GET", dataType: "JSON", url: (pathName + "Home/GetPrintPreviewData?purchaseNumber=1"), cache: false });
-        ajxVend.done(function (args) {
+        // Get data from server and populate most fields on page
+        $.ajax({
+            type: "GET",
+            dataType: "JSON",
+            url: pathName + "Home/GetPrintPreviewData?purchaseNumber=1",
+            cache: false,
+            success: function (data) {
+                var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val());
+                var row = "<tr name='invRow'><td><span name='spProduct'>" +
+                    "product here" + "</span></td><td><span name='spPartNo'>" +
+                    "part no here" + "</span></td><td><span name='spDescription'>" +
+                    "desc here" + "</span></td><td>" + "<span name='spQuantity'>" +
+                    "quan here" + "</span>" + "</td><td class='text-right'>" +
+                    "$" + "<span name='spPrice'>" + "price here" + "</span>" + "</td><td class='text-right'>" +
+                    "$" + "<span name='spShipping'>" + "ship here" + "</span>" + "</td><td class='text-right'>" +
+                    "$" + "<span name='spTax'>" + "tax here" + "</span>" + "<td class='text-right'>" +
+                    "$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
+                $('#tblItemizedList').find("tbody").append(row);
+                UpdateItems();
 
-            var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val());
-            var row = "<tr name='invRow'><td><span name='spProduct'>" +
-                "product here" + "</span></td><td><span name='spPartNo'>" +
-                "part no here" + "</span></td><td><span name='spDescription'>" +
-                "desc here" + "</span></td><td>" + "<span name='spQuantity'>" +
-                "quan here" + "</span>" + "</td><td class='text-right'>" +
-                "$" + "<span name='spPrice'>" + "price here" + "</span>" + "</td><td class='text-right'>" +
-                "$" + "<span name='spShipping'>" + "ship here" + "</span>" + "</td><td class='text-right'>" +
-                "$" + "<span name='spTax'>" + "tax here" + "</span>" + "<td class='text-right'>" +
-                "$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
-            $('#tblItemizedList').find("tbody").append(row);
-            UpdateItems();
-
-            //$("#invoiceOrderDate").text(args.data.OrderDate);
+                //$("#invoiceOrderDate").text(args.data.OrderDate);
+            }
         });
-        var ajxRequestor = $.ajax({ type: "GET", dataType: "JSON", url: pathName + "Home/GetRequestor", cache: false });
-        ajxRequestor.done(function (args) {
-            // Populate fields
-            $("#lblReqName").text(args.FirstName + " " + args.LastName);
+        // Get requestor info from server and populate requestor fields
+        $.ajax({
+            type: "GET",
+            dataType: "JSON",
+            url: pathName + "Home/GetRequestor",
+            cache: false,
+            success: function (data) {
+                $('#lblReqName').text(data.FirstName + " " + data.LastName)
+            }
         });
     }
 });
 
-
+// Add order item to preview invoice when mini form is submitted
 function AddItems() {
     //Validate form inputs
     var formValid = $('#form2').validationEngine('validate', { autoPositionUpdate: true });
@@ -233,6 +270,7 @@ function AddItems() {
     }
 }
 
+// Auto-update preview invoice when values change
 function UpdateItems() {
     var price = 0;
     var shipping = 0;
@@ -248,12 +286,13 @@ function UpdateItems() {
     $("#grandTotal").text("$" + (price + shipping + tax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 }
 
+// Main form submission control
 function Submit() {
     // Validate form inputs
     var form1Valid = $('#form1').validationEngine('validate', { autoPositionUpdate: true });
     var form3Valid = $('#form3').validationEngine('validate', { autoPositionUpdate: true });
     var formValid = form1Valid && form3Valid;
-    var purchaseNumber = 0;
+    var purchaseNumber = 0; // <-- for debug purposes!
     if (formValid != false) {
         var priority = $('#cboPriority').val();
         var terms = $('#cboPaymentTerms').val();
@@ -269,7 +308,7 @@ function Submit() {
         var comment = $('#lblComment').text();
         var signedBy = $('#txtSig').val();
 
-        var initParams = "priority=" + priority +
+        var saveParams = "priority=" + priority +
             "&terms=" + terms +
             "&dateRequested=" + dateRequested +
             "&dateRequired=" + dateRequired +
@@ -286,8 +325,8 @@ function Submit() {
         // Save PO form data.
         $.ajax({
             type: "GET",
-            url: pathName + "home/SavePOForm?" + initParams,
-            datatype: "JSON",
+            url: pathName + "home/SavePOForm?" + saveParams,
+            dataType: "JSON",
             async: false,
             cache: false,
             success: function (data) {
@@ -295,13 +334,6 @@ function Submit() {
             }
         });
 
-        //// Save PO form data.
-        //var x = $.ajax({ type: "GET", url: pathName + "home/SavePOForm?" + mainParams, datatype: "JSON", async: false, cache: false });
-        //x.done(function (args) {
-        //    purchaseNumber = args;
-        //});
-
-        // Loop over collection and save each row to database with an ajax call
         $("tr[name='invRow']").each(function () {
             var product = $(this).find("span[name='spProduct']").text();
             var partNumber = $(this).find("span[name='spPartNo']").text();
@@ -311,7 +343,7 @@ function Submit() {
             var shipping = $(this).find("span[name='spShipping']").text();
             var tax = $(this).find("span[name='spTax']").text();
 
-            var params = "&product=" + product +
+            var itemParams = "&product=" + product +
                 "&partNumber=" + partNumber +
                 "&description=" + description +
                 "&quantity=" + quantity +
@@ -321,8 +353,8 @@ function Submit() {
 
             $.ajax({
                 type: "GET",
-                url: pathName + "home/SaveOrderedItems?purchaseNumber=" + purchaseNumber + params,
-                datatype: "JSON",
+                url: pathName + "home/SaveOrderedItems?purchaseNumber=" + purchaseNumber + itemParams,
+                dataType: "JSON",
                 async: false,
                 cache: false
             });
