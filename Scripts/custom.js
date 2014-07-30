@@ -322,15 +322,15 @@ function Submit() {
             "&comment=" + comment +
             "&signedBy=" + signedBy;
 
-        // Save PO form data.
+        // Save PO form data
         $.ajax({
             type: "GET",
-            url: pathName + "home/SavePOForm?" + saveParams,
+            url: pathName + "Home/SavePOForm?" + saveParams,
             dataType: "JSON",
             async: false,
             cache: false,
             success: function (data) {
-                alert(data);
+                alert(data); // <-- Debug
             }
         });
 
@@ -350,10 +350,10 @@ function Submit() {
                 "&price=" + price +
                 "&shipping=" + shipping +
                 "&tax=" + tax;
-
+            // Save ordered items
             $.ajax({
                 type: "GET",
-                url: pathName + "home/SaveOrderedItems?purchaseNumber=" + purchaseNumber + itemParams,
+                url: pathName + "Home/SaveOrderedItems?purchaseNumber=" + purchaseNumber + itemParams,
                 dataType: "JSON",
                 async: false,
                 cache: false
