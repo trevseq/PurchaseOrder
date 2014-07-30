@@ -58,7 +58,13 @@ $(document).ready(function () {
 
 
         // Populate shipping address field
-        var shipAdr = "Kasowitz, Benson, Torres, & Friedman LLP" + "\n" + "Attn: " + $("#txtDepartment").val() + "\n" + "1633 Broadway" + "\n" + "New York, New York, 10019";
+        var shipAdr = "Kasowitz, Benson, Torres, & Friedman LLP" +
+            "\n" +
+            "Attn: " + $("#txtDepartment").val() +
+            "\n" +
+            "1633 Broadway" +
+            "\n" +
+            "New York, New York, 10019";
         $("#txtShipAddress").val(shipAdr);
         
 
