@@ -113,7 +113,7 @@ $(document).ready(function () {
         // Update invoice ship address based on textarea value
         $("#txtShipAddress").blur(function (evt) {
             var id = evt.target.id.replace("txt", "lbl");
-            text = $(evt.target).val().replace("\n", "</br>")
+            text = $(evt.target).val()//.replace("\n", "</br>")
             $('#' + id).text(text);
         });
 
