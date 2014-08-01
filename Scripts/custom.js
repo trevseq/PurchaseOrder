@@ -247,14 +247,16 @@ function AddItems() {
         autoPositionUpdate: true,
         onSuccess: function () {
             var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val());
-            var row = "<tr name='invRow'><td><img src='/Images/delete-32x32.png' style='height:20px;width:20px;cursor:pointer' /></td><td><span name='spProduct'>" +
-                $('#txtProduct').val() + "</span></td><td style='display:none'><span name='spPartNo'>" +
-                $('#txtPartNo').val() + "</span></td><td style='display:none'><span name='spDescription'>" +
-                $('#txtDescription').val() + "</span></td><td class='text-center'>" + "<span name='spQuantity'>" +
-                $('#txtQuantity').val() + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spPrice'>" +
-                $('#txtPrice').val() + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spShipping'>" +
-                $('#txtShipping').val() + "</span>" + "</td><td class='text-right'>" + "$" + "<span name='spTax'>" +
-                $('#txtTax').val() + "</span>" + "<td class='text-right'>" + "$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
+            rowTotal = rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            var row = "<tr name='invRow'><td><img src='/Images/delete-32x32.png' style='height:20px;width:20px;cursor:pointer' /></td>" +
+                "<td><span name='spProduct'>" + $('#txtProduct').val() + "</span></td>" +
+                "<td style='display:none'><span name='spPartNo'>" + $('#txtPartNo').val() + "</span></td>" +
+                "<td style='display:none'><span name='spDescription'>" + $('#txtDescription').val() + "</span></td>" +
+                "<td class='text-center'><span name='spQuantity'>" + $('#txtQuantity').val() + "</span></td>" +
+                "<td class='text-right'>$<span name='spPrice'>" + $('#txtPrice').val() + "</span></td>" +
+                "<td class='text-right'>$<span name='spShipping'>" + $('#txtShipping').val() + "</span></td>" +
+                "<td class='text-right'>$<span name='spTax'>" + $('#txtTax').val() + "</span>" +
+                "<td class='text-right'>$" + rowTotal + "</td></tr>";
             $('#tblItemizedList').find("tbody").append(row);
 
             UpdateItems();
@@ -360,7 +362,6 @@ function Submit() {
                 cache: false
             });
         });
-
 
         window.location = pathName + "Home/PrintPreview?purchaseNumber=" + purchaseNumber;
     }
