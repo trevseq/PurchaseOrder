@@ -47,9 +47,7 @@ $(document).ready(function () {
                 var options = $.map(data, function (e) {
                     return "<option value=\"" + e.Id + "\">" + e.Name + "</option>";
                 }).join("");
-
                 $("#cboProductType").html("<option value=\"\" selected=\"\">Select...</option>" + options);
-
             }
         });
         // Fetch requestor info
@@ -135,20 +133,8 @@ $(document).ready(function () {
         });
 
         $('#cboVendors').change(function () {
-            $('#txtVContactName').val("");
-            $('#txtVContactTitle').val("");
-            $('#txtVContactAddress').text("");
-            $('#txtVContactPhone').val("");
-            $('#txtVContactExtension').val("");
-            $('#txtVContactFax').val("");
-            $('#txtVContactHyperlink').val("");
-
-            $('#lblVContactName').text("");
-            $('#lblVContactTitle').text("");
-            $('#lblVContactAddress').text("");
-            $('#lblVContactPhone').text("");
-            $('#lblVContactExtension').text("");
-            $('#lblVContactFax').text("");
+            $("input[id^='txtVContact'").val("");
+            $("div[id^='lblVContact'").text("");
 
             var address = $("#cboVendors option:selected").data("address");
 
