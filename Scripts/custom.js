@@ -1,16 +1,12 @@
 ﻿var pathName = location.pathname.toLowerCase();
+var isValidated = false;
 
-//pathName = pathName.replace("secure", "");
 pathName = pathName.replace("default", "");
 pathName = pathName.replace("home", "");
 pathName = pathName.replace("printpreview", "");
-//pathName = pathName.replace("profiles", "");
 
 pathName += ((pathName.substring(pathName.length - 1) != "/") ? "/" : "");
 pathName = location.protocol + "//" + location.host + pathName.replace("//", "/");
-
-var isValidated = false;
-
 
 $(document).ready(function () {
     // Form page
@@ -77,12 +73,9 @@ $(document).ready(function () {
         });
 
         // Populate shipping address field
-        var shipAdr = "Kasowitz, Benson, Torres, & Friedman LLP" +
-            "\n" +
-            "Attn: " + $("#txtDepartment").val() +
-            "\n" +
-            "1633 Broadway" +
-            "\n" +
+        var shipAdr = "Kasowitz, Benson, Torres, & Friedman LLP \n" +
+            "Attn: " + $("#txtDepartment").val() + "\n" +
+            "1633 Broadway \n" +
             "New York, New York, 10019";
         $("#txtShipAddress").val(shipAdr);
 
@@ -191,12 +184,12 @@ $(document).ready(function () {
             $("div[name='comment']").val($("#lblComment").val());
         });
         (function ($) {
-            $(document).on('change keydown keypress input', 'div[data-placeholder]', function () {
+            $().on('change keydown keypress input', 'div[data-placeholder]', function () {
                 if (this.textContent) {
                     this.dataset.divPlaceholderContent = 'true';
                 }
                 else {
-                    delete (this.dataset.divPlaceholderContent);
+                    delete this.dataset.divPlaceholderContent;
                 }
             });
         })(jQuery);
