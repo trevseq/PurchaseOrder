@@ -10,9 +10,7 @@
   #{$property}: calc(#{$expression}); 
 }
 
-#mainContainer {
-    //width: 75%;
-}
+#mainContainer { //width: 75%; }
 
 .navbar {
     //width: 65%;
@@ -53,24 +51,14 @@ body {
 
 // Invoice table
 .table {
-    thead > tr > .no-line {
-        border-bottom: none;
-    }
+    thead > tr > .no-line { border-bottom: none; }
     tbody > tr {
-        .thick-line {
-            border-top: 2px solid;
-        }
-        .no-line {
-            border-top: none;
-        }
+        .thick-line { border-top: 2px solid; }
+        .no-line { border-top: none; }
     }
     tfoot > tr {
-        .no-line {
-            border-top: none;
-        }
-        .thick-line {
-            border-top: 2px solid;
-        }
+        .no-line { border-top: none; }
+        .thick-line { border-top: 2px solid; }
     }
 }
 
@@ -85,9 +73,7 @@ body {
     width: 50%
 }
 
-input, textarea, button { 
-    margin-top:10px 
-}
+input, textarea, button { margin-top:10px; }
 
 // Required field
 .required-field-block {
