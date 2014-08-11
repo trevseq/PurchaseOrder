@@ -14,12 +14,11 @@ namespace PurchaseOrder
                 "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                "~/Scripts/jquery.unobtrusive*",
-                "~/Scripts/jquery.validate*"));
+                "~/Scripts/jquery.validationEngine-en.js",
+                "~/Scripts/jquery.validationEngine.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/javascript").Include(
-                "~/Scripts/jquery.validationEngine-en.js",
-                "~/Scripts/jquery.validationEngine.js",
+                
                 "~/Scripts/custom.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(

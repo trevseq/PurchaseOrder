@@ -117,13 +117,13 @@ $(document).ready(function () {
         // Add order item button
         $('#addItem').click(function (e) {
             AddItems();
-           // e.preventDefault();
+           e.preventDefault();
         });
 
         // Submit form button
         $("#btnSubmit").click(function (e) {
             Submit();
-            e.preventDefault();
+            //e.preventDefault();
         });
 
         // Delete Row button
@@ -222,11 +222,12 @@ $(document).ready(function () {
 // Add order item to preview invoice when mini form is submitted
 function AddItems() {
     // Validate form inputs
-    $('#form2').validationEngine('validate', {
-        autoPositionUpdate: true,
-        onSuccess: function () {
+    try {
+        
+        
             var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val());
             rowTotal = rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            console.log("rowTotal=" + rowTotal);
             var row = "<tr name='invRow'><td><img src='/Images/delete-32x32.png' style='height:20px;width:20px;cursor:pointer' /></td>" +
                 "<td><span name='spProduct'>" + $('#txtProduct').val() + "</span></td>" +
                 "<td style='display:none'><span name='spPartNo'>" + $('#txtPartNo').val() + "</span></td>" +
@@ -248,8 +249,12 @@ function AddItems() {
             $('#txtQuantity').val("1");
             $('#txtShipping').val("");
             $('#txtTax').val("");
-        }
-    });
+        
+    //});
+    }
+    catch (e)
+    { alert(e); }
+    
 }
 
 // Auto-update preview invoice when values change
@@ -271,24 +276,24 @@ function UpdateItems() {
 // Main form submission control
 function Submit() {
     // Validate form inputs
-    var form1Valid = $('#form1').validationEngine('validate', { autoPositionUpdate: true });
-    var form3Valid = $('#form3').validationEngine('validate', { autoPositionUpdate: true });
-    var formValid = form1Valid && form3Valid;
+    //var form1Valid = $('#form1').validationEngine('validate', { autoPositionUpdate: true });
+    //var form3Valid = $('#form3').validationEngine('validate', { autoPositionUpdate: true });
+    //var formValid = form1Valid && form3Valid;
     var purchaseNumber = 0; // <-- for debug purposes!
-    if (formValid != false) {
+    if (true) {
         var priority = $('#cboPriority').val();
         var terms = $('#cboPaymentTerms').val();
         var dateRequested = $('#txtDateRequested').val();
         var dateRequired = $('#txtDateRequired').val();
         var justification = $('#txtJustification').val();
-        var manager = ($('#cboManager').val().length > 0) ? $('#cboManager').val() : "";
+        var manager = $('#cboManager').val();
         var requestorId = $('#txtReqName').data("requestorid");
         var vendor = $('#cboVendors').val();
         var productType = $('#cboProductType').val();
         var billingAddress = $('#txtBillAddress').val();
         var shippingAddress = $('#txtShipAddress').val();
         var comment = $('#lblComment').text();
-        var signedBy = ($('#txtSig').val().length > 0) ? $('#txtSig').val() : ""; // <-- single line if is for debugging: normally a manager would sign.
+        var signedBy = $('#txtSig').val(); // <-- single line if is for debugging: normally a manager would sign.
 
         var saveParams = "priority=" + priority +
             "&terms=" + terms +
@@ -304,44 +309,51 @@ function Submit() {
             "&comment=" + comment +
             "&signedBy=" + signedBy;
 
+        // console.clear();
+        
+        console.log(encodeURI(pathName + "Home/SavePOForm?" + saveParams));
         // Save PO form data
         $.ajax({
             type: "GET",
-            url: pathName + "Home/SavePOForm?" + saveParams,
+            url: encodeURI(pathName + "Home/SavePOForm?" + saveParams),
             dataType: "JSON",
-            async: false,
-            cache: false,
-            success: function (data) {
-                alert(data); // <-- Debug
-            }
-        });
+           //async: false,
+            cache: false
+            // ,success:
+        }).done(function (data) {
 
-        $("tr[name='invRow']").each(function () {
-            var product = $(this).find("span[name='spProduct']").text();
-            var partNumber = $(this).find("span[name='spPartNo']").text();
-            var description = $(this).find("span[name='spDescription']").text();
-            var quantity = $(this).find("span[name='spQuantity']").text();
-            var price = $(this).find("span[name='spPrice']").text();
-            var shipping = $(this).find("span[name='spShipping']").text();
-            var tax = $(this).find("span[name='spTax']").text();
+            $("tr[name='invRow']").each(function () {
+                var product = $(this).find("span[name='spProduct']").text();
+                var partNumber = $(this).find("span[name='spPartNo']").text();
+                var description = $(this).find("span[name='spDescription']").text();
+                var quantity = $(this).find("span[name='spQuantity']").text();
+                var price = $(this).find("span[name='spPrice']").text();
+                var shipping = $(this).find("span[name='spShipping']").text();
+                var tax = $(this).find("span[name='spTax']").text();
 
-            var itemParams = "&product=" + product +
-                "&partNumber=" + partNumber +
-                "&description=" + description +
-                "&quantity=" + quantity +
-                "&price=" + price +
-                "&shipping=" + shipping +
-                "&tax=" + tax;
-            // Save ordered items
-            $.ajax({
-                type: "GET",
-                url: pathName + "Home/SaveOrderedItems?purchaseNumber=" + purchaseNumber + itemParams,
-                dataType: "JSON",
-                async: false,
-                cache: false
+                var itemParams = "&product=" + product +
+                    "&partNumber=" + partNumber +
+                    "&description=" + description +
+                    "&quantity=" + quantity +
+                    "&price=" + price +
+                    "&shipping=" + shipping +
+                    "&tax=" + tax;
+                // Save ordered items
+                $.ajax({
+                    type: "GET",
+                    url: encodeURI(pathName + "Home/SaveOrderedItems?purchaseNumber=" + purchaseNumber + itemParams),
+                    dataType: "JSON",
+                   // async: true,
+                    cache: false
+                });
             });
+
+            
+window.location = encodeURI(pathName + "Home/PrintPreview?purchaseNumber=" + purchaseNumber);
         });
 
-        window.location = pathName + "Home/PrintPreview?purchaseNumber=" + purchaseNumber;
+
+
+
     }
 }
