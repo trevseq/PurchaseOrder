@@ -10,13 +10,13 @@
   #{$property}: calc(#{$expression}); 
 }
 
-#mainContainer { //width: 75%; }
+#mainContainer { width: 75%; }
 
 .navbar {
-    //width: 65%;
-    //margin-left: 19%;
-    //box-shadow: 10px 10px 5px #888888;
-    //border-radius: 15px;
+    width: 65%;
+    margin-left: 19%;
+    box-shadow: 10px 10px 5px #888888;
+    border-radius: 15px;
 }
 
 body {
@@ -78,7 +78,6 @@ input, textarea, button { margin-top:10px; }
 // Required field
 .required-field-block {
     position: relative;
-    
     .required-icon {
         display: inline-block;
         vertical-align: middle;
@@ -124,7 +123,7 @@ input, textarea, button { margin-top:10px; }
         }
 }
 	
-/*.required-field-block .required-icon {
+.required-field-block .required-icon {
     background-color: transparent;
     position: absolute;
     top: 0em;
@@ -138,7 +137,7 @@ input, textarea, button { margin-top:10px; }
     -webkit-transition: color 0.2s ease;
     -moz-transition: color 0.2s ease;
     transition: color 0.2s ease;
-}*/
+}
 
 // Mock textbox div with placeholder
 div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
