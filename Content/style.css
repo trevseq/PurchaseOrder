@@ -17,7 +17,8 @@ body {
 
 .body-content {
   padding-left: 15px;
-  padding-right: 15px; }
+  padding-right: 15px;
+  /*margin-top: 2%;*/ }
 
 .padding-error {
   padding-top: 20px; }
@@ -52,7 +53,7 @@ body {
 
 .floatPos {
   float: left;
-  width: 50%; }
+  /*width: 50%*/ }
 
 input, textarea, button {
   margin-top: 10px; }

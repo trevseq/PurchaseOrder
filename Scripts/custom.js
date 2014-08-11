@@ -117,7 +117,7 @@ $(document).ready(function () {
         // Add order item button
         $('#addItem').click(function (e) {
             AddItems();
-            e.preventDefault();
+           // e.preventDefault();
         });
 
         // Submit form button
@@ -147,7 +147,7 @@ $(document).ready(function () {
             $.ajax({
                 type: "GET",
                 dataType: "JSON",
-                url: pathName + "Home/GetVendorContact?VId" + $('#cboVendors').val(),
+                url: pathName + "Home/GetVendorContact?VId=" + $('#cboVendors').val(),
                 cache: false,
                 success: function (data) {
                     $('#txtVContactName').val(data.Name);
@@ -288,7 +288,7 @@ function Submit() {
         var billingAddress = $('#txtBillAddress').val();
         var shippingAddress = $('#txtShipAddress').val();
         var comment = $('#lblComment').text();
-        var signedBy = $('#txtSig').val();
+        var signedBy = ($('#txtSig').val().length > 0) ? $('#txtSig').val() : ""; // <-- single line if is for debugging: normally a manager would sign.
 
         var saveParams = "priority=" + priority +
             "&terms=" + terms +
