@@ -1,7 +1,7 @@
 ﻿<!-- ko with: home -->
 <div id="mainContainer">
     <!--Main web form-->
-    <div class="col-lg-9 floatPos" id="mainForm">
+    <div class="col-lg- floatPos" id="mainForm">
         <div class="row">
             <!--General order info section-->
             <form id="form1" class="form-horizontal" role="form">
@@ -10,7 +10,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">P.O. Number</label>
                         <div class="col-sm-4">
-                            <input id="txtPONum" type="text" placeholder="P.O. Number" value="312341234" class="form-control validate[required]">
+                            <input id="txtPONum" type="text" placeholder="P.O. Number" value="312341234" class="form-control">
                         </div>
                         <label class="col-sm-2 control-label" for="textinput">Date Requested</label>
                         <div class="col-sm-4">
@@ -20,7 +20,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Priority</label>
                         <div class="col-sm-4">
-                            <select id="cboPriority" class="form-control validate[required]" name="priority">
+                            <select id="cboPriority" class="form-control" name="priority">
                                 <option value="Low">Low</option>
                                 <option value="Normal" selected>Normal</option>
                                 <option value="High">High</option>
@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Terms</label>
                         <div class="col-sm-4">
-                            <select id="cboPaymentTerms" class="form-control validate[required]" name="terms"></select>
+                            <select id="cboPaymentTerms" class="form-control" name="terms"></select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <label class="col-sm-2" for="textinput">Product</label>
                         <div class="col-sm-5">
-                            <input id="txtProduct" type="text" placeholder="Product" class="form-control validate[required]" />
+                            <input id="txtProduct" type="text" placeholder="Product" class="form-control" />
                         </div>
                         <label class="col-sm-2" for="textinput">Part No.</label>
                         <div class="col-sm-3">
@@ -64,21 +64,21 @@
                         </div>
                         <label class="col-sm-2" for="textinput">Quantity</label>
                         <div class="col-sm-3">
-                            <input id="txtQuantity" type="text" placeholder="Quantity" class="form-control validate[requred,custom[integer]]" value="1" />
+                            <input id="txtQuantity" type="text" placeholder="Quantity" class="form-control" value="1" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2" for="textinput">Price</label>
                         <div class="col-sm-2">
-                            <input id="txtPrice" type="text" placeholder="" class="form-control validate[required,custom[number]]" value="" />
+                            <input id="txtPrice" type="text" placeholder="" class="form-control" value="" />
                         </div>
                         <label class="col-sm-2" for="textinput">Shipping</label>
                         <div class="col-sm-2">
-                            <input id="txtShipping" type="text" placeholder="" class="form-control validate[required,custom[number]]" value="" />
+                            <input id="txtShipping" type="text" placeholder="" class="form-control" value="" />
                         </div>
                         <label class="col-sm-2" for="textinput">Tax</label>
                         <div class="col-sm-2">
-                            <input id="txtTax" type="text" placeholder="" class="form-control validate[required,custom[number]]" value="" />
+                            <input id="txtTax" type="text" placeholder="" class="form-control" value="" />
                         </div>
                     </div>
 
@@ -105,19 +105,19 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Name</label>
                         <div class="col-sm-10">
-                            <input id="txtReqName" data-requestorid="7293" type="text" placeholder="Name" class="form-control validate[required]" name="requestor">
+                            <input id="txtReqName" data-requestorid="7293" type="text" placeholder="Name" class="form-control" name="requestor">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Title</label>
                         <div class="col-sm-10">
-                            <input id="txtReqTitle" type="text" placeholder="Title" class="form-control validate[required]">
+                            <input id="txtReqTitle" type="text" placeholder="Title" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Email</label>
                         <div class="col-sm-10">
-                            <input id="txtReqEmail" type="text" placeholder="Email" class="form-control validate[required,custom[email]]">
+                            <input id="txtReqEmail" type="text" placeholder="Email" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -133,11 +133,11 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Phone</label>
                         <div class="col-sm-4">
-                            <input id="txtReqPhone" type="text" placeholder="Phone" class="form-control validate[required,custom[phone]]">
+                            <input id="txtReqPhone" type="text" placeholder="Phone" class="form-control">
                         </div>
                         <label class="col-sm-2 control-label" for="textinput">Fax</label>
                         <div class="col-sm-4">
-                            <input id="txtReqFax" type="text" placeholder="Fax" class="form-control validate[required,custom[phone]]">
+                            <input id="txtReqFax" type="text" placeholder="Fax" class="form-control">
                         </div>
                     </div>
                     <hr />
@@ -145,7 +145,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Company Name</label>
                         <div class="col-sm-10">
-                            <select id="cboVendors" class="form-control validate[required]" name="vendor"></select>
+                            <select id="cboVendors" class="form-control" name="vendor"></select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -203,10 +203,10 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-6">
-                            <textarea id="txtBillAddress" placeholder="Address" name="billingAddress" class="form-control validate[required]" style="height:70px">Kasowitz, Benson, Torres, &amp; Friedman LLP &#10;1633 Broadway &#10;New York, New York, 10019</textarea>
+                            <textarea id="txtBillAddress" placeholder="Address" name="billingAddress" class="form-control" style="height:70px">Kasowitz, Benson, Torres, &amp; Friedman LLP &#10;1633 Broadway &#10;New York, New York, 10019</textarea>
                         </div>
                         <div class="col-sm-6">
-                            <textarea id="txtShipAddress" placeholder="Address" name="shippingAddress" class="form-control validate[required]" style="height:70px">Kasowitz, Benson, Torres, &amp; Friedman LLP &#10;Attn: &#10;1633 Broadway &#10;New York, New York, 10019</textarea>
+                            <textarea id="txtShipAddress" placeholder="Address" name="shippingAddress" class="form-control" style="height:70px">Kasowitz, Benson, Torres, &amp; Friedman LLP &#10;Attn: &#10;1633 Broadway &#10;New York, New York, 10019</textarea>
                         </div>
                     </div>
                     <hr />
