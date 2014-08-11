@@ -275,53 +275,44 @@ function UpdateItems() {
 
 // Main form submission control
 function Submit() {
-    // Validate form inputs
-    //var form1Valid = $('#form1').validationEngine('validate', { autoPositionUpdate: true });
-    //var form3Valid = $('#form3').validationEngine('validate', { autoPositionUpdate: true });
-    //var formValid = form1Valid && form3Valid;
     var purchaseNumber = 0; // <-- for debug purposes!
-    if (true) {
-        var priority = $('#cboPriority').val();
-        var terms = $('#cboPaymentTerms').val();
-        var dateRequested = $('#txtDateRequested').val();
-        var dateRequired = $('#txtDateRequired').val();
-        var justification = $('#txtJustification').val();
-        var manager = $('#cboManager').val();
-        var requestorId = $('#txtReqName').data("requestorid");
-        var vendor = $('#cboVendors').val();
-        var productType = $('#cboProductType').val();
-        var billingAddress = $('#txtBillAddress').val();
-        var shippingAddress = $('#txtShipAddress').val();
-        var comment = $('#lblComment').text();
-        var signedBy = $('#txtSig').val(); // <-- single line if is for debugging: normally a manager would sign.
 
-        var saveParams = "priority=" + priority +
-            "&terms=" + terms +
-            "&dateRequested=" + dateRequested +
-            "&dateRequired=" + dateRequired +
-            "&justification=" + justification +
-            "&manager=" + manager +
-            "&requestorId=" + requestorId +
-            "&vendor=" + vendor +
-            "&productType=" + productType +
-            "&billingAddress=" + billingAddress +
-            "&shippingAddress=" + shippingAddress +
-            "&comment=" + comment +
-            "&signedBy=" + signedBy;
+    var priority = $('#cboPriority').val();
+    var terms = $('#cboPaymentTerms').val();
+    var dateRequested = $('#txtDateRequested').val();
+    var dateRequired = $('#txtDateRequired').val();
+    var justification = $('#txtJustification').val();
+    var manager = $('#cboManager').val();
+    var requestorId = $('#txtReqName').data("requestorid");
+    var vendor = $('#cboVendors').val();
+    var productType = $('#cboProductType').val();
+    var billingAddress = $('#txtBillAddress').val();
+    var shippingAddress = $('#txtShipAddress').val();
+    var comment = $('#lblComment').text();
+    var signedBy = $('#txtSig').val();
 
-        // console.clear();
-        
-        console.log(encodeURI(pathName + "Home/SavePOForm?" + saveParams));
-        // Save PO form data
-        $.ajax({
-            type: "GET",
-            url: encodeURI(pathName + "Home/SavePOForm?" + saveParams),
-            dataType: "JSON",
-           //async: false,
-            cache: false
-            // ,success:
-        }).done(function (data) {
+    var saveParams = "priority=" + priority +
+        "&terms=" + terms +
+        "&dateRequested=" + dateRequested +
+        "&dateRequired=" + dateRequired +
+        "&justification=" + justification +
+        "&manager=" + manager +
+        "&requestorId=" + requestorId +
+        "&vendor=" + vendor +
+        "&productType=" + productType +
+        "&billingAddress=" + billingAddress +
+        "&shippingAddress=" + shippingAddress +
+        "&comment=" + comment +
+        "&signedBy=" + signedBy;
 
+    // Save PO form data
+    $.ajax({
+        type: "GET",
+        url: encodeURI(pathName + "Home/SavePOForm?" + saveParams),
+        dataType: "JSON",
+        async: false,
+        cache: false,
+        success: function (data) {
             $("tr[name='invRow']").each(function () {
                 var product = $(this).find("span[name='spProduct']").text();
                 var partNumber = $(this).find("span[name='spPartNo']").text();
@@ -338,22 +329,19 @@ function Submit() {
                     "&price=" + price +
                     "&shipping=" + shipping +
                     "&tax=" + tax;
+
                 // Save ordered items
                 $.ajax({
                     type: "GET",
                     url: encodeURI(pathName + "Home/SaveOrderedItems?purchaseNumber=" + purchaseNumber + itemParams),
                     dataType: "JSON",
-                   // async: true,
-                    cache: false
+                    async: false,
+                    cache: false,
+                    success: function (data) {
+                        window.location = encodeURI(pathName + "Home/PrintPreview?purchaseNumber=" + purchaseNumber);
+                    }
                 });
             });
-
-            
-window.location = encodeURI(pathName + "Home/PrintPreview?purchaseNumber=" + purchaseNumber);
-        });
-
-
-
-
-    }
+        }
+    });
 }
