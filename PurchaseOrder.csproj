@@ -235,7 +235,6 @@
     <Content Include="Content\style.css">
       <DependentUpon>style.scss</DependentUpon>
     </Content>
-    <Content Include="Content\validationEngine.jquery.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\delete-32x32.png" />
@@ -279,8 +278,6 @@
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\jquery.validationEngine-en.js" />
-    <Content Include="Scripts\jquery.validationEngine.js" />
     <Content Include="Scripts\knockout-2.3.0.debug.js" />
     <Content Include="Scripts\knockout-2.3.0.js" />
     <Content Include="Scripts\knockout.validation.debug.js" />

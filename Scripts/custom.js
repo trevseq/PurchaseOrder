@@ -122,7 +122,7 @@ $(document).ready(function () {
 
         // Submit form button
         $("#btnSubmit").click(function (e) {
-            Submit();
+            ValidateInputs();
             e.preventDefault();
         });
 
@@ -130,6 +130,12 @@ $(document).ready(function () {
         $(document).delegate("img[src$='delete-32x32.png']", "click", function (e) {
             $(this).closest("tr").remove();
             UpdateItems();
+        });
+
+        $('#lblComment').blur(function () {
+            if ($(this).val().length > 0) {
+                $(this).removeClass("divTxtArea");
+            }
         });
 
         $('#cboVendors').change(function () {
@@ -262,6 +268,21 @@ function UpdateItems() {
     $("#shipTotal").text("$" + shipping.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
     $("#taxTotal").text("$" + tax.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
     $("#grandTotal").text("$" + (price + shipping + tax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+}
+
+function ValidateInputs() {
+    //Validate date selector fields
+    if ($('#txtDateRequested').val() == null || $('#txtDateRequested').val() == "") {
+        alert('You must complete the \'Date Requested\' field.');
+        $('#txtDateRequested').focus();
+    }
+    else if ($('#txtDateRequired').val() == null || $('#txtDateRequired').val() == "") {
+        alert('You must complete the \'Date Required\' field.');
+        $('#txtDateRequired').focus();
+    }
+    else {
+        Submit();
+    }
 }
 
 // Main form submission control

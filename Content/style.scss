@@ -66,7 +66,11 @@ body {
 .fixedPos {
     position: fixed;
     margin-left: 35%;
-    width: 30%;
+    width: 700px;
+    border:1px;
+    border-color:blue;
+    border-style:dashed;
+
 }
 
 .floatPos {
@@ -138,12 +142,4 @@ input, textarea, button { margin-top:10px; }
     -webkit-transition: color 0.2s ease;
     -moz-transition: color 0.2s ease;
     transition: color 0.2s ease;
-}
-
-// Mock textbox div with placeholder
-div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
-    content: attr(data-placeholder);
-    float: left;
-    margin-left: 2px;
-    color: #b3b3b3;
 }
