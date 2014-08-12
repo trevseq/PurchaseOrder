@@ -18,7 +18,8 @@ body {
 .body-content {
   padding-left: 15px;
   padding-right: 15px;
-  /*margin-top: 2%;*/ }
+  /*margin-top: 2%;*/
+  width: 1200px; }
 
 .padding-error {
   padding-top: 20px; }
@@ -50,9 +51,9 @@ body {
   position: fixed;
   margin-left: 35%;
   width: 700px;
-  border: 1px;
-  border-color: blue;
-  border-style: dashed; }
+  /*border:1px;
+  border-color:blue;
+  border-style:dashed;*/ }
 
 .floatPos {
   float: left;
@@ -117,4 +118,19 @@ input, textarea, button {
   -webkit-transition: color 0.2s ease;
   -moz-transition: color 0.2s ease;
   transition: color 0.2s ease; }
+
+#kazlogo {
+  height: 104px;
+  width: 314px; }
+
+.divAddressBox {
+  white-space: pre; }
+
+#txtBillAddress {
+  height: 80px;
+  width: 330px; }
+
+#txtShipAddress {
+  height: 80px;
+  width: 330px; }
 

@@ -88,19 +88,6 @@ $(document).ready(function () {
         $('#txtDateRequested').datepicker();
         $('#txtDateRequired').datepicker();
 
-        // Wire click events to re-validate controls.
-        $("[type='text'],[type='date'],[type='number'],[type='email'],[type='textarea']").blur(function () {
-            var txt = $(this);
-            if (txt.val().length > 0) {
-                // close the validation
-                txt.validationEngine('hide');
-            }
-            else {
-                if (isValidated)
-                    txt.validationEngine('validate');
-            }
-        });
-
         // Update invoice ship address based on textarea value
         $("#txtShipAddress").blur(function (evt) {
             var id = evt.target.id.replace("txt", "lbl");
@@ -132,12 +119,23 @@ $(document).ready(function () {
             UpdateItems();
         });
 
-        $('#lblComment').blur(function () {
-            if ($(this).val().length > 0) {
-                $(this).removeClass("divTxtArea");
+        // Div that acts as a textarea box (for invoice comments)
+        $('.divTxtArea').click(function () {
+            if ($(this).data("commented") == "false") {
+                $(this).text('');
+            }
+        });
+        $('.divTxtArea').blur(function () {
+            if ($(this).text() == '') {
+                $(this).data("commented", "false");
+                $(this).text('Comment here...');
+            }
+            else {
+                $(this).data("commented", "true");
             }
         });
 
+        // Vendors dropdown controls
         $('#cboVendors').change(function () {
             $("input[id^='txtVContact'").val("");
             $("div[id^='lblVContact'").text("");
@@ -227,9 +225,8 @@ $(document).ready(function () {
 
 // Add order item to preview invoice when mini form is submitted
 function AddItems() {
-    var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val());
+    var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val()) + parseFloat($('#txtTax').val()) + parseFloat($('#txtShipping').val());
     rowTotal = rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-    console.log("rowTotal=" + rowTotal);
     var row = "<tr name='invRow'><td><img src='/Images/delete-32x32.png' style='height:20px;width:20px;cursor:pointer' /></td>" +
         "<td><span name='spProduct'>" + $('#txtProduct').val() + "</span></td>" +
         "<td style='display:none'><span name='spPartNo'>" + $('#txtPartNo').val() + "</span></td>" +

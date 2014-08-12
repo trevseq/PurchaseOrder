@@ -29,6 +29,7 @@ body {
     padding-left: 15px;
     padding-right: 15px;
     /*margin-top: 2%;*/
+    width: 1200px;
 }
 
 // Set padding to display errors that occur during databinding
@@ -67,9 +68,9 @@ body {
     position: fixed;
     margin-left: 35%;
     width: 700px;
-    border:1px;
+    /*border:1px;
     border-color:blue;
-    border-style:dashed;
+    border-style:dashed;*/
 
 }
 
@@ -142,4 +143,24 @@ input, textarea, button { margin-top:10px; }
     -webkit-transition: color 0.2s ease;
     -moz-transition: color 0.2s ease;
     transition: color 0.2s ease;
+}
+
+#kazlogo{
+    height: 104px;
+    width: 314px;
+}
+
+.divAddressBox{
+    //white-space: nowrap;
+    white-space:pre;
+}
+
+#txtBillAddress{
+    height: 80px;
+    width: 330px;
+}
+
+#txtShipAddress{
+    height: 80px;
+    width: 330px;
 }
