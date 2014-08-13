@@ -121,7 +121,7 @@ $(document).ready(function () {
 
         // Div that acts as a textarea box (for invoice comments)
         $('.divTxtArea').click(function () {
-            if ($(this).data("commented") == "false") {
+            if ($(this).data("commented") != "true") {
                 $(this).text('');
             }
         });
@@ -193,7 +193,7 @@ $(document).ready(function () {
             dataType: "JSON",
             url: pathName + "Home/GetPrintPreviewData?purchaseNumber=1",
             cache: false,
-            success: function (data) {
+            success: function (data, subItems) {
                 var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val());
                 var row = "<tr name='invRow'><td><span name='spProduct'>" +
                     "product here" + "</span></td><td><span name='spPartNo'>" +
@@ -206,6 +206,7 @@ $(document).ready(function () {
                     "$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
                 $('#tblItemizedList').find("tbody").append(row);
                 UpdateItems();
+                alert(subItems.description);//testing
 
                 //$("#invoiceOrderDate").text(args.data.OrderDate);
             }
