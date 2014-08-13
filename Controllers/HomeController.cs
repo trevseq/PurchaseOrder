@@ -220,7 +220,7 @@ namespace PurchaseOrder.Controllers
 
         public ActionResult GetPrintPreviewData(int purchaseNumber)
         {
-            dynamic data = null;
+            dynamic info = null;
             dynamic subItems = null;
             //dynamic vendorInformation = null;
             //dynamic vendorContact = null;
@@ -230,7 +230,7 @@ namespace PurchaseOrder.Controllers
                 int poNumber = int.Parse(Request.QueryString["purchaseNumber"]);
                 var db = new PurchaseOrdersEntities();
 
-                data = (from p in db.PurchaseOrders
+                info = (from p in db.PurchaseOrders
                         join v in db.Vendors on p.Vendor equals v.Id
                         join c in db.Vendors_Contact on p.Vendor equals c.VendorId
                         where p.PurchaseNumber == poNumber
@@ -257,7 +257,7 @@ namespace PurchaseOrder.Controllers
 
             return new JsonResult()
             {
-                Data = new { data, subItems},
+                Data = new { info, subItems },
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
