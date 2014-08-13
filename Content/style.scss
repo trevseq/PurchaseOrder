@@ -13,8 +13,8 @@
 #mainContainer { width: 75%; }
 
 .navbar {
-    width: 65%;
-    margin-left: 19%;
+    width: 75%;
+    margin-left: 12%;
     box-shadow: 10px 10px 5px #888888;
     border-radius: 15px;
 }
@@ -28,7 +28,7 @@ body {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    /*margin-top: 2%;*/
+    margin-top: 2%;
     width: 1200px;
 }
 
@@ -76,7 +76,7 @@ body {
 
 .floatPos {
     float: left;
-    /*width: 50%*/
+    width: 700px;
 }
 
 input, textarea, button { margin-top:10px; }
