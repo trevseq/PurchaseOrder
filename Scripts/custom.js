@@ -208,6 +208,8 @@ $(document).ready(function () {
                 var cFax = data.info.Fax;
                 var vendor = data.info.VendName;
 
+                orderDate = parseDate(orderDate);
+
                 $("#invoiceOrderDate").text(orderDate);
                 $('#lblPaymentTerms').text(terms);
                 $('#lblComment').text(com);
@@ -305,6 +307,36 @@ function UpdateItems() {
     $("#grandTotal").text("$" + (totPrice + totShipping + totTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 }
 
+// Date formatting from sql return
+function parseDate(strdate) {
+    var d = null;
+    if (strdate != null && strdate != "") {
+        var s = new Date(parseInt(strdate.match(/\d{13}/), 10));
+        d = (s.getMonth() + 1) + "/" + s.getDate() + "/" + s.getFullYear();
+    }
+
+    return d;
+}
+
+
+//function formatAMPM(date) {
+//    var d = new Date(parseInt(date.match(/\d{13}/), 10));
+//    var strTime = formatAMPMFromDate(d);
+//    return strTime;
+//}
+
+//function formatAMPMFromDate(date) {
+//    var hours = date.getHours();
+//    var minutes = date.getMinutes();
+//    var ampm = hours >= 12 ? 'pm' : 'am';
+//    hours = hours % 12;
+//    hours = hours ? hours : 12; // the hour '0' should be '12'
+//    minutes = minutes < 10 ? '0' + minutes : minutes;
+//    var strTime = hours + ':' + minutes + ' ' + ampm;
+//    return strTime;
+//}
+
+
 function ValidateInputs() {
     //Validate date selector fields
     if ($('#txtDateRequested').val() == null || $('#txtDateRequested').val() == "") {
@@ -322,8 +354,6 @@ function ValidateInputs() {
 
 // Main form submission control
 function Submit() {
-    var purchaseNumber = 0; // <-- for debug purposes!
-
     var priority = $('#cboPriority').val();
     var terms = $('#cboPaymentTerms').val();
     var dateRequested = $('#txtDateRequested').val();
@@ -333,8 +363,8 @@ function Submit() {
     var requestorId = $('#txtReqName').data("requestorid");
     var vendor = $('#cboVendors').val();
     var productType = $('#cboProductType').val();
-    var billingAddress = $('#txtBillAddress').val();
-    var shippingAddress = $('#txtShipAddress').val();
+    var billingAddress = $('#txtBillAddress').val().replace("\n", " ");// use regex
+    var shippingAddress = $('#txtShipAddress').val().replace("\n", " ");// use regex
     var comment = ($('#lblComment').data("commented") == true) ? $('#lblComment').text() : "";
     var signedBy = $('#txtSig').val();
 
@@ -354,7 +384,7 @@ function Submit() {
 
     // Save PO form data
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: encodeURI(pathName + "Home/SavePOForm?" + saveParams),
         dataType: "JSON",
         async: false,
