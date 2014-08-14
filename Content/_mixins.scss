@@ -1,0 +1,36 @@
+@mixin calc($property, $expression) { 
+  #{$property}: -webkit-calc(#{$expression}); 
+  #{$property}: calc(#{$expression}); 
+}
+
+@mixin transform($args){
+    -webkit-transform: $args;
+    -moz-transform: $args;
+    -ms-transform: $args;
+    -o-transform: $args;
+    transform: $args;
+}
+
+@mixin boxShadow($top, $left, $blur, $color, $inset:""){
+    -webkit-box-shadow: $top $left $blur $color #{$inset};
+    -moz-box-shadow: $top $left $blur $color #{$inset};
+    box-shadow: $top $left $blur $color #{$inset};
+}
+
+@mixin borderRadius($size){
+    -webkit-border-radius: $size;
+    -moz-border-radius: $size;
+    border-radius: $size;
+}
+
+@mixin boxSizing($args){
+    -webkit-box-sizing: $args;
+    -moz-box-sizing: $args;
+    box-sizing: $args;
+
+}
+
+@mixin transition($property, $duration, $timing:"", $delay:""){
+    transition: $property $duration #{$timing} #{$delay};
+    -webkit-transition: $property $duration #{$timing} #{$delay};
+}

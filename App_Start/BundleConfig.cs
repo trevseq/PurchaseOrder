@@ -16,9 +16,9 @@ namespace PurchaseOrder
             bundles.Add(new ScriptBundle("~/bundles/javascript").Include(
                 "~/Scripts/custom.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
-                "~/Scripts/knockout-{version}.js",
-                "~/Scripts/knockout.validation.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+            //    "~/Scripts/knockout-{version}.js",
+            //    "~/Scripts/knockout.validation.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/sammy-{version}.js",
@@ -39,7 +39,7 @@ namespace PurchaseOrder
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
-                "~/Content/style.css"));
+                "~/Content/formpage.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862

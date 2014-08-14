@@ -1,5 +1,28 @@
-.invoice-title h2, .invoice-title h3 {
-  display: inline-block; }
+.navbar {
+  width: 75%;
+  margin-left: 12%;
+  position: fixed;
+  overflow: auto;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-box-shadow: 10px 10px 5px #888888 ;
+  -moz-box-shadow: 10px 10px 5px #888888 ;
+  box-shadow: 10px 10px 5px #888888 ;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px; }
+
+.pageHeader {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: inline-block;
+  color: floralwhite;
+  white-space: nowrap;
+  font-size: xx-large; }
 
 .table thead > tr > .no-line {
   border-bottom: none; }
@@ -26,16 +49,14 @@ input, textarea, button {
     padding: 0.5em 0.8em;
     color: rgba(0, 0, 0, 0.65);
     text-transform: uppercase;
+    font-size: 75%;
     font-weight: normal;
     border-radius: 0.325em;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
-    -webkit-transition: background 0.1s linear;
-    -moz-transition: background 0.1s linear;
-    transition: background 0.1s linear;
-    font-size: 75%; }
+    transition: background 0.1s linear ;
+    -webkit-transition: background 0.1s linear ; }
     .required-field-block .required-icon :after {
       position: absolute;
       content: "";
@@ -49,13 +70,15 @@ input, textarea, button {
       border-bottom: 30px solid transparent;
       border-left: 0em solid transparent;
       border-right-color: inherit;
-      -webkit-transition: border-color 0.2s ease;
-      -moz-transition: border-color 0.2s ease;
-      transition: border-color 0.2s ease; }
+      transition: border-color 0.2s ease ;
+      -webkit-transition: border-color 0.2s ease ; }
     .required-field-block .required-icon .text {
       color: #B80000;
       font-size: 26px;
       margin: -3px 0 0 12px; }
+
+.padding-error {
+  padding-top: 20px; }
 
 @media print {
   .no-print, .no-print * {

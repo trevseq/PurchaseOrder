@@ -194,6 +194,16 @@ $(document).ready(function () {
             url: pathName + "Home/GetPrintPreviewData?purchaseNumber=1",
             cache: false,
             success: function (data) {
+                // Order info: (PO#, terms, justification, shipaddr, vend contact info, etc.)
+
+
+
+
+
+
+
+
+                var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val());
                 var row = "<tr name='invRow'><td><span name='spProduct'>" +
                     "product here" + "</span></td><td><span name='spPartNo'>" +
                     "part no here" + "</span></td><td><span name='spDescription'>" +
@@ -204,13 +214,11 @@ $(document).ready(function () {
                     "$" + "<span name='spTax'>" + "tax here" + "</span>" + "<td class='text-right'>" +
                     "$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
 
-                var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val());
-
                 $('#tblItemizedList').find("tbody").append(row);
 
                 UpdateItems();
 
-                alert(data.subItems);//testing
+                //alert(data.subItems);//testing
 
                 //$("#invoiceOrderDate").text(args.data.OrderDate);
             }
@@ -222,7 +230,8 @@ $(document).ready(function () {
             url: pathName + "Home/GetRequestor",
             cache: false,
             success: function (data) {
-                $('#lblReqName').text(data.FirstName + " " + data.LastName)
+                $('#lblReqName').text(data.FirstName + " " + data.LastName);
+                $('#lblReqEmail').text(data.Email);
             }
         });
     }

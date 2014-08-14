@@ -1,0 +1,15 @@
+@import "_mixins.scss";
+@import "_globals.scss";
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
+
+@page {
+    size: auto; // auto is the current printer page size
+    margin: 0mm; // this affects the margin in the printer settings
+}

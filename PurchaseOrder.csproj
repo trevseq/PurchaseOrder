@@ -229,11 +229,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\printpreview.css">
-      <DependentUpon>printpreview.scss</DependentUpon>
+    <Content Include="Content\formpage.css" />
+    <Content Include="Content\printpage.css">
+      <DependentUpon>printpage.scss</DependentUpon>
     </Content>
     <Content Include="Content\style.css">
-      <DependentUpon>style.scss</DependentUpon>
+      <DependentUpon>formpage.scss</DependentUpon>
     </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -243,7 +244,7 @@
     <Content Include="Models\PurchaseOrdersModel.edmx.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\style.scss">
+    <Content Include="Content\formpage.scss">
       <Compile>True</Compile>
       <Minify>True</Minify>
       <IgnoreWarnings>True</IgnoreWarnings>
@@ -269,7 +270,9 @@
       <DependentUpon>PurchaseOrdersModel.edmx</DependentUpon>
       <LastGenOutput>PurchaseOrdersModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Content\printpreview.scss" />
+    <Content Include="Content\printpage.scss" />
+    <Content Include="Content\_mixins.scss" />
+    <Content Include="Content\_globals.scss" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

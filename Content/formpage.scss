@@ -1,0 +1,63 @@
+@import "_mixins.scss";
+@import "_globals.scss";
+
+@media only screen and (max-width: 767px) {
+    .nofloat {
+        float: none;
+        padding: 10px 15px;
+    }
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+// Set padding to keep content from hitting the edges
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 2%;
+    width: 1200px;
+}
+
+.fixedPos {
+    position: fixed;
+    margin-left: 35%;
+    width: 700px;
+    @include transform(translateZ(0));
+
+}
+
+.floatPos {
+    float: left;
+    width: 700px;
+}
+
+#kazlogo{
+    height: 104px;
+    width: 314px;
+}
+
+.divAddressBox{
+    //white-space: nowrap;
+    white-space:pre;
+}
+
+#txtBillAddress{
+    height: 80px;
+    width: 330px;
+}
+
+#txtShipAddress{
+    height: 80px;
+    width: 330px;
+}
+
+#mainForm{
+    width: 600px;
+}
+
+#miniInvoice{
+    width: 700px;
+}

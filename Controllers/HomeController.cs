@@ -251,7 +251,16 @@ namespace PurchaseOrder.Controllers
 
                 subItems = (from i in db.PurchaseOrderItems
                             where i.PurchaseNumber == poNumber
-                            select i);
+                            select new
+                            {
+                                //i.PurchaseNumber,
+                                i.Product,
+                                i.Quantity,
+                                i.Price,
+                                i.Tax,
+                                i.Shipping,
+                                i.Description
+                            });
             }
 
 
