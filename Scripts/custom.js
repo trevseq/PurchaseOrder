@@ -110,7 +110,7 @@ $(document).ready(function () {
         // Submit form button
         $("#btnSubmit").click(function (e) {
             ValidateInputs();
-            e.preventDefault();
+            //e.preventDefault();
         });
 
         // Delete Row button
@@ -194,33 +194,57 @@ $(document).ready(function () {
             url: pathName + "Home/GetPrintPreviewData?purchaseNumber=1",
             cache: false,
             success: function (data) {
-                // Order info: (PO#, terms, justification, shipaddr, vend contact info, etc.)
+                // Order info: (PO#, terms, justification, shipaddr, vend contact info, et cetera)
+                var poNum = data.info.PurchaseNumber;
+                var priority = data.info.Priority;
+                var terms = data.info.Terms;
+                var justi = data.info.Justification;
+                var shipAddr = data.info.ShippingAddress;
+                var com = data.info.Comment;
+                var orderDate = data.info.OrderDate;
+                var addr = data.info.Address1;
+                var cName = data.info.Name;
+                var cPhone = data.info.Phone;
+                var cFax = data.info.Fax;
+                var vendor = data.info.VendName;
+
+                $("#invoiceOrderDate").text(orderDate);
+                $('#lblPaymentTerms').text(terms);
+                $('#lblComment').text(com);
+                $('#lblPONum').text(poNum);
+                $('#lblVendors').text(vendor);
+                $('#lblVContactName').text(cName);
+                $('#lblVContactPhone').text(cPhone);
+                $('#lblVContactFax').text(cFax);
+                $('#lblVContactAddress').text(addr);
+                $('#lblShipAddress').text(shipAddr);
 
 
+                // Purchased items: (for rows in invoice table)
+                var p;
+                for (p in data.subItems) {
+                    var prod = data.subItems[p].Product;
+                    var quan = data.subItems[p].Quantity;
+                    var price = data.subItems[p].Price;
+                    var tax = data.subItems[p].Tax;
+                    var ship = data.subItems[p].Shipping;
+                    var desc = data.subItems[p].Description;
+                    var partNum = data.subItems[p].PartNumber;
+                    var rowTotal = parseFloat(price) * parseFloat(quan) + parseFloat(tax) + parseFloat(ship);
 
+                    var row = "<tr name='invRow'>";
+                    row += "<td><span name='spProduct'>" + prod + "</span></td>";
+                    row += "<td><span name='spPartNo'>" + partNum + "</span></td>";
+                    row += "<td><span name='spDescription'>" + desc + "</span></td>";
+                    row += "<td><span name='spQuantity'>" + quan + "</span></td>";
+                    row += "<td class='text-right'>$<span name='spPrice'>" + price + "</span></td>";
+                    row += "<td class='text-right'>$<span name='spShipping'>" + ship + "</span></td>";
+                    row += "<td class='text-right'>$<span name='spTax'>" + tax + "</span></td>";
+                    row += "<td class='text-right'>$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
 
-
-
-
-
-                var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val());
-                var row = "<tr name='invRow'><td><span name='spProduct'>" +
-                    "product here" + "</span></td><td><span name='spPartNo'>" +
-                    "part no here" + "</span></td><td><span name='spDescription'>" +
-                    "desc here" + "</span></td><td>" + "<span name='spQuantity'>" +
-                    "quan here" + "</span>" + "</td><td class='text-right'>" +
-                    "$" + "<span name='spPrice'>" + "price here" + "</span>" + "</td><td class='text-right'>" +
-                    "$" + "<span name='spShipping'>" + "ship here" + "</span>" + "</td><td class='text-right'>" +
-                    "$" + "<span name='spTax'>" + "tax here" + "</span>" + "<td class='text-right'>" +
-                    "$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
-
-                $('#tblItemizedList').find("tbody").append(row);
-
+                    $('#tblItemizedList').find("tbody").append(row);
+                }
                 UpdateItems();
-
-                //alert(data.subItems);//testing
-
-                //$("#invoiceOrderDate").text(args.data.OrderDate);
             }
         });
         // Get requestor info from server and populate requestor fields
@@ -267,18 +291,18 @@ function AddItems() {
 
 // Auto-update preview invoice when values change
 function UpdateItems() {
-    var price = 0;
-    var shipping = 0;
-    var tax = 0;
+    var totPrice = 0;
+    var totShipping = 0;
+    var totTax = 0;
     $('#tblItemizedList > tbody tr').each(function (i) {
-        price += parseFloat($(this).find("span[name='spPrice']").text()) * parseInt($(this).find("span[name='spQuantity']").text());
-        shipping += parseFloat($(this).find("span[name='spShipping']").text());
-        tax += parseFloat($(this).find("span[name='spTax']").text());
+        totPrice += parseFloat($(this).find("span[name='spPrice']").text()) * parseInt($(this).find("span[name='spQuantity']").text());
+        totShipping += parseFloat($(this).find("span[name='spShipping']").text());
+        totTax += parseFloat($(this).find("span[name='spTax']").text());
     });
-    $("#subTotal").text("$" + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#shipTotal").text("$" + shipping.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#taxTotal").text("$" + tax.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#grandTotal").text("$" + (price + shipping + tax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#subTotal").text("$" + totPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#shipTotal").text("$" + totShipping.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#taxTotal").text("$" + totTax.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#grandTotal").text("$" + (totPrice + totShipping + totTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 }
 
 function ValidateInputs() {
@@ -311,7 +335,7 @@ function Submit() {
     var productType = $('#cboProductType').val();
     var billingAddress = $('#txtBillAddress').val();
     var shippingAddress = $('#txtShipAddress').val();
-    var comment = $('#lblComment').text();
+    var comment = ($('#lblComment').data("commented") == true) ? $('#lblComment').text() : "";
     var signedBy = $('#txtSig').val();
 
     var saveParams = "priority=" + priority +
@@ -356,12 +380,12 @@ function Submit() {
                 // Save ordered items
                 $.ajax({
                     type: "GET",
-                    url: encodeURI(pathName + "Home/SaveOrderedItems?purchaseNumber=" + purchaseNumber + itemParams),
+                    url: encodeURI(pathName + "Home/SaveOrderedItems?" + itemParams),
                     dataType: "JSON",
                     async: false,
                     cache: false,
                     success: function (data) {
-                        window.location = encodeURI(pathName + "Home/PrintPreview?purchaseNumber=" + purchaseNumber);
+                        window.location = encodeURI(pathName + "Home/PrintPreview?purchaseNumber=" + data.PurchaseNumber);
                     }
                 });
             });

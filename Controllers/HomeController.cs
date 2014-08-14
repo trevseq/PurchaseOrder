@@ -244,6 +244,7 @@ namespace PurchaseOrder.Controllers
                             p.Comment,
                             p.OrderDate,
                             v.Address1,
+                            VendName = v.Name,
                             c.Name,
                             c.Phone,
                             c.Fax
@@ -259,10 +260,10 @@ namespace PurchaseOrder.Controllers
                                 i.Price,
                                 i.Tax,
                                 i.Shipping,
-                                i.Description
+                                i.Description,
+                                i.PartNumber
                             });
             }
-
 
             return new JsonResult()
             {
