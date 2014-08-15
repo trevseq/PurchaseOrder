@@ -15,7 +15,7 @@ namespace PurchaseOrder.Models
     public partial class PurchaseOrderItem
     {
         public int Id { get; set; }
-        public int PurchaseNumber { get; set; }
+        public Nullable<int> PurchaseNumber { get; set; }
         public string Product { get; set; }
         public string PartNumber { get; set; }
         public string Description { get; set; }

@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="PurchaseOrdersModel.Vendors_Contact" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PurchaseOrdersModel.POAppAccess" Width="3.125" PointX="10.375" PointY="1" />
         <EntityTypeShape EntityType="PurchaseOrdersModel.PurchaseOrderItem" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="PurchaseOrdersModel.PurchaseOrder" Width="2.75" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="PurchaseOrdersModel.PurchaseOrder" Width="1.5" PointX="5.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

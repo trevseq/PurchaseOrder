@@ -335,6 +335,7 @@ function parseDate(strdate) {
 //}
 
 function ValidateInputs() {
+    // Validation here if necessary in future...
     Submit();
 }
 
@@ -349,8 +350,8 @@ function Submit() {
     var requestorId = $('#txtReqName').data("requestorid");
     var vendor = $('#cboVendors').val();
     var productType = $('#cboProductType').val();
-    var billingAddress = $('#txtBillAddress').val().replace("\n", " ");// use regex
-    var shippingAddress = $('#txtShipAddress').val().replace("\n", " ");// use regex
+    var billingAddress = $('#txtBillAddress').val().replace(/(\r\n|\n|\r)/gm, "");
+    var shippingAddress = $('#txtShipAddress').val().replace(/(\r\n|\n|\r)/gm, "");
     var comment = ($('#lblComment').data("commented") == true) ? $('#lblComment').text() : "";
     var signedBy = $('#txtSig').val();
 
@@ -376,7 +377,7 @@ function Submit() {
         async: false,
         cache: false,
         success: function (data) {
-            var purchaseNum = parseInt(data.PurchaseNumber);
+            var purchaseNum = data;
             $("tr[name='invRow']").each(function () {
                 var product = $(this).find("span[name='spProduct']").text();
                 var partNumber = $(this).find("span[name='spPartNo']").text();
@@ -404,7 +405,7 @@ function Submit() {
                     cache: false,
                 });
             });
-            window.location = encodeURI(pathName + "Home/PrintPreview?purchaseNumber=" + data.PurchaseNumber);
+            window.location = encodeURI(pathName + "Home/PrintPreview?purchaseNumber=" + data);
         }
     });
 }
