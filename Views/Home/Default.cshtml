@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Terms</label>
                         <div class="col-sm-4">
-                            <select id="cboPaymentTerms" class="form-control" name="terms"></select>
+                            <select id="cboPaymentTerms" class="form-control" name="terms" ></select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -64,21 +64,21 @@
                         </div>
                         <label class="col-sm-2" for="textinput">Quantity</label>
                         <div class="col-sm-3">
-                            <input id="txtQuantity" type="text" placeholder="Quantity" class="form-control" value="1" />
+                            <input id="txtQuantity" type="number" placeholder="Quantity" class="form-control" value="1" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2" for="textinput">Price</label>
                         <div class="col-sm-2">
-                            <input id="txtPrice" type="text" placeholder="" class="form-control" value="" />
+                            <input id="txtPrice" type="number" placeholder="" class="form-control" value="" />
                         </div>
-                        <label class="col-sm-2" for="textinput">Shipping</label>
+                        <label class="col-sm-2" for="textinput">Shipping<br /><small><i>(single item)</i></small></label>
                         <div class="col-sm-2">
-                            <input id="txtShipping" type="text" placeholder="" class="form-control" value="" />
+                            <input id="txtShipping" type="number" placeholder="" class="form-control" value="" />
                         </div>
-                        <label class="col-sm-2" for="textinput">Tax</label>
+                        <label class="col-sm-2" for="textinput">Tax<br /><small><i>(single item)</i></small></label>
                         <div class="col-sm-2">
-                            <input id="txtTax" type="text" placeholder="" class="form-control" value="" />
+                            <input id="txtTax" type="number" placeholder="" class="form-control" value="" />
                         </div>
                     </div>
 
@@ -117,7 +117,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Email</label>
                         <div class="col-sm-10">
-                            <input id="txtReqEmail" type="text" placeholder="Email" class="form-control">
+                            <input id="txtReqEmail" type="email" placeholder="Email" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -192,7 +192,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Hyperlink</label>
                         <div class="col-sm-10">
-                            <input type="text" id="txtVContactHyperlink" placeholder="Insert Hyperlink" class="form-control">
+                            <input type="url" id="txtVContactHyperlink" placeholder="Insert Hyperlink" class="form-control">
                         </div>
                     </div>
                     <hr />

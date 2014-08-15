@@ -85,8 +85,9 @@ $(document).ready(function () {
         $('#lblReqEmail').text($('#txtReqEmail').val());
 
         // Datepickers
-        $('#txtDateRequested').datepicker();
-        $('#txtDateRequired').datepicker();
+        $('#txtDateRequested').datepicker().datepicker('setDate', new Date());
+        $('#txtDateRequired').datepicker().datepicker('setDate', new Date());
+        
 
         // Update invoice ship address based on textarea value
         $("#txtShipAddress").blur(function (evt) {
@@ -110,7 +111,7 @@ $(document).ready(function () {
         // Submit form button
         $("#btnSubmit").click(function (e) {
             ValidateInputs();
-            //e.preventDefault();
+            e.preventDefault();
         });
 
         // Delete Row button
@@ -290,7 +291,6 @@ function AddItems() {
     $('#txtTax').val("");
 }
 
-
 // Auto-update preview invoice when values change
 function UpdateItems() {
     var totPrice = 0;
@@ -314,10 +314,8 @@ function parseDate(strdate) {
         var s = new Date(parseInt(strdate.match(/\d{13}/), 10));
         d = (s.getMonth() + 1) + "/" + s.getDate() + "/" + s.getFullYear();
     }
-
     return d;
 }
-
 
 //function formatAMPM(date) {
 //    var d = new Date(parseInt(date.match(/\d{13}/), 10));
@@ -336,20 +334,8 @@ function parseDate(strdate) {
 //    return strTime;
 //}
 
-
 function ValidateInputs() {
-    //Validate date selector fields
-    if ($('#txtDateRequested').val() == null || $('#txtDateRequested').val() == "") {
-        alert('You must complete the \'Date Requested\' field.');
-        $('#txtDateRequested').focus();
-    }
-    else if ($('#txtDateRequired').val() == null || $('#txtDateRequired').val() == "") {
-        alert('You must complete the \'Date Required\' field.');
-        $('#txtDateRequired').focus();
-    }
-    else {
-        Submit();
-    }
+    Submit();
 }
 
 // Main form submission control
@@ -384,12 +370,13 @@ function Submit() {
 
     // Save PO form data
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: encodeURI(pathName + "Home/SavePOForm?" + saveParams),
         dataType: "JSON",
         async: false,
         cache: false,
         success: function (data) {
+            var purchaseNum = parseInt(data.PurchaseNumber);
             $("tr[name='invRow']").each(function () {
                 var product = $(this).find("span[name='spProduct']").text();
                 var partNumber = $(this).find("span[name='spPartNo']").text();
@@ -399,7 +386,8 @@ function Submit() {
                 var shipping = $(this).find("span[name='spShipping']").text();
                 var tax = $(this).find("span[name='spTax']").text();
 
-                var itemParams = "&product=" + product +
+                var itemParams = "&purchaseNumber=" + purchaseNum +
+                    "&product=" + product +
                     "&partNumber=" + partNumber +
                     "&description=" + description +
                     "&quantity=" + quantity +
@@ -414,11 +402,9 @@ function Submit() {
                     dataType: "JSON",
                     async: false,
                     cache: false,
-                    success: function (data) {
-                        window.location = encodeURI(pathName + "Home/PrintPreview?purchaseNumber=" + data.PurchaseNumber);
-                    }
                 });
             });
+            window.location = encodeURI(pathName + "Home/PrintPreview?purchaseNumber=" + data.PurchaseNumber);
         }
     });
 }
