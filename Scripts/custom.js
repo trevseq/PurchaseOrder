@@ -355,19 +355,21 @@ function Submit() {
     var comment = ($('#lblComment').data("commented") == true) ? $('#lblComment').text() : "";
     var signedBy = $('#txtSig').val();
 
-    var saveParams = "priority=" + priority +
-        "&terms=" + terms +
-        "&dateRequested=" + dateRequested +
-        "&dateRequired=" + dateRequired +
-        "&justification=" + justification +
-        "&manager=" + manager +
-        "&requestorId=" + requestorId +
-        "&vendor=" + vendor +
-        "&productType=" + productType +
-        "&billingAddress=" + billingAddress +
-        "&shippingAddress=" + shippingAddress +
-        "&comment=" + comment +
-        "&signedBy=" + signedBy;
+    var saveParams = {
+        "priority": priority,
+        "terms": terms,
+        "dateRequested": dateRequested,
+        "dateRequired": dateRequired,
+        "justification": justification,
+        "manager": manager,
+        "requestorId": requestorId,
+        "vendor": vendor,
+        "productType": productType,
+        "billingAddress": billingAddress,
+        "shippingAddress": shippingAddress,
+        "comment": comment,
+        "signedBy": signedBy
+    };
 
     // Save PO form data
     $.ajax({
@@ -387,14 +389,16 @@ function Submit() {
                 var shipping = $(this).find("span[name='spShipping']").text();
                 var tax = $(this).find("span[name='spTax']").text();
 
-                var itemParams = "&purchaseNumber=" + purchaseNum +
-                    "&product=" + product +
-                    "&partNumber=" + partNumber +
-                    "&description=" + description +
-                    "&quantity=" + quantity +
-                    "&price=" + price +
-                    "&shipping=" + shipping +
-                    "&tax=" + tax;
+                var itemParams = {
+                    "purchaseNumber": purchaseNum,
+                    "product": product,
+                    "partNumber": partNumber,
+                    "description": description,
+                    "quantity": quantity,
+                    "price": price,
+                    "shipping": shipping,
+                    "tax": tax
+                };
 
                 // Save ordered items
                 $.ajax({
