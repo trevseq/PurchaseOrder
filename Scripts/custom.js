@@ -403,7 +403,7 @@ function Submit() {
                     + "purchaseNumber=" + purchaseNum
                     + "&product=" + product
                     + "&partNumber=" + partNumber
-                    + "&description=" + description
+                    + "&description=" + encodeURIComponent(description)
                     + "&quantity=" + quantity
                     + "&price=" + price
                     + "&shipping=" + shipping
