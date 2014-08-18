@@ -188,10 +188,11 @@ $(document).ready(function () {
     // Print preview page
     else if (location.pathname.toLowerCase().indexOf("printpreview") > -1) {
         // Get data from server and populate most fields on page
+        var PONumber = GetUrlValue("purchaseNumber");
         $.ajax({
             type: "GET",
             dataType: "JSON",
-            url: pathName + "Home/GetPrintPreviewData?purchaseNumber=1",
+            url: pathName + "Home/GetPrintPreviewData?purchaseNumber=" + PONumber,
             cache: false,
             success: function (data) {
                 // Order info: (PO#, terms, justification, shipaddr, vend contact info, et cetera)
@@ -306,6 +307,18 @@ function UpdateItems() {
     $("#grandTotal").text("$" + (totPrice + totShipping + totTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 }
 
+// Get key values in url
+function GetUrlValue(VarSearch) {
+    var SearchString = window.location.search.substring(1);
+    var VariableArray = SearchString.split('&');
+    for (var i = 0; i < VariableArray.length; i++) {
+        var KeyValuePair = VariableArray[i].split('=');
+        if (KeyValuePair[0] == VarSearch) {
+            return KeyValuePair[1];
+        }
+    }
+}
+
 // Date formatting from sql return
 function parseDate(strdate) {
     var d = null;
@@ -349,31 +362,30 @@ function Submit() {
     var requestorId = $('#txtReqName').data("requestorid");
     var vendor = $('#cboVendors').val();
     var productType = $('#cboProductType').val();
-    var billingAddress = $('#txtBillAddress').val().replace(/(\r\n|\n|\r)/gm, "");
-    var shippingAddress = $('#txtShipAddress').val().replace(/(\r\n|\n|\r)/gm, "");
+    var billingAddress = $('#txtBillAddress').val().replace(/(\r\n|\n|\r)/gm, " ");
+    var shippingAddress = $('#txtShipAddress').val().replace(/(\r\n|\n|\r)/gm, " ");
     var comment = ($('#lblComment').data("commented") == true) ? $('#lblComment').text() : "";
     var signedBy = $('#txtSig').val();
 
-    var saveParams = {
-        "priority": priority,
-        "terms": terms,
-        "dateRequested": dateRequested,
-        "dateRequired": dateRequired,
-        "justification": justification,
-        "manager": manager,
-        "requestorId": requestorId,
-        "vendor": vendor,
-        "productType": productType,
-        "billingAddress": billingAddress,
-        "shippingAddress": shippingAddress,
-        "comment": comment,
-        "signedBy": signedBy
-    };
+    var saveParams = ""
+        + "priority=" + priority
+        + "&terms=" + terms
+        + "&dateRequested=" + dateRequested
+        + "&dateRequired=" + dateRequired
+        + "&justification=" + justification
+        + "&manager=" + manager
+        + "&requestorId=" + requestorId
+        + "&vendor=" + vendor
+        + "&productType=" + productType
+        + "&billingAddress=" + billingAddress
+        + "&shippingAddress=" + shippingAddress
+        + "&comment=" + comment
+        + "&signedBy=" + signedBy;
 
     // Save PO form data
     $.ajax({
         type: "GET",
-        url: encodeURI(pathName + "Home/SavePOForm?" + saveParams),
+        url: encodeURI(pathName + "Home/SavePOForm?" + encodeURIComponent(saveParams)),
         dataType: "JSON",
         async: false,
         cache: false,
@@ -388,21 +400,21 @@ function Submit() {
                 var shipping = $(this).find("span[name='spShipping']").text();
                 var tax = $(this).find("span[name='spTax']").text();
 
-                var itemParams = {
-                    "purchaseNumber": purchaseNum,
-                    "product": product,
-                    "partNumber": partNumber,
-                    "description": description,
-                    "quantity": quantity,
-                    "price": price,
-                    "shipping": shipping,
-                    "tax": tax
-                };
+                var itemParams = ""
+                    + "purchaseNumber=" + purchaseNum
+                    + "&product=" + product
+                    + "&partNumber=" + partNumber
+                    + "&description=" + description
+                    + "&quantity=" + quantity
+                    + "&price=" + price
+                    + "&shipping=" + shipping
+                    + "&tax=" + tax;
+                
 
                 // Save ordered items
                 $.ajax({
                     type: "GET",
-                    url: encodeURI(pathName + "Home/SaveOrderedItems?" + itemParams),
+                    url: encodeURI(pathName + "Home/SaveOrderedItems?" + encodeURIComponent(itemParams)),
                     dataType: "JSON",
                     async: false,
                     cache: false,
