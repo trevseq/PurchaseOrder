@@ -9,182 +9,185 @@
     <link rel="stylesheet" type="text/css" media="all" href="~/Content/printpage.css" />
 </head>
 <body>
-    <form method="get">
-        <input type="hidden" name="purchaseNumber" />
-    <div class="container" >@*style="width:612px;height:792px"*@
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="row">
+    <div id="printpagebuffer">
+        <form method="get">
+            <input type="hidden" name="purchaseNumber" />
+            <div class="container">
+                @*style="width:612px;height:792px"*@
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <br />
+                        <div class="col-xs-6">
+                            <img src="/Images/logo.jpg" style="height:104px;width:314px" />
+                        </div>
+                        <div class="col-xs-5 pull-right">
+                            <div>
+                                <strong>Requisitioned By:</strong>
+                                <div id="lblReqName" class="pull-right"></div>
+                            </div>
+                            <div>
+                                <strong>Email:</strong>
+                                <div id="lblReqEmail" class="pull-right"></div>
+                            </div>
+                            <div>
+                                <strong>Terms:</strong>
+                                <div id="lblPaymentTerms" class="pull-right"></div>
+                            </div>
+                            <div>
+                                <strong>Comment:</strong>
+                                <div id="lblComment" class="pull-right"></div>
+                            </div>
+                            <div>
+                                <strong>PO #:</strong>
+                                <div id="lblPONum" class="pull-right"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <strong>Vendor:</strong>
+                            <br />
+                            <strong>Contact:</strong>
+                        </div>
+                        <div class="col-xs-4">
+                            <div id="lblVendors"></div>
+                            <div id="lblVContactName"></div>
+                            <div id="lblVContactAddress"></div>
+                        </div>
+                        <div class="col-xs-4 col-sm-offset-2">
+                            <strong>Ship To:</strong>
+                            <div id="lblShipAddress"></div>
+                        </div>
+                    </div>
                     <br />
-                    <div class="col-xs-6">
-                        <img src="/Images/logo.jpg" style="height:104px;width:314px" />
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <strong>Phone:</strong>
+                            <br />
+                            <strong>Fax:</strong>
+                        </div>
+                        <div class="col-xs-4">
+                            <div id="lblVContactPhone"></div>
+                            <div id="lblVContactFax"></div>
+                        </div>
+                        <div class="col-xs-4 col-sm-offset-2">
+                            <strong>Order Date:</strong>
+                            <div id="invoiceOrderDate"></div>
+                        </div>
                     </div>
-                    <div class="col-xs-5 pull-right">
-                        <div>
-                            <strong>Requisitioned By:</strong>
-                            <div id="lblReqName" class="pull-right"></div>
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><strong>Order summary</strong></h3>
                         </div>
-                        <div>
-                            <strong>Email:</strong>
-                            <div id="lblReqEmail" class="pull-right"></div>
-                        </div>
-                        <div>
-                            <strong>Terms:</strong>
-                            <div id="lblPaymentTerms" class="pull-right"></div>
-                        </div>
-                        <div>
-                            <strong>Comment:</strong>
-                            <div id="lblComment" class="pull-right"></div>
-                        </div>
-                        <div>
-                            <strong>PO #:</strong>
-                            <div id="lblPONum" class="pull-right"></div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table border="0" class="table table-condensed" id="tblItemizedList">
+                                    <thead>
+                                        <tr>
+                                            <td><strong>Item</strong></td>
+                                            <td><strong>Part Number</strong></td>
+                                            <td><strong>Description</strong></td>
+                                            <td><strong>Quantity</strong></td>
+                                            <td class="text-right"><strong>Cost/Unit</strong></td>
+                                            <td class="text-right"><strong>Shipping</strong></td>
+                                            <td class="text-right"><strong>Tax</strong></td>
+                                            <td class="text-right"><strong>Cost</strong></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                            <td class="thick-line text-right" id="subTotal"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line text-center"><strong>Shipping</strong></td>
+                                            <td class="no-line text-right" id="shipTotal"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line text-center"><strong>Tax</strong></td>
+                                            <td class="no-line text-right" id="taxTotal"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line text-center"><strong>Total</strong></td>
+                                            <td class="no-line text-right" id="grandTotal"></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <p id="lblJustification"></p>
                         </div>
                     </div>
                 </div>
-                <hr>
-                <div class="row">
-                    <div class="col-xs-2">
-                        <strong>Vendor:</strong>
-                        <br />
-                        <strong>Contact:</strong>
-                    </div>
-                    <div class="col-xs-4">
-                        <div id="lblVendors"></div>
-                        <div id="lblVContactName"></div>
-                        <div id="lblVContactAddress"></div>
-                    </div>
-                    <div class="col-xs-4 col-sm-offset-2">
-                        <strong>Ship To:</strong>
-                        <div id="lblShipAddress"></div>
-                    </div>
+            </div>
+            <div class="row no-print">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
+                    <button id="btnPrint" onclick="javascript: print()" class="btn btn-primary">Print</button>
                 </div>
-                <br />
-                <div class="row">
-                    <div class="col-xs-2">
-                        <strong>Phone:</strong>
-                        <br />
-                        <strong>Fax:</strong>
-                    </div>
-                    <div class="col-xs-4">
-                        <div id="lblVContactPhone"></div>
-                        <div id="lblVContactFax"></div>
-                    </div>
-                    <div class="col-xs-4 col-sm-offset-2">
-                        <strong>Order Date:</strong>
-                        <div id="invoiceOrderDate"></div>
-                    </div>
+                <div class="col-md-5"></div>
+            </div>
+            <div class="row no-print">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <br />
+                    <i>To send this page: Press print, click "change printer", and hit "save as pdf". Save this locally and attach it in an email.</i>
                 </div>
-                <br />
+                <div class="col-md-3"></div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><strong>Order summary</strong></h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table border="0" class="table table-condensed" id="tblItemizedList">
-                                <thead>
-                                    <tr>
-                                        <td><strong>Item</strong></td>
-                                        <td><strong>Part Number</strong></td>
-                                        <td><strong>Description</strong></td>
-                                        <td><strong>Quantity</strong></td>
-                                        <td class="text-right"><strong>Cost/Unit</strong></td>
-                                        <td class="text-right"><strong>Shipping</strong></td>
-                                        <td class="text-right"><strong>Tax</strong></td>
-                                        <td class="text-right"><strong>Cost</strong></td>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td> </td>
-                                        <td> </td>
-                                        <td> </td>
-                                        <td> </td>
-                                        <td> </td>
-                                        <td> </td>
-                                        <td> </td>
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="thick-line"></td>
-                                        <td class="thick-line"></td>
-                                        <td class="thick-line"></td>
-                                        <td class="thick-line"></td>
-                                        <td class="thick-line"></td>
-                                        <td class="thick-line"></td>
-                                        <td class="thick-line text-center"><strong>Subtotal</strong></td>
-                                        <td class="thick-line text-right" id="subTotal"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line text-center"><strong>Shipping</strong></td>
-                                        <td class="no-line text-right" id="shipTotal"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line text-center"><strong>Tax</strong></td>
-                                        <td class="no-line text-right" id="taxTotal"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line text-center"><strong>Total</strong></td>
-                                        <td class="no-line text-right" id="grandTotal"></td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <p id="lblJustification"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row no-print">
-            <div class="col-md-5"></div>
-            <div class="col-md-2">
-                <button id="btnPrint" onclick="javascript: print()" class="btn btn-primary">Print</button>
-            </div>
-            <div class="col-md-5"></div>
-        </div>
-        <div class="row no-print">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <br />
-                <i>To send this page: Press print, click "change printer", and hit "save as pdf". Save this locally and attach it in an email.</i>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
-    </div>
     </form>
+    </div>
 </body>
 </html>

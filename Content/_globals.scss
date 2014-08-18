@@ -1,12 +1,5 @@
 @import "_mixins.scss";
 
-// Page size <-- crappy workaround to messing with bootstrap's viewport breakpoints
-body{
-    width: 1800px!important;
-}
-
-
-
 // Title bar
 .navbar {
     width: 100%;

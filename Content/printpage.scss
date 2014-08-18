@@ -7,9 +7,32 @@
     {
         display: none !important;
     }
+    .container .body-content {
+        margin-left: 25px !important;
+        margin-right: 25px !important;
+    }
+    #printpagebuffer{
+        padding-left: 2.5%;
+        padding-right: 2.5%;
+        padding-top: -5%;
+        display: block;
+        position: absolute;
+    }
 }
 
 @page {
     size: auto; // auto is the current printer page size
     margin: 0mm; // this affects the margin in the printer settings
+}
+
+#btnPrint{
+    width:95px;
+}
+
+#lblVContactAddress{
+    white-space: pre-wrap;
+}
+
+.panel-body{
+    overflow: hidden;
 }

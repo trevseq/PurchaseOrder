@@ -367,8 +367,7 @@ function Submit() {
     var comment = ($('#lblComment').data("commented") == true) ? $('#lblComment').text() : "";
     var signedBy = $('#txtSig').val();
 
-    var saveParams = ""
-        + "priority=" + priority
+    var saveParams = "priority=" + priority
         + "&terms=" + terms
         + "&dateRequested=" + dateRequested
         + "&dateRequired=" + dateRequired
@@ -377,15 +376,15 @@ function Submit() {
         + "&requestorId=" + requestorId
         + "&vendor=" + vendor
         + "&productType=" + productType
-        + "&billingAddress=" + billingAddress
-        + "&shippingAddress=" + shippingAddress
+        + "&billingAddress=" + encodeURIComponent(billingAddress)
+        + "&shippingAddress=" + encodeURIComponent(shippingAddress)
         + "&comment=" + comment
         + "&signedBy=" + signedBy;
 
     // Save PO form data
     $.ajax({
         type: "GET",
-        url: encodeURI(pathName + "Home/SavePOForm?" + encodeURIComponent(saveParams)),
+        url: (pathName + "Home/SavePOForm?" + saveParams),
         dataType: "JSON",
         async: false,
         cache: false,
@@ -414,13 +413,13 @@ function Submit() {
                 // Save ordered items
                 $.ajax({
                     type: "GET",
-                    url: encodeURI(pathName + "Home/SaveOrderedItems?" + encodeURIComponent(itemParams)),
+                    url: (pathName + "Home/SaveOrderedItems?" + itemParams),
                     dataType: "JSON",
                     async: false,
                     cache: false,
                 });
             });
-            window.location = encodeURI(pathName + "Home/PrintPreview?purchaseNumber=" + data);
+            window.location = (pathName + "Home/PrintPreview?purchaseNumber=" + data);
         }
     });
 }

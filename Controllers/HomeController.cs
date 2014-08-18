@@ -132,7 +132,7 @@ namespace PurchaseOrder.Controllers
         }
         
         public ActionResult SavePOForm(
-            int requestorId,
+            int? requestorId,
             int? vendor,
             string priority = null,
             string terms = null,
