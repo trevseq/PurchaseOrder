@@ -1,6 +1,8 @@
+body {
+  width: 1800px !important; }
+
 .navbar {
-  width: 75%;
-  margin-left: 12%;
+  width: 100%;
   position: fixed;
   overflow: auto;
   text-align: center;
@@ -12,13 +14,7 @@
   -moz-transform: translateZ(0);
   -ms-transform: translateZ(0);
   -o-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-box-shadow: 10px 10px 5px #888888 ;
-  -moz-box-shadow: 10px 10px 5px #888888 ;
-  box-shadow: 10px 10px 5px #888888 ;
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  border-radius: 15px; }
+  transform: translateZ(0); }
 
 .table thead > tr > .no-line {
   border-bottom: none; }

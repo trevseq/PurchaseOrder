@@ -8,13 +8,13 @@
                 <fieldset>
                     <h2>Order Item</h2>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="textinput">P.O. Number</label>
-                        <div class="col-sm-4">
-                            <input id="txtPONum" type="text" placeholder="P.O. Number" value="312341234" class="form-control">
-                        </div>
                         <label class="col-sm-2 control-label" for="textinput">Date Requested</label>
                         <div class="col-sm-4">
                             <input type="text" id="txtDateRequested" placeholder="Date" class="form-control">
+                        </div>
+                        <label class="col-sm-2 control-label" for="textinput">Date Required</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtDateRequired" placeholder="Date" class="form-control" name="dateRequired">
                         </div>
                     </div>
                     <div class="form-group">
@@ -26,15 +26,9 @@
                                 <option value="High">High</option>
                             </select>
                         </div>
-                        <label class="col-sm-2 control-label" for="textinput">Date Required</label>
-                        <div class="col-sm-4">
-                            <input type="text" id="txtDateRequired" placeholder="Date" class="form-control" name="dateRequired">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="col-sm-2 control-label" for="textinput">Terms</label>
                         <div class="col-sm-4">
-                            <select id="cboPaymentTerms" class="form-control" name="terms" ></select>
+                            <select id="cboPaymentTerms" class="form-control" name="terms"></select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -68,22 +62,24 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2" for="textinput">Price</label>
+                        <label class="col-sm-2" for="textinput">Price<br /><small><i>(per item)</i></small></label>
                         <div class="col-sm-2">
                             <input id="txtPrice" type="number" placeholder="" class="form-control" value="" />
                         </div>
-                        <label class="col-sm-2" for="textinput">Shipping<br /><small><i>(single item)</i></small></label>
+                        <label class="col-sm-2" for="textinput">Shipping<br /><small><i>(per item)</i></small></label>
                         <div class="col-sm-2">
                             <input id="txtShipping" type="number" placeholder="" class="form-control" value="" />
                         </div>
-                        <label class="col-sm-2" for="textinput">Tax<br /><small><i>(single item)</i></small></label>
+                        <label class="col-sm-2" for="textinput">Tax<br /><small><i>(per item)</i></small></label>
                         <div class="col-sm-2">
                             <input id="txtTax" type="number" placeholder="" class="form-control" value="" />
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
+                        <div class="col-sm-offset-1 col-sm-8">
+                            <p><i>Please do not put $ in the price, shipping, and tax input boxes.</i></p>
+                        </div>
+                        <div class="col-sm-offset-1 col-sm-2">
                             <div class="pull-right">
                                 <button id="addItem" class="btn btn-primary">Add Item</button>
                             </div>
@@ -259,7 +255,7 @@
                             </div>
                             <div>
                                 <strong>PO #:</strong>
-                                <div id="lblPONum" class="pull-right"></div>
+                                <div id="lblPONum" class="pull-right"><i>Will be auto-generated</i></div>
                             </div>
                         </div>
                     </div>

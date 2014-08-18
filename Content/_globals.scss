@@ -1,9 +1,16 @@
 @import "_mixins.scss";
 
+// Page size <-- crappy workaround to messing with bootstrap's viewport breakpoints
+body{
+    width: 1800px!important;
+}
+
+
+
 // Title bar
 .navbar {
-    width: 75%;
-    margin-left: 12%;
+    width: 100%;
+    //margin-left: 12%;
     position: fixed;
     overflow: auto;
     text-align: center;
@@ -12,8 +19,8 @@
     white-space: nowrap;
     font-size: xx-large;
     @include transform(translateZ(0));
-    @include boxShadow(10px, 10px, 5px, #888888);
-    @include borderRadius(15px)
+    //@include boxShadow(10px, 10px, 5px, #888888);
+    //@include borderRadius(15px)
 }
 
 // Invoice table

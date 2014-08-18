@@ -78,7 +78,6 @@ $(document).ready(function () {
         $("#txtShipAddress").val(shipAdr);
 
         // Populate Invoice 
-        $('#lblPONum').text($('#txtPONum').val());
         $('#lblJustification').text($('#txtJustification').val());
         $("#lblShipAddress").text($('#txtShipAddress').val().replace("&#10;", "\n"));
         $('#lblReqName').text($('#txtReqName').val());
