@@ -273,6 +273,7 @@
     <Content Include="Content\printpage.scss" />
     <Content Include="Content\_mixins.scss" />
     <Content Include="Content\_globals.scss" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -11,6 +11,9 @@ pathName = location.protocol + "//" + location.host + pathName.replace("//", "/"
 $(document).ready(function () {
     // Form page
     if (location.pathname.toLowerCase().indexOf("printpreview") == -1) {
+
+        /*==================== FORM PAGE AJAX CALLS ========================*/
+
         // Vendors dropdown list
         $.ajax({
             type: "GET",
@@ -70,6 +73,9 @@ $(document).ready(function () {
             }
         });
 
+
+        /*============== FORM POPULATION ========================*/
+
         // Populate shipping address field
         var shipAdr = "Kasowitz, Benson, Torres, & Friedman LLP \n" +
             "Attn: " + $("#txtDepartment").val() + "\n" +
@@ -86,7 +92,12 @@ $(document).ready(function () {
         // Datepickers
         $('#txtDateRequested').datepicker().datepicker('setDate', new Date());
         $('#txtDateRequired').datepicker().datepicker('setDate', new Date());
-        
+
+        // Clear form vals in case back button is used on print preview page
+        ClearForm();
+
+
+        /*================ EVENT LISTENERS =========================*/
 
         // Update invoice ship address based on textarea value
         $("#txtShipAddress").blur(function (evt) {
@@ -221,6 +232,7 @@ $(document).ready(function () {
                 $('#lblVContactFax').text(cFax);
                 $('#lblVContactAddress').text(addr);
                 $('#lblShipAddress').text(shipAddr);
+                $('#lblJustification').text(justi);
 
 
                 // Purchased items: (for rows in invoice table)
@@ -263,6 +275,9 @@ $(document).ready(function () {
         });
     }
 });
+
+
+/*=============== FUNCTIONS ========================*/
 
 // Add order item to preview invoice when mini form is submitted
 function AddItems() {
@@ -307,6 +322,29 @@ function UpdateItems() {
     $("#grandTotal").text("$" + (totPrice + totShipping + totTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 }
 
+// Clear form vals
+function ClearForm() {
+    // Empty the form vals in case of browser back button usage from print preview page
+
+    // Vendors section
+    $('#txtVContactName').val("");
+    $('#txtVContactTitle').val("");
+    $('#txtVContactAddress').val("");
+    $('#txtVContactPhone').val("");
+    $('#txtVContactExtension').val("");
+    $('#txtVContactFax').val("");
+    $('#txtVContactHyperlink').val("");
+
+    // Product section
+    $('#txtTax').val("");
+    $('#txtShipping').val("");
+    $('#txtPrice').val("");
+    $('#txtDescription').val("");
+    $('#txtPartNo').val("");
+    $('#txtProduct').val("");
+    $('#txtJustification').val("");
+}
+
 // Get key values in url
 function GetUrlValue(VarSearch) {
     var SearchString = window.location.search.substring(1);
@@ -329,29 +367,32 @@ function parseDate(strdate) {
     return d;
 }
 
-//function formatAMPM(date) {
-//    var d = new Date(parseInt(date.match(/\d{13}/), 10));
-//    var strTime = formatAMPMFromDate(d);
-//    return strTime;
-//}
+// Unused
+function formatAMPM(date) {
+    var d = new Date(parseInt(date.match(/\d{13}/), 10));
+    var strTime = formatAMPMFromDate(d);
+    return strTime;
+}
 
-//function formatAMPMFromDate(date) {
-//    var hours = date.getHours();
-//    var minutes = date.getMinutes();
-//    var ampm = hours >= 12 ? 'pm' : 'am';
-//    hours = hours % 12;
-//    hours = hours ? hours : 12; // the hour '0' should be '12'
-//    minutes = minutes < 10 ? '0' + minutes : minutes;
-//    var strTime = hours + ':' + minutes + ' ' + ampm;
-//    return strTime;
-//}
+// Unused
+function formatAMPMFromDate(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+}
 
+// Validate form input fields before submission
 function ValidateInputs() {
     // Validation here if necessary in future...
     Submit();
 }
 
-// Main form submission control
+// Form submit and ajax calls
 function Submit() {
     var priority = $('#cboPriority').val();
     var terms = $('#cboPaymentTerms').val();
@@ -371,14 +412,14 @@ function Submit() {
         + "&terms=" + terms
         + "&dateRequested=" + dateRequested
         + "&dateRequired=" + dateRequired
-        + "&justification=" + justification
+        + "&justification=" + encodeURIComponent(justification)
         + "&manager=" + manager
         + "&requestorId=" + requestorId
         + "&vendor=" + vendor
         + "&productType=" + productType
         + "&billingAddress=" + encodeURIComponent(billingAddress)
         + "&shippingAddress=" + encodeURIComponent(shippingAddress)
-        + "&comment=" + comment
+        + "&comment=" + encodeURIComponent(comment)
         + "&signedBy=" + signedBy;
 
     // Save PO form data
@@ -399,8 +440,7 @@ function Submit() {
                 var shipping = $(this).find("span[name='spShipping']").text();
                 var tax = $(this).find("span[name='spTax']").text();
 
-                var itemParams = ""
-                    + "purchaseNumber=" + purchaseNum
+                var itemParams = "purchaseNumber=" + purchaseNum
                     + "&product=" + product
                     + "&partNumber=" + partNumber
                     + "&description=" + encodeURIComponent(description)
