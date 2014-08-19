@@ -211,7 +211,7 @@ $(document).ready(function () {
                 var priority = data.info.Priority;
                 var terms = data.info.Terms;
                 var justi = data.info.Justification;
-                var shipAddr = data.info.ShippingAddress;
+                var shipAddr = data.info.ShippingAddress.replace(/(\\n)/gm, "\n");
                 var com = data.info.Comment;
                 var orderDate = data.info.OrderDate;
                 var addr = data.info.Address1;
@@ -386,6 +386,11 @@ function formatAMPMFromDate(date) {
     return strTime;
 }
 
+// Parse addresses
+function ParseAddr(adr) {
+    // asdfghjkl;
+}
+
 // Validate form input fields before submission
 function ValidateInputs() {
     // Validation here if necessary in future...
@@ -404,7 +409,7 @@ function Submit() {
     var vendor = $('#cboVendors').val();
     var productType = $('#cboProductType').val();
     var billingAddress = $('#txtBillAddress').val().replace(/(\r\n|\n|\r)/gm, " ");
-    var shippingAddress = $('#txtShipAddress').val().replace(/(\r\n|\n|\r)/gm, " ");
+    var shippingAddress = $('#txtShipAddress').val().replace(/(\n)/gm, "\\n");
     var comment = ($('#lblComment').data("commented") == true) ? $('#lblComment').text() : "";
     var signedBy = $('#txtSig').val();
 
