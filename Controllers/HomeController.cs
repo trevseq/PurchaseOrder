@@ -16,7 +16,18 @@ namespace PurchaseOrder.Controllers
             
             return View();
         }
-
+        /// <summary>
+        /// Displays the print preview page
+        /// </summary>
+        /// <returns>Print Preview HTML view</returns>
+        public ActionResult PrintPreview()
+        {
+            return View("PrintPreview");
+        }
+        public ActionResult Edit()
+        {
+            return View("Edit");
+        }
         public ActionResult GetRequestor()
         {
             // Get requestor ID aka(EmployeeID)
@@ -60,14 +71,7 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-        /// <summary>
-        /// Displays the print preview page
-        /// </summary>
-        /// <returns>Print Preview HTML view</returns>
-        public ActionResult PrintPreview()
-        {
-            return View("PrintPreview");
-        }
+        
         /// <summary>
         /// Handles ajax requests for list of vendors
         /// </summary>

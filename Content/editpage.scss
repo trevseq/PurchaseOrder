@@ -1,0 +1,34 @@
+@import "_mixins.scss";
+@import "_globals.scss";
+
+body{
+    background-color: #C4C4C4;
+}
+
+#outerContainer{
+    width: 85%;
+    height: 90%;
+    position: fixed;
+    //background-color: #F3F3F3;
+    overflow: hidden;
+}
+
+.list-column{
+    background-color: #F3F3F3;
+    width: 35%;
+    height: 80%;
+    float: left;
+    margin-right: 5%;
+    padding: 5%;
+    @include boxShadow(10px, 10px, 5px, #888888);
+    @include borderRadius(15px);
+}
+
+.editWrapper{
+    width: 100%;
+}
+
+.centerMe{
+    width: 75%;
+    margin: 0 auto;
+}

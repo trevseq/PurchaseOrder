@@ -1,0 +1,101 @@
+.navbar {
+  width: 100%;
+  position: fixed;
+  overflow: auto;
+  text-align: center;
+  display: inline-block;
+  color: floralwhite;
+  white-space: nowrap;
+  font-size: xx-large;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0); }
+
+.table thead > tr > .no-line {
+  border-bottom: none; }
+.table tbody > tr .thick-line {
+  border-top: 2px solid; }
+.table tbody > tr .no-line {
+  border-top: none; }
+.table tfoot > tr .no-line {
+  border-top: none; }
+.table tfoot > tr .thick-line {
+  border-top: 2px solid; }
+
+input, textarea, button {
+  margin-top: 10px; }
+
+.required-field-block {
+  position: relative; }
+  .required-field-block .required-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin: -0.25em 0.25em 0em;
+    background-color: #E8E8E8;
+    border-color: #E8E8E8;
+    padding: 0.5em 0.8em;
+    color: rgba(0, 0, 0, 0.65);
+    text-transform: uppercase;
+    font-size: 75%;
+    font-weight: normal;
+    border-radius: 0.325em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    transition: background 0.1s linear ;
+    -webkit-transition: background 0.1s linear ; }
+    .required-field-block .required-icon :after {
+      position: absolute;
+      content: "";
+      right: 1px;
+      top: 1px;
+      z-index: -1;
+      width: 0em;
+      height: 0em;
+      border-top: 0em solid transparent;
+      border-right: 30px solid transparent;
+      border-bottom: 30px solid transparent;
+      border-left: 0em solid transparent;
+      border-right-color: inherit;
+      transition: border-color 0.2s ease ;
+      -webkit-transition: border-color 0.2s ease ; }
+    .required-field-block .required-icon .text {
+      color: #B80000;
+      font-size: 26px;
+      margin: -3px 0 0 12px; }
+
+.padding-error {
+  padding-top: 20px; }
+
+body {
+  background-color: #C4C4C4; }
+
+#outerContainer {
+  width: 85%;
+  height: 90%;
+  position: fixed;
+  overflow: hidden; }
+
+.list-column {
+  background-color: #F3F3F3;
+  width: 35%;
+  height: 80%;
+  float: left;
+  margin-right: 5%;
+  padding: 5%;
+  -webkit-box-shadow: 10px 10px 5px #888888 ;
+  -moz-box-shadow: 10px 10px 5px #888888 ;
+  box-shadow: 10px 10px 5px #888888 ;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px; }
+
+.editWrapper {
+  width: 100%; }
+
+.centerMe {
+  width: 75%;
+  margin: 0 auto; }
+
