@@ -85,7 +85,7 @@ $(document).ready(function () {
 
         // Populate Invoice 
         $('#lblJustification').text($('#txtJustification').val());
-        $("#lblShipAddress").text($('#txtShipAddress').val().replace("&#10;", "\n"));
+        $("#lblShipAddress").text($('#txtShipAddress').val());
         $('#lblReqName').text($('#txtReqName').val());
         $('#lblReqEmail').text($('#txtReqEmail').val());
 
@@ -409,7 +409,7 @@ function Submit() {
     var vendor = $('#cboVendors').val();
     var productType = $('#cboProductType').val();
     var billingAddress = $('#txtBillAddress').val().replace(/(\r\n|\n|\r)/gm, " ");
-    var shippingAddress = $('#txtShipAddress').val().replace(/(\n)/gm, "\\n");
+    var shippingAddress = $('#txtShipAddress').val().replace(/\n/gm, "\\n");
     var comment = ($('#lblComment').data("commented") == true) ? $('#lblComment').text() : "";
     var signedBy = $('#txtSig').val();
 
