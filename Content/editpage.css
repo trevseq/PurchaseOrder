@@ -72,18 +72,19 @@ input, textarea, button {
 body {
   background-color: #C4C4C4; }
 
-#outerContainer {
+#wrapper {
   width: 100%;
   height: 100%;
   position: fixed;
   overflow: hidden; }
 
-.list-column {
+#outerContainer {
   background-color: #F3F3F3;
-  width: 75%;
+  width: 50%;
   height: 90%;
-  float: left;
-  margin-right: 5%;
+  margin-right: 25%;
+  margin-left: 25%;
+  margin-top: 3.5%;
   padding: 5%;
   -webkit-box-shadow: 10px 10px 5px #888888 ;
   -moz-box-shadow: 10px 10px 5px #888888 ;
@@ -98,4 +99,14 @@ body {
 .centerMe {
   width: 75%;
   margin: 0 auto; }
+
+.navbar-override {
+  width: 75%;
+  margin-left: 12.5%;
+  -webkit-box-shadow: 10px 10px 5px #888888 ;
+  -moz-box-shadow: 10px 10px 5px #888888 ;
+  box-shadow: 10px 10px 5px #888888 ;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px; }
 

@@ -6,44 +6,54 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Purchase Order Editor</title>
+    <link href="~/favicon_latest.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
-    @Styles.Render("modernizr")
-    @Styles.Render("editstyles")
+    @Styles.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/editstyles")
 </head>
 <body>
-    <div id="outerContainer">
-        <div id="leftList" class="list-column">
-            <div class="innerListCol">
-                <h3>Vendors</h3>
-                <hr />
-                <ol>
-                    <li>Vendor Here</li>
-                    <li>Vendor Here</li>
-                    <li>Vendor Here</li>
-                    <li>Vendor Here</li>
-                    <li>Vendor Here</li>
-                    <li>Vendor Here</li>
-                </ol>
-            </div>
-        </div>
-        <div id="rightList" class="list-column">
-            <div class="innerListCol">
-                <h3>Products</h3>
-                <hr />
-                <ol>
-                    <li>Product Here</li>
-                    <li>Product Here</li>
-                    <li>Product Here</li>
-                    <li>Product Here</li>
-                    <li>Product Here</li>
-                    <li>Product Here</li>
-                </ol>
+    <div class="navbar navbar-inverse navbar-fixed-top no-print navbar-override">
+        <div class="container">
+            <div class="pageHeader">
+                <span>Purchase Order Editor</span>
             </div>
         </div>
     </div>
-    @Scripts.Render("jquery")
-    @Scripts.Render("bootstrap")
-    @Scripts.Render("javascript")
+    <div id="wrapper">
+        <div id="outerContainer">
+            <div id="leftList" class="navtab">
+                <div class="innerListCol">
+                    <h3>Vendors</h3>
+                    <hr />
+                    <ol>
+                        <li>Vendor Here</li>
+                        <li>Vendor Here</li>
+                        <li>Vendor Here</li>
+                        <li>Vendor Here</li>
+                        <li>Vendor Here</li>
+                        <li>Vendor Here</li>
+                    </ol>
+                </div>
+            </div>
+            <div id="rightList" class="navtab">
+                <div class="innerListCol">
+                    <h3>Products</h3>
+                    <hr />
+                    <ol>
+                        <li>Product Here</li>
+                        <li>Product Here</li>
+                        <li>Product Here</li>
+                        <li>Product Here</li>
+                        <li>Product Here</li>
+                        <li>Product Here</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/javascript")
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
 </body>
 </html>

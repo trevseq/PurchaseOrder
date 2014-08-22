@@ -275,6 +275,9 @@ $(document).ready(function () {
             }
         });
     }
+    else if (location.pathname.toLowerCase().indexOf("edit") > -1) {
+
+    }
 });
 
 
