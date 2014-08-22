@@ -41,14 +41,8 @@ namespace PurchaseOrder
                 "~/Content/bootstrap.css",
                 "~/Content/formpage.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/EditScripts").Include(
-                "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js",
-                "//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js",
-                "~/Scripts/editPage.js"));
-
             bundles.Add(new StyleBundle("~/bundles/EditStyles").Include(
                 "~/Content/bootstrap.css",
-                "//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css",
                 "~/Content/editpage.css"));
 
 

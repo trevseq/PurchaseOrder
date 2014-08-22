@@ -13,13 +13,8 @@ namespace PurchaseOrder.Controllers
     {
         public ActionResult Default()
         {
-            
             return View();
         }
-        /// <summary>
-        /// Displays the print preview page
-        /// </summary>
-        /// <returns>Print Preview HTML view</returns>
         public ActionResult PrintPreview()
         {
             return View("PrintPreview");
