@@ -1,8 +1,7 @@
-﻿@{
+﻿@*@using PurchaseOrder.Models;*@
+@{
     Layout = null;
 }
-
-
 
 <!DOCTYPE html>
 <html>
@@ -10,58 +9,44 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Purchase Order Editor</title>
-    <link rel="stylesheet" type="text/css" media="all" href="~/Content/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="~/Content/editpage.css" />
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+    @Styles.Render("EditStyles")
+    @Scripts.Render("EditScripts")
+    @*<link rel="stylesheet" type="text/css" media="all" href="~/Content/bootstrap.css" />*@
+    @*<link rel="stylesheet" type="text/css" media="all" href="~/Content/editpage.css" />*@
+    @*<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />*@
+    @*<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>*@
+    @*<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>*@
 </head>
 <body>
-    <div class="editWrapper">
-        <div id="outerContainer">
-            <div id="leftList" class="list-column">
-                <div class="innerListCol">
-                    <h3>Vendors</h3>
-                    <hr />
-                    <ol>
-                        <li>Vendor Here</li>
-                        <li>Vendor Here</li>
-                        <li>Vendor Here</li>
-                        <li>Vendor Here</li>
-                        <li>Vendor Here</li>
-                        <li>Vendor Here</li>
-                    </ol>
-                </div>
+    <div id="outerContainer">
+        <div id="leftList" class="list-column">
+            <div class="innerListCol">
+                <h3>Vendors</h3>
+                <hr />
+                <ol>
+                    <li>Vendor Here</li>
+                    <li>Vendor Here</li>
+                    <li>Vendor Here</li>
+                    <li>Vendor Here</li>
+                    <li>Vendor Here</li>
+                    <li>Vendor Here</li>
+                </ol>
             </div>
-            <div id="rightList" class="list-column">
-                <div class="innerListCol">
-                    <h3>Products</h3>
-                    <hr />
-                    <ol>
-                        <li>Product Here</li>
-                        <li>Product Here</li>
-                        <li>Product Here</li>
-                        <li>Product Here</li>
-                        <li>Product Here</li>
-                        <li>Product Here</li>
-                    </ol>
-                </div>
+        </div>
+        <div id="rightList" class="list-column">
+            <div class="innerListCol">
+                <h3>Products</h3>
+                <hr />
+                <ol>
+                    <li>Product Here</li>
+                    <li>Product Here</li>
+                    <li>Product Here</li>
+                    <li>Product Here</li>
+                    <li>Product Here</li>
+                    <li>Product Here</li>
+                </ol>
             </div>
         </div>
     </div>
 </body>
 </html>
-<script>
-    var pathName = location.pathname.toLowerCase();
-
-    pathName = pathName.replace("default", "");
-    pathName = pathName.replace("home", "");
-    pathName = pathName.replace("printpreview", "");
-    pathName = pathName.replace("edit", "");
-    pathName += ((pathName.substring(pathName.length - 1) != "/") ? "/" : "");
-    pathName = location.protocol + "//" + location.host + pathName.replace("//", "/");
-
-    $(document).ready(function () {
-
-    });
-</script>

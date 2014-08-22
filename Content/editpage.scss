@@ -6,8 +6,8 @@ body{
 }
 
 #outerContainer{
-    width: 85%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
     position: fixed;
     //background-color: #F3F3F3;
     overflow: hidden;
@@ -15,8 +15,8 @@ body{
 
 .list-column{
     background-color: #F3F3F3;
-    width: 35%;
-    height: 80%;
+    width: 40%;
+    height: 90%;
     float: left;
     margin-right: 5%;
     padding: 5%;
