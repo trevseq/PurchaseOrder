@@ -22,6 +22,7 @@ body{
     margin-left: 25%;
     margin-top: 3.5%;
     padding: 5%;
+    //overflow-y: scroll;
     @include boxShadow(10px, 10px, 5px, #888888);
     @include borderRadius(15px);
 }

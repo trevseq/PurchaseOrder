@@ -42,6 +42,7 @@ namespace PurchaseOrder
                 "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Content/jquery-ui.css",
                 "~/Content/bootstrap.css",
                 "~/Content/formpage.css"));
 
@@ -49,10 +50,14 @@ namespace PurchaseOrder
                 "~/Content/bootstrap.css",
                 "~/Content/editpage.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                "~/Scripts/jquery-ui.js"
+                ));
+
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

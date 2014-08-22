@@ -9,6 +9,8 @@ pathName = pathName.replace("edit", "");
 pathName += ((pathName.substring(pathName.length - 1) != "/") ? "/" : "");
 pathName = location.protocol + "//" + location.host + pathName.replace("//", "/");
 
+
+
 $(document).ready(function () {
     // Form page
     if (location.pathname.toLowerCase().indexOf("printpreview") == -1) {
@@ -277,6 +279,11 @@ $(document).ready(function () {
     }
     else if (location.pathname.toLowerCase().indexOf("edit") > -1) {
 
+        alert("edit page!");
+
+
+        // Fancy Tabs
+        $('#dbTableTabs').tabs();
     }
 });
 
