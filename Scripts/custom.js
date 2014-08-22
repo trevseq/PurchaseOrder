@@ -9,11 +9,9 @@ pathName = pathName.replace("edit", "");
 pathName += ((pathName.substring(pathName.length - 1) != "/") ? "/" : "");
 pathName = location.protocol + "//" + location.host + pathName.replace("//", "/");
 
-
-
 $(document).ready(function () {
     // Form page
-    if (location.pathname.toLowerCase().indexOf("printpreview") == -1) {
+    if (!((location.pathname.toLowerCase().indexOf("printpreview") >= -1) || (location.pathname.toLowerCase().indexOf("edit") >= -1))) {
 
         /*==================== FORM PAGE AJAX CALLS ========================*/
 
@@ -278,12 +276,11 @@ $(document).ready(function () {
         });
     }
     else if (location.pathname.toLowerCase().indexOf("edit") > -1) {
-
-        alert("edit page!");
+        console.log("%cEdit Page script section was triggered!", 'color: #33cc33');
 
 
         // Fancy Tabs
-        $('#dbTableTabs').tabs();
+        $('#dbTableTabs').tabs()
     }
 });
 
