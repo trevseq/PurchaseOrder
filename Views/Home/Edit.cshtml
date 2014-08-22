@@ -1,20 +1,14 @@
 ﻿@*@using PurchaseOrder.Models;*@
-@{
-    Layout = null;
-}
-
+@{Layout = null;}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Purchase Order Editor</title>
-    @*<link rel="stylesheet" type="text/css" media="all" href="~/Content/bootstrap.css" />*@
-    @*<link rel="stylesheet" type="text/css" media="all" href="~/Content/editpage.css" />*@
-    @Styles.Render("EditStyles")
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+    @Styles.Render("modernizr")
+    @Styles.Render("editstyles")
 </head>
 <body>
     <div id="outerContainer">
@@ -47,19 +41,10 @@
             </div>
         </div>
     </div>
+    @Scripts.Render("jquery")
+    @Scripts.Render("bootstrap")
+    @Scripts.Render("javascript")
+    @RenderSection("Scripts", required: false)
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
 </body>
 </html>
-<script>
-    var pathName = location.pathname.toLowerCase();
-
-    pathName = pathName.replace("default", "");
-    pathName = pathName.replace("home", "");
-    pathName = pathName.replace("printpreview", "");
-    pathName = pathName.replace("edit", "");
-    pathName += ((pathName.substring(pathName.length - 1) != "/") ? "/" : "");
-    pathName = location.protocol + "//" + location.host + pathName.replace("//", "/");
-
-    $(document).ready(function () {
-
-    });
-</script>

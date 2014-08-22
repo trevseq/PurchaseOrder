@@ -10,7 +10,11 @@ namespace PurchaseOrder
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            // CDN support!
+            bundles.UseCdn = true;
+            var jqueryJsCdnPath = "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js";
+            
+            bundles.Add(new ScriptBundle("~/bundles/jquery", jqueryJsCdnPath).Include(
                 "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/javascript").Include(
@@ -41,15 +45,14 @@ namespace PurchaseOrder
                 "~/Content/bootstrap.css",
                 "~/Content/formpage.css"));
 
-            bundles.Add(new StyleBundle("~/bundles/EditStyles").Include(
+            bundles.Add(new StyleBundle("~/bundles/editstyles").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/editpage.css"));
 
 
-            bundles.UseCdn = true;
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
