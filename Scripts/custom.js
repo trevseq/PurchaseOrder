@@ -278,26 +278,27 @@ $(document).ready(function () {
 
     // Edit Page
     else if (location.pathname.toLowerCase().indexOf("edit") > -1) {
+        $('#outerContainer').append("<button id='backToForm' title='Return to form page' class='btn pull-right'>Back</button>");
         $('#dbTableTabs').tabs({
             activate: function (event, ui) {
                 $('.tabSpecific').remove();
 
                 var activeTab = $("#dbTableTabs").tabs("option", "active");
                 if (activeTab == 0) {
-                    $('#outerContainer').append("<button id='tabAddItem-1' class='btn btn-primary tabSpecific'>Add Vendor</button>");
+                    $('#outerContainer').append("<button id='tab0AddItem' class='btn btn-primary tabSpecific'>Add Vendor</button>");
                 }
                 else if (activeTab == 1) {
-                    $('#outerContainer').append("<button id='tabAddItem-1' class='btn btn-primary tabSpecific'>Add Product</button>");
+                    $('#outerContainer').append("<button id='tab1AddItem' class='btn btn-primary tabSpecific'>Add Product</button>");
                 }
                 else if (activeTab == 2) {
-                    $('#outerContainer').append("<button id='tabAddItem-1' class='btn btn-primary tabSpecific'>Add Payment Term</button>");
+                    $('#outerContainer').append("<button id='tab2AddItem' class='btn btn-primary tabSpecific'>Add Payment Term</button>");
                 }
                 else if (activeTab == 3) {
-                    $('#outerContainer').append("<button id='tabAddItem-1' class='btn btn-primary tabSpecific'>Add Purchase Order</button>");
+                    $('#outerContainer').append("<button id='tab3AddItem' class='btn btn-primary tabSpecific'>Add Purchase Order</button>");
                 }
             }
         });
-        // Fetch tab content
+        // Fetch Vendor tab content
         $.ajax({
             type: "GET",
             url: (pathName + "Home/GetVendors"),
@@ -313,16 +314,6 @@ $(document).ready(function () {
                 $('#dbTableTabs-1').html("<ol>" + options + "</ol>");
             }
         });
-
-        var activeTab = $("#dbTableTabs").tabs("option", "active");
-        if (activeTab == 0) {
-            $('.tabSpecific').remove()
-            $('#outerContainer').append("<button id='tabAddItem-1' class='btn btn-primary tabSpecific'>Add Vendor</button>");
-        }
-        else if (activeTab == 1) {
-            //$('#outerContainer').remove($("[name^='tabAddItem-']"));
-        }
-
 
 
 
