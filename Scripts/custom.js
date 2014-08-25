@@ -353,7 +353,23 @@ $(document).ready(function () {
 /*=============== FUNCTIONS ========================*/
 
 function VendDialog(id) {
-
+    var dialog = null;
+    dialog = $('#tab1Form').dialog({
+        height: 500,
+        width: 500,
+        modal: true,
+        buttons: {
+            "Save Edits": SaveVendDlg,
+            "Delete Entry": DeleteEntryFromDlg,
+            Cancel: function () {
+                dialog.dialog("close");
+            }
+        },
+        close: function () {
+            //do something here...
+            console.log("dlg closed");
+        }
+    });
 }
 
 function ProdDialog(i) {
@@ -363,6 +379,16 @@ function ProdDialog(i) {
 function TermDialog(i) {
 //todo
 }
+
+
+function SaveVendDlg(){
+//asdfdsf
+}
+
+function DeleteEntryFromDlg(){
+//asdfasdf
+}
+
 
 
 // Add order item to preview invoice when mini form is submitted
