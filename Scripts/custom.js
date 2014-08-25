@@ -353,6 +353,7 @@ $(document).ready(function () {
 /*=============== FUNCTIONS ========================*/
 
 function VendDialog(id) {
+    // first populate the hidden form with ajax, then run the dialog function.
     var dialog = null;
     dialog = $('#tab1Form').dialog({
         height: 500,
@@ -370,6 +371,7 @@ function VendDialog(id) {
             console.log("dlg closed");
         }
     });
+    dialog.dialog("open"); // not working!!?!?!
 }
 
 function ProdDialog(i) {
