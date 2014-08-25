@@ -275,12 +275,43 @@ $(document).ready(function () {
             }
         });
     }
+
+    // Edit Page
     else if (location.pathname.toLowerCase().indexOf("edit") > -1) {
-        console.log("%cEdit Page script section was triggered!", 'color: #33cc33');
+        // Fetch tab content
+        $.ajax({
+            type: "GET",
+            url: (pathName + "Home/GetVendors"),
+            dataType: "JSON",
+            async: false,
+            cache: false,
+            success: function (data) {
+                var options = $.map(data, function (e) {
+                    vName = e.Name;
+                    return "<li>" + vName.replace(/,$/, "") + "</ li>";
+                });
+
+                $('#dbTableTabs-1').html("<ol>" + options + "</ol>");
+            }
+        });
 
 
-        // Fancy Tabs
-        $('#dbTableTabs').tabs()
+
+
+
+        // Initialize fancy tabs
+        $('#dbTableTabs').tabs();
+        var activeTab = $("#dbTableTabs").tabs("option", "active");
+
+        if (activeTab = 1) {
+            $('#outerContainer').remove($('.tabSpecific'));
+            $('#outerContainer').append("<button id='tab1AddItem' class='btn btn-primary tabSpecific'>Add Vendor</button>");
+        }
+
+
+
+
+
     }
 });
 

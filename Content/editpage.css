@@ -85,7 +85,7 @@ body {
   margin-right: 25%;
   margin-left: 25%;
   margin-top: 3.5%;
-  padding: 5%;
+  padding: 1%;
   -webkit-box-shadow: 10px 10px 5px #888888 ;
   -moz-box-shadow: 10px 10px 5px #888888 ;
   box-shadow: 10px 10px 5px #888888 ;
@@ -109,4 +109,11 @@ body {
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   border-radius: 15px; }
+
+#dbTableTabs {
+  height: inherit; }
+
+.tab {
+  overflow-y: scroll;
+  height: inherit; }
 

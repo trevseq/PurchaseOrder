@@ -21,7 +21,7 @@ body{
     margin-right: 25%;
     margin-left: 25%;
     margin-top: 3.5%;
-    padding: 5%;
+    padding: 1%;
     //overflow-y: scroll;
     @include boxShadow(10px, 10px, 5px, #888888);
     @include borderRadius(15px);
@@ -41,4 +41,13 @@ body{
     margin-left: 12.5%;
     @include boxShadow(10px, 10px, 5px, #888888);
     @include borderRadius(15px);
+}
+
+#dbTableTabs{
+    height: inherit;
+}
+
+.tab{
+    overflow-y: scroll;
+    height: inherit;
 }

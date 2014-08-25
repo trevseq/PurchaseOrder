@@ -48,6 +48,7 @@ namespace PurchaseOrder
 
             bundles.Add(new StyleBundle("~/bundles/editstyles").Include(
                 "~/Content/bootstrap.css",
+                "~/Content/jquery-ui.css",
                 "~/Content/editpage.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
