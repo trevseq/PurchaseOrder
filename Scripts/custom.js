@@ -306,7 +306,7 @@ $(document).ready(function () {
             success: function (data) {
                 var options = $.map(data, function (e) {
                     vName = e.Name;
-                    return "<li id='" + e.Id + "'>" + vName + "</li>";
+                    return "<li>" + "<a id='vendLink" + e.Id + "' data-id='" + e.Id + "' class='vendLink'>" + vName + "</a></li>";
                 });
                 options = options.join("");
                 $('#dbTableTabs-1').html("<ol>" + options + "</ol>");
@@ -342,14 +342,28 @@ $(document).ready(function () {
                 $('#dbTableTabs-3').html("<ol>" + options + "</ol>");
             }
         });
-
-    
-
+        
+        $(document).delegate("a[id^='vendLink']", "click", function (e) {
+            VendDialog($(this).data("id"));
+        });
     }
 });
 
 
 /*=============== FUNCTIONS ========================*/
+
+function VendDialog(id) {
+
+}
+
+function ProdDialog(i) {
+//todo
+}
+
+function TermDialog(i) {
+//todo
+}
+
 
 // Add order item to preview invoice when mini form is submitted
 function AddItems() {
