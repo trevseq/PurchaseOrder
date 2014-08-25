@@ -278,6 +278,25 @@ $(document).ready(function () {
 
     // Edit Page
     else if (location.pathname.toLowerCase().indexOf("edit") > -1) {
+        $('#dbTableTabs').tabs({
+            activate: function (event, ui) {
+                $('.tabSpecific').remove();
+
+                var activeTab = $("#dbTableTabs").tabs("option", "active");
+                if (activeTab == 0) {
+                    $('#outerContainer').append("<button id='tabAddItem-1' class='btn btn-primary tabSpecific'>Add Vendor</button>");
+                }
+                else if (activeTab == 1) {
+                    $('#outerContainer').append("<button id='tabAddItem-1' class='btn btn-primary tabSpecific'>Add Product</button>");
+                }
+                else if (activeTab == 2) {
+                    $('#outerContainer').append("<button id='tabAddItem-1' class='btn btn-primary tabSpecific'>Add Payment Term</button>");
+                }
+                else if (activeTab == 3) {
+                    $('#outerContainer').append("<button id='tabAddItem-1' class='btn btn-primary tabSpecific'>Add Purchase Order</button>");
+                }
+            }
+        });
         // Fetch tab content
         $.ajax({
             type: "GET",
@@ -288,26 +307,21 @@ $(document).ready(function () {
             success: function (data) {
                 var options = $.map(data, function (e) {
                     vName = e.Name;
-                    return "<li>" + vName.replace(/,$/, "") + "</ li>";
+                    return "<li>" + vName + "</li>";
                 });
-
+                options = options.join("");
                 $('#dbTableTabs-1').html("<ol>" + options + "</ol>");
             }
         });
 
-
-
-
-
-        // Initialize fancy tabs
-        $('#dbTableTabs').tabs();
         var activeTab = $("#dbTableTabs").tabs("option", "active");
-
-        if (activeTab = 1) {
-            $('#outerContainer').remove($('.tabSpecific'));
-            $('#outerContainer').append("<button id='tab1AddItem' class='btn btn-primary tabSpecific'>Add Vendor</button>");
+        if (activeTab == 0) {
+            $('.tabSpecific').remove()
+            $('#outerContainer').append("<button id='tabAddItem-1' class='btn btn-primary tabSpecific'>Add Vendor</button>");
         }
-
+        else if (activeTab == 1) {
+            //$('#outerContainer').remove($("[name^='tabAddItem-']"));
+        }
 
 
 
