@@ -278,7 +278,8 @@ $(document).ready(function () {
 
     // Edit Page
     else if (location.pathname.toLowerCase().indexOf("edit") > -1) {
-        $('#outerContainer').append("<button id='backToForm' title='Return to form page' class='btn pull-right'>Back</button>");
+        $('#outerContainer').append("<a id='backToForm' title='Return to form page' href='"+pathName+"' class='btn btn-default pull-right'>Back</a>");
+        $('#outerContainer').append("<button id='tab0AddItem' class='btn btn-primary tabSpecific'>Add Vendor</button>");
         $('#dbTableTabs').tabs({
             activate: function (event, ui) {
                 $('.tabSpecific').remove();
@@ -293,9 +294,6 @@ $(document).ready(function () {
                 else if (activeTab == 2) {
                     $('#outerContainer').append("<button id='tab2AddItem' class='btn btn-primary tabSpecific'>Add Payment Term</button>");
                 }
-                else if (activeTab == 3) {
-                    $('#outerContainer').append("<button id='tab3AddItem' class='btn btn-primary tabSpecific'>Add Purchase Order</button>");
-                }
             }
         });
         // Fetch Vendor tab content
@@ -303,19 +301,49 @@ $(document).ready(function () {
             type: "GET",
             url: (pathName + "Home/GetVendors"),
             dataType: "JSON",
-            async: false,
+            async: true,
             cache: false,
             success: function (data) {
                 var options = $.map(data, function (e) {
                     vName = e.Name;
-                    return "<li>" + vName + "</li>";
+                    return "<li id='" + e.Id + "'>" + vName + "</li>";
                 });
                 options = options.join("");
                 $('#dbTableTabs-1').html("<ol>" + options + "</ol>");
             }
         });
+        $.ajax({
+            type: "GET",
+            url: (pathName + "Home/GetProductType"),
+            dataType: "JSON",
+            async: true,
+            cache: false,
+            success: function (data) {
+                var options = $.map(data, function (e) {
+                    pName = e.Name;
+                    return "<li id='" + e.Id + "'>" + pName + "</li>";
+                });
+                options = options.join("");
+                $('#dbTableTabs-2').html("<ol>" + options + "</ol>");
+            }
+        });
+        $.ajax({
+            type: "GET",
+            url: (pathName + "Home/GetPaymentTerms"),
+            dataType: "JSON",
+            async: true,
+            cache: false,
+            success: function (data) {
+                var options = $.map(data, function (e) {
+                    pName = e.Name;
+                    return "<li id='" + e.Id + "'>" + pName + "</li>";
+                });
+                options = options.join("");
+                $('#dbTableTabs-3').html("<ol>" + options + "</ol>");
+            }
+        });
 
-
+    
 
     }
 });

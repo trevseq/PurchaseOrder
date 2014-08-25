@@ -117,3 +117,6 @@ body {
   overflow-y: scroll;
   height: inherit; }
 
+#backToForm {
+  margin-top: 1%; }
+
