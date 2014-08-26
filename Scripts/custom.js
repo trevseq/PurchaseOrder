@@ -60,7 +60,6 @@ $(document).ready(function () {
             dataType: "JSON",
             url: pathName + "Home/GetRequestor",
             cache: false,
-            async: false,
             success: function (data) {
                 // Populate requestor section:
                 $("#txtReqName").data("requestorid", data.EmployeeID);
@@ -301,7 +300,6 @@ $(document).ready(function () {
             type: "GET",
             url: (pathName + "Home/GetVendors"),
             dataType: "JSON",
-            async: true,
             cache: false,
             success: function (data) {
                 var options = $.map(data, function (e) {
@@ -316,7 +314,6 @@ $(document).ready(function () {
             type: "GET",
             url: (pathName + "Home/GetProductType"),
             dataType: "JSON",
-            async: true,
             cache: false,
             success: function (data) {
                 var options = $.map(data, function (e) {
@@ -331,7 +328,6 @@ $(document).ready(function () {
             type: "GET",
             url: (pathName + "Home/GetPaymentTerms"),
             dataType: "JSON",
-            async: true,
             cache: false,
             success: function (data) {
                 var options = $.map(data, function (e) {
@@ -561,7 +557,6 @@ function Submit() {
         type: "GET",
         url: (pathName + "Home/SavePOForm?" + saveParams),
         dataType: "JSON",
-        async: false,
         cache: false,
         success: function (data) {
             var purchaseNum = data;
@@ -589,7 +584,6 @@ function Submit() {
                     type: "GET",
                     url: (pathName + "Home/SaveOrderedItems?" + itemParams),
                     dataType: "JSON",
-                    async: false,
                     cache: false,
                 });
             });
