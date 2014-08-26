@@ -286,13 +286,13 @@ $(document).ready(function () {
 
                 var activeTab = $("#dbTableTabs").tabs("option", "active");
                 if (activeTab == 0) {
-                    $('#outerContainer').append("<button id='tab0AddItem' class='btn btn-primary tabSpecific'>Add Vendor</button>");
+                    $('#outerContainer').append("<button id='tab0AddItem' name='tabAdd' class='btn btn-primary tabSpecific'>Add Vendor</button>");
                 }
                 else if (activeTab == 1) {
-                    $('#outerContainer').append("<button id='tab1AddItem' class='btn btn-primary tabSpecific'>Add Product</button>");
+                    $('#outerContainer').append("<button id='tab1AddItem' name='tabAdd' class='btn btn-primary tabSpecific'>Add Product</button>");
                 }
                 else if (activeTab == 2) {
-                    $('#outerContainer').append("<button id='tab2AddItem' class='btn btn-primary tabSpecific'>Add Payment Term</button>");
+                    $('#outerContainer').append("<button id='tab2AddItem' name='tabAdd' class='btn btn-primary tabSpecific'>Add Payment Term</button>");
                 }
             }
         });
@@ -342,7 +342,8 @@ $(document).ready(function () {
                 $('#dbTableTabs-3').html("<ol>" + options + "</ol>");
             }
         });
-        
+                
+        // Event handlers:
         $(document).delegate("a[id^='vendLink']", "click", function (e) {
             VendDialog($(this).data("id"));
         });
@@ -351,6 +352,17 @@ $(document).ready(function () {
         });
         $(document).delegate("a[id^='termLink']", "click", function (e) {
             termDialog($(this).data("id"));
+        });
+        $("button[name='tabAdd']").click(function (e) {
+            if (e == $('#tab0AddItem')) {
+                VendDialog(null);
+            }
+            else if (e == $('#tab1AddItem')) {
+                //todo
+            }
+            else if (e == $('#tab2AddItem')) {
+                //todo
+            }
         });
     }
 });
@@ -366,8 +378,8 @@ function VendDialog(id) {
         width: 500,
         modal: true,
         buttons: {
-            "Save Edits": SaveVendDlg,
-            "Delete Entry": VendEntryDelete,
+            //"Save Edits": SaveVendDlg,
+            //"Delete Entry": VendEntryDelete,
             Cancel: function () {
                 dialog.dialog("close");
             }
