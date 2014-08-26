@@ -47,7 +47,7 @@ input, textarea, button { margin-top:10px }
         font-size: 75%;
         font-weight: normal;
         border-radius: 0.325em;
-        @include boxSizing(border-box);
+        @include box-sizing(border-box);
         @include transition(background, 0.1s, linear);
         :after {
             position: absolute;

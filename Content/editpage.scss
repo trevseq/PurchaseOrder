@@ -24,7 +24,7 @@ body{
     padding: 1%;
     //overflow-y: scroll;
     @include boxShadow(10px, 10px, 5px, #888888);
-    @include borderRadius(15px);
+    @include border-radius(15px);
 }
 
 .editWrapper{
@@ -40,7 +40,7 @@ body{
     width: 75%;
     margin-left: 12.5%;
     @include boxShadow(10px, 10px, 5px, #888888);
-    @include borderRadius(15px);
+    @include border-radius(15px);
 }
 
 #dbTableTabs{
