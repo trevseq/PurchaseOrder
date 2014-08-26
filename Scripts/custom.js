@@ -306,7 +306,7 @@ $(document).ready(function () {
             success: function (data) {
                 var options = $.map(data, function (e) {
                     vName = e.Name;
-                    return "<li>" + "<a id='vendLink" + e.Id + "' data-id='" + e.Id + "' class='vendLink'>" + vName + "</a></li>";
+                    return "<li>" + "<a id='vendLink" + e.Id + "' style='cursor: pointer;'  data-id='" + e.Id + "' class='vendLink'>" + vName + "</a></li>";
                 });
                 options = options.join("");
                 $('#dbTableTabs-1').html("<ol>" + options + "</ol>");
@@ -321,7 +321,7 @@ $(document).ready(function () {
             success: function (data) {
                 var options = $.map(data, function (e) {
                     pName = e.Name;
-                    return "<li id='" + e.Id + "'>" + pName + "</li>";
+                    return "<li>" + "<a id='prodLink" + e.Id + "' style='cursor: pointer;'  data-id='" + e.Id + "' class='prodLink'>" + pName + "</a></li>";
                 });
                 options = options.join("");
                 $('#dbTableTabs-2').html("<ol>" + options + "</ol>");
@@ -335,8 +335,8 @@ $(document).ready(function () {
             cache: false,
             success: function (data) {
                 var options = $.map(data, function (e) {
-                    pName = e.Name;
-                    return "<li id='" + e.Id + "'>" + pName + "</li>";
+                    tName = e.Name;
+                    return "<li>" + "<a id='termLink" + e.Id + "' style='cursor: pointer;'  data-id='" + e.Id + "' class='termLink'>" + tName + "</a></li>";
                 });
                 options = options.join("");
                 $('#dbTableTabs-3').html("<ol>" + options + "</ol>");
@@ -345,6 +345,12 @@ $(document).ready(function () {
         
         $(document).delegate("a[id^='vendLink']", "click", function (e) {
             VendDialog($(this).data("id"));
+        });
+        $(document).delegate("a[id^='prodLink']", "click", function (e) {
+            ProdDialog($(this).data("id"));
+        });
+        $(document).delegate("a[id^='termLink']", "click", function (e) {
+            termDialog($(this).data("id"));
         });
     }
 });
@@ -361,7 +367,7 @@ function VendDialog(id) {
         modal: true,
         buttons: {
             "Save Edits": SaveVendDlg,
-            "Delete Entry": DeleteEntryFromDlg,
+            "Delete Entry": VendEntryDelete,
             Cancel: function () {
                 dialog.dialog("close");
             }
@@ -382,16 +388,13 @@ function TermDialog(i) {
 //todo
 }
 
-
-function SaveVendDlg(){
-//asdfdsf
+function SaveVendDlg() {
+//todo
 }
 
-function DeleteEntryFromDlg(){
-//asdfasdf
+function VendEntryDelete() {
+//todo
 }
-
-
 
 // Add order item to preview invoice when mini form is submitted
 function AddItems() {
