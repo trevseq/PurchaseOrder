@@ -377,7 +377,7 @@ function VendDialog(id) {
         modal: true,
         buttons: {
             //"Save Edits": SaveVendDlg,
-            "Delete Entry": VendEntryDelete,
+            //"Delete Entry": VendEntryDelete,
             Cancel: function () {
                 $('#tab1Form').dialog("close");
             }
@@ -398,7 +398,7 @@ function ProdDialog(i) {
         modal: true,
         buttons: {
             //"Save Edits": SaveVendDlg,
-            "Delete Entry": EntryDelete,
+            //"Delete Entry": EntryDelete,
             Cancel: function () {
                 $('#tab2Form').dialog("close");
             }
@@ -419,7 +419,7 @@ function TermDialog(i) {
         modal: true,
         buttons: {
             //"Save Edits": SaveVendDlg,
-            "Delete Entry": EntryDelete,
+            //"Delete Entry": EntryDelete,
             Cancel: function () {
                 $('#tab3Form').dialog("close");
             }
@@ -436,7 +436,7 @@ function SaveVendDlg() {
 }
 
 function EntryDelete() {
-//todo
+    var warn = confirm("Are you sure you want to delete this entry?");
 }
 
 // Add order item to preview invoice when mini form is submitted
