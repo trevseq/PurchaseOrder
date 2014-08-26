@@ -28,19 +28,7 @@
                 </ul>
                 <div id="dbTableTabs-1" class="tab">
                     <p></p>
-                    <div id="tab1Form" title="aaaa" style="display: none;">
-                        <p class="validateTips">All form fields are required.</p>
-                        <form>
-                            <fieldset>
-                                <label for="vName">Vendor Name</label>
-                                <input type="text" name="vName" id="vName" value="" class="text ui-widget-content ui-corner-all">
-                                <label for="vWebsite">Vendor Website</label>
-                                <input type="text" name="vWebsite" id="vWebsite" value="" class="text ui-widget-content ui-corner-all">
-                                <label for="vAddress">Vendor Address</label>
-                                <input type="text" name="vAddress" id="vAddress" value="" class="text ui-widget-content ui-corner-all">
-                            </fieldset>
-                        </form>
-                    </div>
+
                 </div>
                 <div id="dbTableTabs-2" class="tab">
                     <p></p>
@@ -51,6 +39,33 @@
             </div>
             <div id="testdiv" style="display: none;"></div>
         </div>
+    </div>
+    <div id="tab1Form" title="Vendors" style="display: none;">
+        <p>All form fields are required.</p>
+        <form>
+            <fieldset>
+                <label for="vName">Vendor Name</label>
+                <input type="text" name="vName" id="vName" value="" class="text ui-widget-content ui-corner-all" />
+                <label for="vWebsite">Vendor Website</label>
+                <input type="text" name="vWebsite" id="vWebsite" value="" class="text ui-widget-content ui-corner-all" />
+                <label for="vAddress">Vendor Address</label>
+                <input type="text" name="vAddress" id="vAddress" value="" class="text ui-widget-content ui-corner-all" />
+            </fieldset>
+        </form>
+    </div>
+    <div id="tab2Form" title="Products" style="display: none;">
+        <form>
+            <fieldset>
+                <label for="pName">Product Type</label>
+                <input type="text" name="pName" id="pName" value="" class="text ui-widget-content ui-corner-all" />
+            </fieldset>
+        </form>
+    </div>
+    <div id="tab3Form" title="Payment Terms" style="display:none;">
+        <fieldset>
+            <label for="tName">Term</label>
+            <input type="text" name="tName" id="tName" value="" class="text ui-widget-content ui-corner-all" />
+        </fieldset>
     </div>
     @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryui", "~/bundles/bootstrap", "~/bundles/javascript")
 </body>

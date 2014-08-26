@@ -338,19 +338,19 @@ $(document).ready(function () {
                 $('#dbTableTabs-3').html("<ol>" + options + "</ol>");
             }
         });
-                
+
         // Event handlers:
         $(document).delegate("a[id^='vendLink']", "click", function (e) {
-            VendDialog($(this).data("id"));
+            VendDialog($(e.target).data("id"));
         });
         $(document).delegate("a[id^='prodLink']", "click", function (e) {
-            ProdDialog($(this).data("id"));
+            ProdDialog($(e.target).data("id"));
         });
         $(document).delegate("a[id^='termLink']", "click", function (e) {
-            termDialog($(this).data("id"));
+            termDialog($(e.target).data("id"));
         });
-        $("button[name='tabAdd']").click(function (e) {
-            if (e == $('#tab0AddItem')) {
+        $(document).delegate("button[name='tabAdd']", "click", function (e) {
+            if (e.target.id == 'tab0AddItem') {
                 VendDialog(null);
             }
             else if (e == $('#tab1AddItem')) {
@@ -364,6 +364,8 @@ $(document).ready(function () {
 });
 
 
+
+
 /*=============== FUNCTIONS ========================*/
 
 function VendDialog(id) {
@@ -375,32 +377,65 @@ function VendDialog(id) {
         modal: true,
         buttons: {
             //"Save Edits": SaveVendDlg,
-            //"Delete Entry": VendEntryDelete,
+            "Delete Entry": VendEntryDelete,
             Cancel: function () {
-                dialog.dialog("close");
+                $('#tab1Form').dialog("close");
             }
         },
         close: function () {
             //do something here...
-            console.log("dlg closed");
         }
     });
-    dialog.dialog("open"); // not working!!?!?!
+    dialog.dialog("open");
 }
 
 function ProdDialog(i) {
-//todo
+    // first populate the hidden form with ajax, then run the dialog function.
+    var dialog = null;
+    dialog = $('#tab2Form').dialog({
+        height: 500,
+        width: 500,
+        modal: true,
+        buttons: {
+            //"Save Edits": SaveVendDlg,
+            "Delete Entry": EntryDelete,
+            Cancel: function () {
+                $('#tab2Form').dialog("close");
+            }
+        },
+        close: function () {
+            //do something here...
+        }
+    });
+    dialog.dialog("open");
 }
 
 function TermDialog(i) {
-//todo
+    // first populate the hidden form with ajax, then run the dialog function.
+    var dialog = null;
+    dialog = $('#tab3Form').dialog({
+        height: 500,
+        width: 500,
+        modal: true,
+        buttons: {
+            //"Save Edits": SaveVendDlg,
+            "Delete Entry": EntryDelete,
+            Cancel: function () {
+                $('#tab3Form').dialog("close");
+            }
+        },
+        close: function () {
+            //do something here...
+        }
+    });
+    dialog.dialog("open");
 }
 
 function SaveVendDlg() {
 //todo
 }
 
-function VendEntryDelete() {
+function EntryDelete() {
 //todo
 }
 
