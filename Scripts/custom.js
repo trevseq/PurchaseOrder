@@ -102,7 +102,7 @@ $(document).ready(function () {
         // Update invoice ship address based on textarea value
         $("#txtShipAddress").blur(function (evt) {
             var id = evt.target.id.replace("txt", "lbl");
-            text = $(evt.target).val()//.replace("\n", "</br>")
+            var text = $(evt.target).val()//.replace("\n", "</br>")
             $('#' + id).text(text);
         });
 
@@ -129,10 +129,14 @@ $(document).ready(function () {
             $(this).closest("tr").remove();
             UpdateItems();
         });
+        
+        $('#kazlogo').click(function () {
+            console.log("test");
+        });
 
         // Div that acts as a textarea box (for invoice comments)
         $('.divTxtArea').click(function () {
-            if ($(this).data("commented") != "true") {
+            if ($(this).data("commented") != "false") {
                 $(this).text('');
             }
         });
@@ -181,19 +185,19 @@ $(document).ready(function () {
         });
 
         // Invoice comment area (acts like text input with placeholder attribute set)
-        $("#lblComment").change(function () {
-            $("div[name='comment']").val($("#lblComment").val());
-        });
-        (function ($) {
-            $().on('change keydown keypress input', 'div[data-placeholder]', function () {
-                if (this.textContent) {
-                    this.dataset.divPlaceholderContent = 'true';
-                }
-                else {
-                    delete this.dataset.divPlaceholderContent;
-                }
-            });
-        })(jQuery);
+        //$("#lblComment").change(function () {
+        //    $("div[name='comment']").val($("#lblComment").val());
+        //});
+        //(function ($) {
+        //    $().on('change keydown keypress input', 'div[data-placeholder]', function () {
+        //        if (this.textContent) {
+        //            this.dataset.divPlaceholderContent = 'true';
+        //        }
+        //        else {
+        //            delete this.dataset.divPlaceholderContent;
+        //        }
+        //    });
+        //})(jQuery);
     }
 
     // Print preview page
