@@ -270,5 +270,67 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+        public ActionResult GetVend(int id)
+        {
+            var db = new PurchaseOrdersEntities();
+            dynamic vendor = null;
+            dynamic contact = null;
+
+            vendor = (from v in db.Vendors
+                      where v.Id == id
+                      select new
+                      {
+                          v.Id,
+                          v.Name,
+                          v.Address1,
+                          v.Comments,
+                          v.Website
+                      }).FirstOrDefault();
+
+            contact = (from c in db.Vendors_Contact
+                       join v in db.Vendors on c.VendorId equals v.Id
+                       where c.VendorId == id
+                       select new
+                       {
+                           c.Name,
+                           c.Title,
+                           c.Phone,
+                           c.Ext,
+                           c.Fax,
+                           c.Email
+                       }).FirstOrDefault();
+
+            return new JsonResult()
+            {
+                Data = new { vendor, contact },
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        public ActionResult GetProd(int id)
+        {
+            var db = new PurchaseOrdersEntities();
+            var p = db.Products;
+
+            var prod = p.Where(e => e.Id == id).FirstOrDefault();
+
+            return new JsonResult(){
+                Data = prod,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public ActionResult GetTerm(int id)
+        {
+            var db = new PurchaseOrdersEntities();
+            var t = db.PaymentTerms;
+
+            var term = t.Where(e => e.Id == id).FirstOrDefault();
+
+            return new JsonResult()
+            {
+                Data = term,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
     }
 }

@@ -187,21 +187,6 @@ $(document).ready(function () {
                 }
             });
         });
-
-        // Invoice comment area (acts like text input with placeholder attribute set)
-        //$("#lblComment").change(function () {
-        //    $("div[name='comment']").val($("#lblComment").val());
-        //});
-        //(function ($) {
-        //    $().on('change keydown keypress input', 'div[data-placeholder]', function () {
-        //        if (this.textContent) {
-        //            this.dataset.divPlaceholderContent = 'true';
-        //        }
-        //        else {
-        //            delete this.dataset.divPlaceholderContent;
-        //        }
-        //    });
-        //})(jQuery);
     }
 
     // Print preview page
@@ -361,11 +346,11 @@ $(document).ready(function () {
             if (e.target.id == 'tab0AddItem') {
                 VendDialog(null);
             }
-            else if (e == $('#tab1AddItem')) {
-                //todo
+            else if (e.target.id == $('#tab1AddItem')) {
+                ProdDialog(null);
             }
-            else if (e == $('#tab2AddItem')) {
-                //todo
+            else if (e.target.id == $('#tab2AddItem')) {
+                TermDialog(null);
             }
         });
     }
@@ -376,12 +361,48 @@ $(document).ready(function () {
 
 /*=============== FUNCTIONS ========================*/
 
-function VendDialog(id) {
-    // first populate the hidden form with ajax, then run the dialog function.
+function VendDialog(i) {
+    // Clear vals
+    $("#vName").val("");
+    $("#vWebsite").val("");
+    $("#vAddress").val("");
+    $("#vComment").val("");
+
+    $("#cName").val("");
+    $("#cTitle").val("");
+    $("#cPhone").val("");
+    $("#cExt").val("");
+    $("#cFax").val("");
+    $("#cEmail").val("");
+
+    if (i !== null) {
+        $.ajax({
+            type: "GET",
+            url: (pathName + "Home/GetVend?id=" + i),
+            dataType: "JSON",
+            cache: false,
+            success: function (data) {
+                // Vendor info
+                $("#vName").val(data.vendor.Name);
+                $("#vWebsite").val(data.vendor.Website);
+                $("#vAddress").val(data.vendor.Address1);
+                $("#vComment").val(data.vendor.Comments);
+
+                // Vendor contact info
+                $("#cName").val(data.contact.Name);
+                $("#cTitle").val(data.contact.Title);
+                $("#cPhone").val(data.contact.Phone);
+                $("#cExt").val(data.contact.Ext);
+                $("#cFax").val(data.contact.Fax);
+                $("#cEmail").val(data.contact.Email);
+            }
+        });
+    }
+
     var dialog = null;
     dialog = $('#tab1Form').dialog({
-        height: 500,
-        width: 500,
+        height: 650,
+        width: 438,
         modal: true,
         buttons: {
             //"Save Edits": SaveVendDlg,
@@ -398,15 +419,28 @@ function VendDialog(id) {
 }
 
 function ProdDialog(i) {
-    // first populate the hidden form with ajax, then run the dialog function.
+    // Clear vals
+    $("#pName").val("");
+
+    if (i !== null) {
+        $.ajax({
+            type: "GET",
+            url: (pathName + "Home/GetProd?id=" + i),
+            dataType: "JSON",
+            cache: false,
+            success: function (data) {
+                $("#pName").val(data.Name);
+            }
+        });
+    }
+    
     var dialog = null;
     dialog = $('#tab2Form').dialog({
         height: 500,
         width: 500,
         modal: true,
         buttons: {
-            //"Save Edits": SaveVendDlg,
-            //"Delete Entry": EntryDelete,
+            // TODO: save and delete
             Cancel: function () {
                 $('#tab2Form').dialog("close");
             }
@@ -419,15 +453,30 @@ function ProdDialog(i) {
 }
 
 function TermDialog(i) {
-    // first populate the hidden form with ajax, then run the dialog function.
+    // Clear vals
+    $("#tNameFull").val("");
+    $("#tNameShort").val("");
+
+    if (i !== null) {
+        $.ajax({
+            type: "GET",
+            url: (pathName + "Home/GetTerm?id=" + i),
+            dataType: "JSON",
+            cache: false,
+            success: function (data) {
+                $("#tNameFull").val(data.Name);
+                $("#tNameShort").val(data.Value);
+            }
+        });
+    }
+
     var dialog = null;
     dialog = $('#tab3Form').dialog({
         height: 500,
         width: 500,
         modal: true,
         buttons: {
-            //"Save Edits": SaveVendDlg,
-            //"Delete Entry": EntryDelete,
+            // TODO: save and delete
             Cancel: function () {
                 $('#tab3Form').dialog("close");
             }
