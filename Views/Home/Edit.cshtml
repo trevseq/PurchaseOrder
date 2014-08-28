@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>Purchase Order Editor</title>
     <link href="~/favicon_latest.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
     @Styles.Render("~/bundles/editstyles")
-    
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top no-print navbar-override">
@@ -66,6 +66,9 @@
             <input type="text" name="tName" id="tName" value="" class="text ui-widget-content ui-corner-all" />
         </fieldset>
     </div>
-    @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryui", "~/bundles/bootstrap", "~/bundles/javascript")
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+    @Scripts.Render("~/bundles/javascript")
+    
 </body>
 </html>
