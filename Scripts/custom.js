@@ -358,9 +358,9 @@ $(document).ready(function () {
 
 
 
-
 /*=============== FUNCTIONS ========================*/
 
+// Edit page vendor dialog
 function VendDialog(i) {
     // Clear vals
     $("#vName").val("");
@@ -418,6 +418,7 @@ function VendDialog(i) {
     dialog.dialog("open");
 }
 
+// Edit page product dialog
 function ProdDialog(i) {
     // Clear vals
     $("#pName").val("");
@@ -452,6 +453,7 @@ function ProdDialog(i) {
     dialog.dialog("open");
 }
 
+// Edit page payment terms dialog
 function TermDialog(i) {
     // Clear vals
     $("#tNameFull").val("");
@@ -486,14 +488,6 @@ function TermDialog(i) {
         }
     });
     dialog.dialog("open");
-}
-
-function SaveVendDlg() {
-//todo
-}
-
-function EntryDelete() {
-    var warn = confirm("Are you sure you want to delete this entry?");
 }
 
 // Add order item to preview invoice when mini form is submitted
@@ -601,11 +595,6 @@ function formatAMPMFromDate(date) {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime;
-}
-
-// Parse addresses
-function ParseAddr(adr) {
-    // asdfghjkl;
 }
 
 // Validate form input fields before submission
