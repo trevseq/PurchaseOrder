@@ -1,5 +1,6 @@
 ﻿var pathName = location.pathname.toLowerCase();
 var isValidated = false;
+var urlLower = location.pathname.toLowerCase();
 
 pathName = pathName.replace("default", "");
 pathName = pathName.replace("home", "");
@@ -9,10 +10,10 @@ pathName = pathName.replace("edit", "");
 pathName += ((pathName.substring(pathName.length - 1) != "/") ? "/" : "");
 pathName = location.protocol + "//" + location.host + pathName.replace("//", "/");
 
+
 $(document).ready(function () {
     // Form page
-    if (!((location.pathname.toLowerCase().indexOf("printpreview") >= -1) || (location.pathname.toLowerCase().indexOf("edit") >= -1))) {
-
+    if (urlLower === "/" || urlLower.search("default") !== -1) {
         /*==================== FORM PAGE AJAX CALLS ========================*/
 
         // Vendors dropdown list
@@ -130,8 +131,11 @@ $(document).ready(function () {
             UpdateItems();
         });
         
-        $('#kazlogo').click(function () {
-            console.log("test");
+        $('#viewRecordLink').click(function (e) {
+            var orderPrompt = prompt("Please enter an order number");
+            if (orderPrompt !== null) {
+                location.assign("Home/PrintPreview?purchasenumber=" + orderPrompt);
+            }
         });
 
         // Div that acts as a textarea box (for invoice comments)
@@ -201,7 +205,7 @@ $(document).ready(function () {
     }
 
     // Print preview page
-    else if (location.pathname.toLowerCase().indexOf("printpreview") > -1) {
+    else if (urlLower.search("printpreview") !== -1) {
         // Get data from server and populate most fields on page
         var PONumber = GetUrlValue("purchaseNumber");
         $.ajax({
@@ -280,8 +284,8 @@ $(document).ready(function () {
     }
 
     // Edit Page
-    else if (location.pathname.toLowerCase().indexOf("edit") > -1) {
-        $('#outerContainer').append("<a id='backToForm' title='Return to form page' href='"+pathName+"' class='btn btn-default pull-right'>Back</a>");
+    else if (urlLower.search("edit") !== -1) {
+        $('#outerContainer').append("<a id='backToForm' title='Return to form page' href='" + pathName + "' class='btn btn-default pull-right'>Back</a>");
         $('#outerContainer').append("<button id='tab0AddItem' class='btn btn-primary tabSpecific'>Add Vendor</button>");
         $('#dbTableTabs').tabs({
             activate: function (event, ui) {
@@ -616,7 +620,7 @@ function Submit() {
                     + "&price=" + price
                     + "&shipping=" + shipping
                     + "&tax=" + tax;
-                
+
 
                 // Save ordered items
                 $.ajax({
