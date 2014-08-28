@@ -340,7 +340,7 @@ $(document).ready(function () {
             ProdDialog($(e.target).data("id"));
         });
         $(document).delegate("a[id^='termLink']", "click", function (e) {
-            termDialog($(e.target).data("id"));
+            TermDialog($(e.target).data("id"));
         });
         $(document).delegate("button[name='tabAdd']", "click", function (e) {
             if (e.target.id == 'tab0AddItem') {
@@ -464,8 +464,8 @@ function TermDialog(i) {
             dataType: "JSON",
             cache: false,
             success: function (data) {
-                $("#tNameFull").val(data.Name);
-                $("#tNameShort").val(data.Value);
+                $("#tNameFull").val(data.term.Name);
+                $("#tNameShort").val(data.term.Value);
             }
         });
     }
