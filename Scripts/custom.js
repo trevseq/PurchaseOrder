@@ -346,10 +346,10 @@ $(document).ready(function () {
             if (e.target.id == 'tab0AddItem') {
                 VendDialog(null);
             }
-            else if (e.target.id == $('#tab1AddItem')) {
+            else if (e.target.id == 'tab1AddItem') {
                 ProdDialog(null);
             }
-            else if (e.target.id == $('#tab2AddItem')) {
+            else if (e.target.id == 'tab2AddItem') {
                 TermDialog(null);
             }
         });
@@ -473,7 +473,7 @@ function TermDialog(i) {
     var dialog = null;
     dialog = $('#tab3Form').dialog({
         height: 500,
-        width: 500,
+        width: 415,
         modal: true,
         buttons: {
             // TODO: save and delete
