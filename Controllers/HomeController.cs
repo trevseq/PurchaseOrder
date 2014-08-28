@@ -322,13 +322,17 @@ namespace PurchaseOrder.Controllers
         public ActionResult GetTerm(int id)
         {
             var db = new PurchaseOrdersEntities();
-            var t = db.PaymentTerms;
-
-            var term = t.Where(e => e.Id == id).FirstOrDefault();
+            var term = (from t in db.PaymentTerms
+                        where t.Id == id
+                        select new
+                        {
+                            t.Name,
+                            t.Value
+                        }).FirstOrDefault();
 
             return new JsonResult()
             {
-                Data = term,
+                Data = new { term },
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
