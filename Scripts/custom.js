@@ -132,7 +132,7 @@ $(document).ready(function () {
         $('#viewRecordLink').click(function (e) {
             var orderPrompt = prompt("Please enter an order number");
             if (orderPrompt !== null) {
-                location.assign("Home/PrintPreview?purchasenumber=" + orderPrompt);
+                location.assign("Home/PrintPreview?purchaseNumber=" + orderPrompt);
             }
         });
 
