@@ -336,5 +336,58 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        public ActionResult RemoveEntry(int id, string table)
+        {
+            bool success = false;
+
+            if (table == "vendors")
+            {
+                var db = new PurchaseOrdersEntities();
+                var t = db.Vendors;
+                var vendor = t.Where(e => e.Id == id).FirstOrDefault();
+
+                // delete the vendor row
+
+                // if vendor has a contact, delete it too
+                success = true;
+            }
+            else if (table == "products")
+            {
+                var db = new PurchaseOrdersEntities();
+                var t = db.Products;
+                var product = t.Where(e => e.Id == id).FirstOrDefault();
+
+                // delete the product row
+                success = true;
+            }
+            else if (table == "terms")
+            {
+                var db = new PurchaseOrdersEntities();
+                var t = db.PaymentTerms;
+                var term = t.Where(e => e.Id == id).FirstOrDefault();
+
+                // delete the payment term row
+                success = true;
+            }
+
+
+            return new JsonResult()
+            {
+                Data = success,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public ActionResult SaveEdits(int id, string table)
+        {
+            bool success = false;
+
+            return new JsonResult()
+            {
+                Data = success,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
     }
 }

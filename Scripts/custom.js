@@ -405,9 +405,34 @@ function VendDialog(i) {
         width: 438,
         modal: true,
         buttons: {
-            //"Save Edits": SaveVendDlg,
-            //"Delete Entry": VendEntryDelete,
-            Cancel: function () {
+            "Save Edits": function () {
+                $.ajax({
+                    type: "GET",
+                    url: (pathName + "/Home/SaveEdits?id=" + i + "&table=vendors"),
+                    dataType: "JSON",
+                    cache: false,
+                    success: function (data) {
+                        alert("The entry was saved successfully.")
+                        $('#tab1Form').dialog("close");
+                    }
+                });
+            },
+            "Delete Entry": function () {
+                var c = confirm("Are you sure you want to delete this vendor and its contact if it has one?");
+                if (c === true) {
+                    $.ajax({
+                        type: "GET",
+                        url: (pathName + "/Home/RemoveEntry?id=" + i + "&table=vendors"),
+                        dataType: "JSON",
+                        cache: false,
+                        success: function (data) {
+                            alert("The entry was deleted successfully.")
+                            $('#tab1Form').dialog("close");
+                        }
+                    });
+                }
+            },
+            Cancel: function() {
                 $('#tab1Form').dialog("close");
             }
         },
