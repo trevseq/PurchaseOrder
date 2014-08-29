@@ -466,9 +466,35 @@ function ProdDialog(i) {
         width: 500,
         modal: true,
         buttons: {
-            // TODO: save and delete
+            "Save Edits": function () {
+                $.ajax({
+                    type: "GET",
+                    url: (pathName + "/Home/SaveEdits?id=" + i + "&table=products"),
+                    dataType: "JSON",
+                    cache: false,
+                    success: function (data) {
+                        alert("The entry was saved successfully.")
+                        $('#tab2Form').dialog("close");
+                    }
+                });
+            },
+            "Delete Entry": function () {
+                var c = confirm("Are you sure you want to delete this product?");
+                if (c === true) {
+                    $.ajax({
+                        type: "GET",
+                        url: (pathName + "/Home/RemoveEntry?id=" + i + "&table=products"),
+                        dataType: "JSON",
+                        cache: false,
+                        success: function (data) {
+                            alert("The entry was deleted successfully.")
+                            $('#tab2Form').dialog("close");
+                        }
+                    });
+                }
+            },
             Cancel: function () {
-                $('#tab2Form').dialog("close");
+                $('#tab1Form').dialog("close");
             }
         },
         close: function () {
@@ -503,9 +529,35 @@ function TermDialog(i) {
         width: 415,
         modal: true,
         buttons: {
-            // TODO: save and delete
+            "Save Edits": function () {
+                $.ajax({
+                    type: "GET",
+                    url: (pathName + "/Home/SaveEdits?id=" + i + "&table=terms"),
+                    dataType: "JSON",
+                    cache: false,
+                    success: function (data) {
+                        alert("The entry was saved successfully.")
+                        $('#tab3Form').dialog("close");
+                    }
+                });
+            },
+            "Delete Entry": function () {
+                var c = confirm("Are you sure you want to delete this payment term?");
+                if (c === true) {
+                    $.ajax({
+                        type: "GET",
+                        url: (pathName + "/Home/RemoveEntry?id=" + i + "&table=terms"),
+                        dataType: "JSON",
+                        cache: false,
+                        success: function (data) {
+                            alert("The entry was deleted successfully.")
+                            $('#tab3Form').dialog("close");
+                        }
+                    });
+                }
+            },
             Cancel: function () {
-                $('#tab3Form').dialog("close");
+                $('#tab1Form').dialog("close");
             }
         },
         close: function () {
