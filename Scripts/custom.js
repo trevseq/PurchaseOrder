@@ -131,7 +131,7 @@ $(document).ready(function () {
         
         $('#viewRecordLink').click(function (e) {
             var orderPrompt = prompt("Please enter an order number");
-            if ((orderPrompt !== null) && (orderPrompt.replace(/\s/g, "") !== null)) {
+            if (orderPrompt !== null) {
                 orderPrompt = orderPrompt.replace(/\D/gi, "");
                 location.assign("Home/PrintPreview?purchaseNumber=" + orderPrompt);
             }
