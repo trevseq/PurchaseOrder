@@ -14,8 +14,6 @@ pathName = location.protocol + "//" + location.host + pathName.replace("//", "/"
 $(document).ready(function () {
     // Form page
     if (urlLower === "/" || urlLower.search("default") !== -1) {
-        /*==================== FORM PAGE AJAX CALLS ========================*/
-
         // Vendors dropdown list
         $.ajax({
             type: "GET",
@@ -75,7 +73,7 @@ $(document).ready(function () {
         });
 
 
-        /*============== FORM POPULATION ========================*/
+        /*-------- FORM POPULATION -----------------*/
 
         // Populate shipping address field
         var shipAdr = "Kasowitz, Benson, Torres, & Friedman LLP \n" +
@@ -98,7 +96,7 @@ $(document).ready(function () {
         ClearForm();
 
 
-        /*================ EVENT LISTENERS =========================*/
+        /*----------- EVENT LISTENERS ------------------------*/
 
         // Update invoice ship address based on textarea value
         $("#txtShipAddress").blur(function (evt) {
@@ -189,7 +187,7 @@ $(document).ready(function () {
         });
     }
 
-    // Print preview page
+    /*=============== Print Page ========================*/
     else if (urlLower.search("printpreview") !== -1) {
         // Get data from server and populate most fields on page
         var PONumber = GetUrlValue("purchaseNumber");
@@ -268,7 +266,7 @@ $(document).ready(function () {
         });
     }
 
-    // Edit Page
+    /*=============== Edit Page ========================*/
     else if (urlLower.search("edit") !== -1) {
         $('#outerContainer').append("<a id='backToForm' title='Return to form page' href='" + pathName + "' class='btn btn-default pull-right'>Back</a>");
         $('#outerContainer').append("<button id='tab0AddItem' class='btn btn-primary tabSpecific'>Add Vendor</button>");
@@ -388,13 +386,15 @@ function VendDialog(i) {
                 $("#vAddress").val(data.vendor.Address1);
                 $("#vComment").val(data.vendor.Comments);
 
-                // Vendor contact info
-                $("#cName").val(data.contact.Name);
-                $("#cTitle").val(data.contact.Title);
-                $("#cPhone").val(data.contact.Phone);
-                $("#cExt").val(data.contact.Ext);
-                $("#cFax").val(data.contact.Fax);
-                $("#cEmail").val(data.contact.Email);
+                if (data.contact !== null) {
+                    // Vendor contact info
+                    $("#cName").val(data.contact.Name);
+                    $("#cTitle").val(data.contact.Title);
+                    $("#cPhone").val(data.contact.Phone);
+                    $("#cExt").val(data.contact.Ext);
+                    $("#cFax").val(data.contact.Fax);
+                    $("#cEmail").val(data.contact.Email);
+                }
             }
         });
     }
