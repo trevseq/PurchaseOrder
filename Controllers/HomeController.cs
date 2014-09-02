@@ -378,9 +378,48 @@ namespace PurchaseOrder.Controllers
             };
         }
 
-        public ActionResult SaveEdits(int id, string table)
+        public ActionResult SaveTerm(int id, string name, string value)
         {
             bool success = false;
+            var db = new PurchaseOrdersEntities();
+
+
+            return new JsonResult()
+            {
+                Data = success,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        public ActionResult SaveProds(int id, string name)
+        {
+            bool success = false;
+            var db = new PurchaseOrdersEntities();
+
+
+
+            return new JsonResult()
+            {
+                Data = success,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        public ActionResult SaveVend(int id, 
+            string name, 
+            string? website, 
+            string? address, 
+            string? comments,
+            string? vendName,
+            string? vendTitle,
+            string? vendEmail,
+            string? vendPhone,
+            string? vendExt,
+            string? vendFax)
+        {
+            bool success = false;
+            var db = new PurchaseOrdersEntities();
+
+
+
 
             return new JsonResult()
             {

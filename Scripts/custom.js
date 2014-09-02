@@ -407,9 +407,21 @@ function VendDialog(i) {
         modal: true,
         buttons: {
             "Save Edits": function () {
+                var params =
+                    "&name=" + $('#vName').val() +
+                    "&website=" + $('#vWebsite').val() +
+                    "&address=" + $('#vAddress').val() +
+                    "&comments=" + $('#vComment').val() +
+                    "&vendName=" + $('#cName').val() +
+                    "&vendTitle=" + $('#cTitle').val() +
+                    "&vendEmail=" + $('#cEmail').val() +
+                    "&vendPhone=" + $('#cPhone').val() +
+                    "&vendExt=" + $('#cExt').val() +
+                    "&vendFax=" + $('#cFax').val();
+
                 $.ajax({
                     type: "GET",
-                    url: (pathName + "/Home/SaveEdits?id=" + i + "&table=vendors"),
+                    url: (pathName + "/Home/SaveEdits?id=" + i + params),
                     dataType: "JSON",
                     cache: false,
                     success: function (data) {
@@ -460,7 +472,6 @@ function ProdDialog(i) {
             }
         });
     }
-    
     var dialog = null;
     dialog = $('#tab2Form').dialog({
         height: 500,
@@ -468,9 +479,10 @@ function ProdDialog(i) {
         modal: true,
         buttons: {
             "Save Edits": function () {
+                var params = "&name=" + $('pName').val();
                 $.ajax({
                     type: "GET",
-                    url: (pathName + "/Home/SaveEdits?id=" + i + "&table=products"),
+                    url: (pathName + "/Home/SaveProds?id=" + i + params),
                     dataType: "JSON",
                     cache: false,
                     success: function (data) {
@@ -531,9 +543,13 @@ function TermDialog(i) {
         modal: true,
         buttons: {
             "Save Edits": function () {
+                var params =
+                    "&name=" + $('tNameFull').val() +
+                    "&value=" + $('tNameShort').val();
+
                 $.ajax({
                     type: "GET",
-                    url: (pathName + "/Home/SaveEdits?id=" + i + "&table=terms"),
+                    url: (pathName + "/Home/SaveTerm?id=" + i + params),
                     dataType: "JSON",
                     cache: false,
                     success: function (data) {
