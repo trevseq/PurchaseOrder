@@ -132,7 +132,7 @@ $(document).ready(function () {
         });
 
         // Delete Row button
-        $(document).delegate("img[src$='delete-32x32.png']", "click", function (e) {
+        $(document).delegate("img[src='" + pathName + "Images/delete-32x32.png']", "click", function (e) {
             $(this).closest("tr").remove();
             UpdateItems();
         });
@@ -596,7 +596,7 @@ function TermDialog(i) {
 function AddItems() {
     var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val()) + parseFloat($('#txtTax').val()) + parseFloat($('#txtShipping').val());
     rowTotal = rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-    var row = "<tr name='invRow'><td><img src='/Images/delete-32x32.png' style='height:20px;width:20px;cursor:pointer' /></td>" +
+    var row = "<tr name='invRow'><td><img src='" + pathName + "/Images/delete-32x32.png'" + " style='height:20px;width:20px;cursor:pointer' /></td>" +
         "<td><span name='spProduct'>" + $('#txtProduct').val() + "</span></td>" +
         "<td style='display:none'><span name='spPartNo'>" + $('#txtPartNo').val() + "</span></td>" +
         "<td style='display:none'><span name='spDescription'>" + $('#txtDescription').val() + "</span></td>" +
