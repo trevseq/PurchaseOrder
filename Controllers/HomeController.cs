@@ -35,7 +35,7 @@ namespace PurchaseOrder.Controllers
             if(string.IsNullOrEmpty(u))
                 return View("Error");
 
-            var isAdmin = AdminCheck(int.Parse(u)); // TODO: actually get employee id to fill here
+            var isAdmin = AdminCheck(int.Parse(u));
             if (isAdmin == true)
             {
                 // user is admin
@@ -92,7 +92,7 @@ namespace PurchaseOrder.Controllers
                                  Room = r["RoomNumber"]
                              }).FirstOrDefault();
 
-                isAdmin = AdminCheck(int.Parse(u)); // TODO: actually get employee id to fill here 
+                isAdmin = AdminCheck(int.Parse(u)); 
             }
 
             return new JsonResult()
