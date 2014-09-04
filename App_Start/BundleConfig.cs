@@ -14,7 +14,7 @@ namespace PurchaseOrder
                 "~/Scripts/custom.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/respond.js",
-                "modernizr-2.8.3.js"));
+                "~/Scripts/modernizr-2.8.3.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/sammy-{version}.js",

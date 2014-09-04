@@ -31,7 +31,7 @@ namespace PurchaseOrder.Controllers
         }
         public ActionResult Edit()
         {
-            string u = Helper.GetEmployeeId(System.Environment.UserName);
+            string u = Helper.GetEmployeeId(this.HttpContext);
             if(string.IsNullOrEmpty(u))
                 return View("Error");
 
@@ -55,7 +55,7 @@ namespace PurchaseOrder.Controllers
             bool isAdmin = false;
            
             // Get requestor ID aka(EmployeeID)
-            string u = Helper.GetEmployeeId(System.Environment.UserName);
+            string u = Helper.GetEmployeeId(this.HttpContext);
             if (!string.IsNullOrEmpty(u))
             {
                 // GEt Requestor information based on employee id

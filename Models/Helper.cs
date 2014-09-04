@@ -15,12 +15,13 @@ namespace PurchaseOrder.Models
             return date;
         }
 
-        public static string GetEmployeeId(string userName)
+        public static string GetEmployeeId(HttpContextBase ctx)
         {
+          
             string s = null;
-            if (!string.IsNullOrEmpty(userName))
+            if (!string.IsNullOrEmpty(ctx.User.Identity.Name))
             {
-                string usr = userName.ToLower();
+                string usr = ctx.User.Identity.Name.ToLower();
                 usr = usr.Replace("kasowitz\\", "");
                 DirectoryEntry ent = new DirectoryEntry("LDAP://DC=kasowitz,DC=com");//, ConfigurationManager.AppSettings["ADUser"], ConfigurationManager.AppSettings["ADPwd"]);
                 DirectorySearcher search = new DirectorySearcher(ent);
