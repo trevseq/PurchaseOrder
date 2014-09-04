@@ -21,7 +21,7 @@ namespace PurchaseOrder.Controllers
             object[] o = Helper.GetRequestorForView(this.User.Identity.Name);
             return new JsonResult()
             {
-                Data = new { reqeuestor=o[0], isAdmin=o[1] },
+                Data = new { requestor = o[0], isAdmin = o[1] },
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }

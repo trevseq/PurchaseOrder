@@ -235,9 +235,8 @@ $(document).ready(function () {
                 $('#lblShipAddress').text(shipAddr);
                 $('#lblJustification').text(justi);
 
-                $('#lblReqName').text();
-                $('#lblReqEmail').text();
-
+                $('#lblReqName').text(data.req.FirstName + " " + data.req.LastName);
+                $('#lblReqEmail').text(data.req.Email);
                 // Purchased items: (for rows in invoice table)
                 var p;
                 for (p in data.subItems) {
@@ -262,18 +261,7 @@ $(document).ready(function () {
 
                     $('#tblItemizedList').find("tbody").append(row);
                 }
-                UpdateItems();
-            }
-        });
-        // Get requestor info from server and populate requestor fields
-        $.ajax({
-            type: "GET",
-            dataType: "JSON",
-            url: pathName + "Home/GetRequestor",
-            cache: false,
-            success: function (data) {
-                $('#lblReqName').text(data.FirstName + " " + data.LastName);
-                $('#lblReqEmail').text(data.Email);
+                
             }
         });
     }

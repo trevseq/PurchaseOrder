@@ -40,15 +40,15 @@ namespace PurchaseOrder.Models
             return s;
         }
 
-        public static string GetUsernameFromID(int id)
+        public static object GetUsernameFromID(int id)
         {
-            string s = null;
+            object s = null;
             string query = string.Format(
                 "SELECT e.[EmployeeID]" +
                 ",e.[LastName]" +
                 ",e.[FirstName] " +
                 ",e.[WorkEmail]" +
-                "FROM [ADP_Feed].[dbo].[Employees] where EmployeeID={0} ", id);
+                "FROM [ADP_Feed].[dbo].[Employees] e where EmployeeID={0} ", id);
 
             SqlDataAdapter adp = new SqlDataAdapter(query, new SqlConnection(ConfigurationManager.ConnectionStrings["PurchaseOrder.Properties.Settings.ADPFeed"].ConnectionString));
             DataTable tb = new DataTable();
@@ -67,7 +67,7 @@ namespace PurchaseOrder.Models
         public static object[] GetRequestorForView(string username)
         {
             bool isAdmin=false;
-            object reqeuestor = null;
+            object requestor = null;
             // Get requestor ID aka(EmployeeID)
             string u = Helper.GetEmployeeId(username);
             if (!string.IsNullOrEmpty(u))
@@ -91,7 +91,7 @@ namespace PurchaseOrder.Models
                 SqlDataAdapter adp = new SqlDataAdapter(query, new SqlConnection(ConfigurationManager.ConnectionStrings["PurchaseOrder.Properties.Settings.ADPFeed"].ConnectionString));
                 DataTable tb = new DataTable();
                 adp.Fill(tb);
-                reqeuestor = (from r in tb.AsEnumerable()
+                requestor = (from r in tb.AsEnumerable()
                              select new
                              {
                                  EmployeeID = r["EmployeeID"],
@@ -109,7 +109,7 @@ namespace PurchaseOrder.Models
                 isAdmin = Helper.AdminCheck(int.Parse(u));
             }
 
-            return new object[]{reqeuestor,isAdmin};
+            return new object[]{requestor,isAdmin};
 
         }
 

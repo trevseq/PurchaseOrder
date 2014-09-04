@@ -18,8 +18,7 @@ namespace PurchaseOrder.Controllers
         {
             dynamic info = null;
             dynamic subItems = null;
-            //dynamic vendorInformation = null;
-            //dynamic vendorContact = null;
+            object req = null;
 
             if (Request["purchaseNumber"] != null)
             {
@@ -60,11 +59,12 @@ namespace PurchaseOrder.Controllers
                                 i.Description,
                                 i.PartNumber
                             });
+                req = Helper.GetUsernameFromID(info.RequestorId);
             }
 
             return new JsonResult()
             {
-                Data = new { info, subItems },
+                Data = new { info, subItems, req },
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
