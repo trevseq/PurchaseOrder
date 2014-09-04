@@ -1,6 +1,6 @@
 ﻿var pathName = location.pathname.toLowerCase();
 var isValidated = false;
-var urlLower = location.pathname.toLowerCase();
+var urlLower = pathName.toLowerCase();
 
 pathName = pathName.replace("default", "");
 pathName = pathName.replace("home", "");
@@ -13,7 +13,7 @@ pathName = location.protocol + "//" + location.host + pathName.replace("//", "/"
 
 $(document).ready(function () {
     // Form page
-    if (urlLower === "/" || urlLower.search("default") !== -1) {
+    if (!(urlLower.indexOf("printpreview") > -1) && !(urlLower.indexOf("edit") > -1) && !(urlLower.indexOf("error") > -1)) {
         // Vendors dropdown list
         $.ajax({
             type: "GET",
@@ -197,7 +197,7 @@ $(document).ready(function () {
     }
 
     /*=============== Print Page ========================*/
-    else if (urlLower.search("printpreview") !== -1) {
+    else if (urlLower.indexOf("printpreview") > -1) {
         // Get data from server and populate most fields on page
         var PONumber = GetUrlValue("purchaseNumber");
         $.ajax({
@@ -276,7 +276,7 @@ $(document).ready(function () {
     }
 
     /*=============== Edit Page ========================*/
-    else if (urlLower.search("edit") !== -1) {
+    else if (urlLower.indexOf("edit") > -1) {
         $('#outerContainer').append("<a id='backToForm' title='Return to form page' href='" + pathName + "' class='btn btn-default pull-right'>Back</a>");
         $('#outerContainer').append("<button id='tab0AddItem' class='btn btn-primary tabSpecific'>Add Vendor</button>");
         $('#dbTableTabs').tabs({

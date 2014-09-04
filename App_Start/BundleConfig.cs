@@ -13,7 +13,8 @@ namespace PurchaseOrder
             bundles.Add(new ScriptBundle("~/bundles/javascript").Include(
                 "~/Scripts/custom.js",
                 "~/Scripts/bootstrap.js",
-                "~/Scripts/respond.js"));
+                "~/Scripts/respond.js",
+                "modernizr-2.8.3.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/sammy-{version}.js",
@@ -33,7 +34,7 @@ namespace PurchaseOrder
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
