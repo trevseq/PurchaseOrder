@@ -39,6 +39,7 @@ namespace PurchaseOrder.Controllers
                             p.ShippingAddress,
                             p.Comment,
                             p.OrderDate,
+                            p.RequestorId,
                             v.Address1,
                             VendName = v.Name,
                             c.Name,

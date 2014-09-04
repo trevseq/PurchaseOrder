@@ -141,7 +141,7 @@ $(document).ready(function () {
             var orderPrompt = prompt("Please enter an order number");
             if (orderPrompt !== null) {
                 orderPrompt = orderPrompt.replace(/\D/gi, "");
-                location.assign("Home/PrintPreview?purchaseNumber=" + orderPrompt);
+                location.assign("PrintPreview?purchaseNumber=" + orderPrompt);
             }
         });
 
@@ -219,6 +219,7 @@ $(document).ready(function () {
                 var cPhone = data.info.Phone;
                 var cFax = data.info.Fax;
                 var vendor = data.info.VendName;
+                var reqId = data.info.requestorId;
 
                 orderDate = parseDate(orderDate);
 
@@ -234,6 +235,8 @@ $(document).ready(function () {
                 $('#lblShipAddress').text(shipAddr);
                 $('#lblJustification').text(justi);
 
+                $('#lblReqName').text();
+                $('#lblReqEmail').text();
 
                 // Purchased items: (for rows in invoice table)
                 var p;
