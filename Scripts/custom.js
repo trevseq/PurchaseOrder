@@ -60,15 +60,23 @@ $(document).ready(function () {
             url: pathName + "Home/GetRequestor",
             cache: false,
             success: function (data) {
-                // Populate requestor section:
-                $("#txtReqName").data("requestorid", data.EmployeeID);
-                $("#txtReqName").val(data.FirstName + " " + data.LastName);
-                $("#txtReqTitle").val(data.Title);
-                $("#txtReqEmail").val(data.Email);
-                $("#txtOffice").val(data.Room);
-                $("#txtDepartment").val(data.Department);
-                $("#txtReqPhone").val(data.Phone);
-                $("#txtReqFax").val(data.Fax);
+                if (data.requestor != null) {
+                    // Populate requestor section:
+                    $("#txtReqName").data("requestorid", data.requestor.EmployeeID);
+                    $("#txtReqName").val(data.requestor.FirstName + " " + data.requestor.LastName);
+                    $("#txtReqTitle").val(data.requestor.Title);
+                    $("#txtReqEmail").val(data.requestor.Email);
+                    $("#txtOffice").val(data.requestor.Room);
+                    $("#txtDepartment").val(data.requestor.Department);
+                    $("#txtReqPhone").val(data.requestor.Phone);
+                    $("#txtReqFax").val(data.requestor.Fax);
+
+                    if(data.isAdmin !== true)
+                        $('#admin').remove();
+                }
+                else {
+                    $('#admin').remove();
+                }
             }
         });
 

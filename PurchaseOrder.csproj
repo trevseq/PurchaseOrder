@@ -335,7 +335,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Default.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>

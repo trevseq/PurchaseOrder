@@ -11,6 +11,16 @@ namespace PurchaseOrder.Controllers
 {
     public class HomeController : Controller
     {
+        public static bool AdminCheck(int empID){
+            // check if admin
+            var db = new PurchaseOrdersEntities();
+            var a = db.POAppAccesses;
+            var user = a.Where(e => e.EmployeeID == empID).FirstOrDefault();
+
+            if (user.IsAdmin == true) { return true; }
+            else { return false; }
+        }
+
         public ActionResult Default()
         {
             return View();
@@ -21,48 +31,73 @@ namespace PurchaseOrder.Controllers
         }
         public ActionResult Edit()
         {
-            return View("Edit");
+            string u = Helper.GetEmployeeId(System.Environment.UserName);
+            if(string.IsNullOrEmpty(u))
+                return View("Error");
+
+            var isAdmin = AdminCheck(int.Parse(u)); // TODO: actually get employee id to fill here
+            if (isAdmin == true)
+            {
+                // user is admin
+                return View("Edit");
+            }
+            else
+            {
+                // user is not admin
+                return View("Error");
+            }
+            
+            
         }
         public ActionResult GetRequestor()
         {
+            dynamic requestor = null;
+            bool isAdmin = false;
+           
             // Get requestor ID aka(EmployeeID)
             string u = Helper.GetEmployeeId(System.Environment.UserName);
-            // GEt Requestor information based on employee id
-            string query = string.Format(
-                "SELECT e.[EmployeeID]" +
-                ",e.[LastName]" +
-                ",e.[FirstName] " +
-                ",t.[Title]" +
-                ",d.[Department]" +
-                ",e.[Location]" +
-                ",e.[WorkPhone]" +
-                ",e.[WorkFax]" +
-                ",e.[WorkEmail]" +
-                ",e.[RoomNumber]  " +
-                "FROM [ADP_Feed].[dbo].[Employees] e " +
-                "join Departments d on e.Department = d.DepartmentID " +
-                "join Titles t on e.JobTitle = t.TitleID where EmployeeID={0}", u);
+            if (!string.IsNullOrEmpty(u))
+            {
+                // GEt Requestor information based on employee id
+                string query = string.Format(
+                    "SELECT e.[EmployeeID]" +
+                    ",e.[LastName]" +
+                    ",e.[FirstName] " +
+                    ",t.[Title]" +
+                    ",d.[Department]" +
+                    ",e.[Location]" +
+                    ",e.[WorkPhone]" +
+                    ",e.[WorkFax]" +
+                    ",e.[WorkEmail]" +
+                    ",e.[RoomNumber]  " +
+                    "FROM [ADP_Feed].[dbo].[Employees] e " +
+                    "join Departments d on e.Department = d.DepartmentID " +
+                    "join Titles t on e.JobTitle = t.TitleID where EmployeeID={0}", u);
 
-            SqlDataAdapter adp = new SqlDataAdapter(query, new SqlConnection(ConfigurationManager.ConnectionStrings["PurchaseOrder.Properties.Settings.ADPFeed"].ConnectionString));
-            DataTable tb = new DataTable();
-            adp.Fill(tb);
-            var requestor = (from r in tb.AsEnumerable()
-                            select new
-                            {
-                                EmployeeID = r["EmployeeID"],
-                                FirstName = r["FirstName"],
-                                LastName = r["LastName"],
-                                Title = r["Title"],
-                                Department = r["Department"],
-                                Office = r["Location"],
-                                Phone = r["WorkPhone"],
-                                Fax = r["WorkFax"],
-                                Email = r["WorkEmail"],
-                                Room = r["RoomNumber"]
-                            }).FirstOrDefault();
+                SqlDataAdapter adp = new SqlDataAdapter(query, new SqlConnection(ConfigurationManager.ConnectionStrings["PurchaseOrder.Properties.Settings.ADPFeed"].ConnectionString));
+                DataTable tb = new DataTable();
+                adp.Fill(tb);
+                requestor = (from r in tb.AsEnumerable()
+                             select new
+                             {
+                                 EmployeeID = r["EmployeeID"],
+                                 FirstName = r["FirstName"],
+                                 LastName = r["LastName"],
+                                 Title = r["Title"],
+                                 Department = r["Department"],
+                                 Office = r["Location"],
+                                 Phone = r["WorkPhone"],
+                                 Fax = r["WorkFax"],
+                                 Email = r["WorkEmail"],
+                                 Room = r["RoomNumber"]
+                             }).FirstOrDefault();
+
+                isAdmin = AdminCheck(int.Parse(u)); // TODO: actually get employee id to fill here 
+            }
+
             return new JsonResult()
             {
-                Data = requestor,
+                Data = new { requestor, isAdmin },
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
