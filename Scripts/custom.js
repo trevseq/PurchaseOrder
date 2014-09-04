@@ -203,7 +203,7 @@ $(document).ready(function () {
         $.ajax({
             type: "GET",
             dataType: "JSON",
-            url: pathName + "Home/GetPrintPreviewData?purchaseNumber=" + PONumber,
+            url: pathName + "PrintPreview/GetPrintPreviewData?purchaseNumber=" + PONumber,
             cache: false,
             success: function (data) {
                 // Order info: (PO#, terms, justification, shipaddr, vend contact info, et cetera)
@@ -312,7 +312,7 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "GET",
-            url: (pathName + "Home/GetProductType"),
+            url: (pathName + "Edit/GetProductType"),
             dataType: "JSON",
             cache: false,
             success: function (data) {
@@ -385,7 +385,7 @@ function VendDialog(i) {
     if (i !== null) {
         $.ajax({
             type: "GET",
-            url: (pathName + "Home/GetVend?id=" + i),
+            url: (pathName + "Edit/GetVend?id=" + i),
             dataType: "JSON",
             cache: false,
             success: function (data) {
@@ -429,7 +429,7 @@ function VendDialog(i) {
 
                 $.ajax({
                     type: "GET",
-                    url: (pathName + "/Home/SaveEdits?id=" + i + params),
+                    url: (pathName + "Edit/SaveEdits?id=" + i + params),
                     dataType: "JSON",
                     cache: false,
                     success: function (data) {
@@ -443,7 +443,7 @@ function VendDialog(i) {
                 if (c === true) {
                     $.ajax({
                         type: "GET",
-                        url: (pathName + "/Home/RemoveEntry?id=" + i + "&table=vendors"),
+                        url: (pathName + "Edit/RemoveEntry?id=" + i + "&table=vendors"),
                         dataType: "JSON",
                         cache: false,
                         success: function (data) {
@@ -453,9 +453,6 @@ function VendDialog(i) {
                     });
                 }
             },
-            Cancel: function() {
-                $('#tab1Form').dialog("close");
-            }
         },
         close: function () {
             //do something here...
@@ -472,7 +469,7 @@ function ProdDialog(i) {
     if (i !== null) {
         $.ajax({
             type: "GET",
-            url: (pathName + "Home/GetProd?id=" + i),
+            url: (pathName + "Edit/GetProd?id=" + i),
             dataType: "JSON",
             cache: false,
             success: function (data) {
@@ -490,7 +487,7 @@ function ProdDialog(i) {
                 var params = "&name=" + $('pName').val();
                 $.ajax({
                     type: "GET",
-                    url: (pathName + "/Home/SaveProds?id=" + i + params),
+                    url: (pathName + "Edit/SaveProds?id=" + i + params),
                     dataType: "JSON",
                     cache: false,
                     success: function (data) {
@@ -504,7 +501,7 @@ function ProdDialog(i) {
                 if (c === true) {
                     $.ajax({
                         type: "GET",
-                        url: (pathName + "/Home/RemoveEntry?id=" + i + "&table=products"),
+                        url: (pathName + "Edit/RemoveEntry?id=" + i + "&table=products"),
                         dataType: "JSON",
                         cache: false,
                         success: function (data) {
@@ -514,9 +511,6 @@ function ProdDialog(i) {
                     });
                 }
             },
-            Cancel: function () {
-                $('#tab1Form').dialog("close");
-            }
         },
         close: function () {
             //do something here...
@@ -534,7 +528,7 @@ function TermDialog(i) {
     if (i !== null) {
         $.ajax({
             type: "GET",
-            url: (pathName + "Home/GetTerm?id=" + i),
+            url: (pathName + "Edit/GetTerm?id=" + i),
             dataType: "JSON",
             cache: false,
             success: function (data) {
@@ -571,7 +565,7 @@ function TermDialog(i) {
                 if (c === true) {
                     $.ajax({
                         type: "GET",
-                        url: (pathName + "/Home/RemoveEntry?id=" + i + "&table=terms"),
+                        url: (pathName + "Edit/RemoveEntry?id=" + i + "&table=terms"),
                         dataType: "JSON",
                         cache: false,
                         success: function (data) {
@@ -581,9 +575,6 @@ function TermDialog(i) {
                     });
                 }
             },
-            Cancel: function () {
-                $('#tab1Form').dialog("close");
-            }
         },
         close: function () {
             //do something here...
@@ -770,7 +761,7 @@ function Submit() {
                     cache: false,
                 });
             });
-            window.location = (pathName + "Home/PrintPreview?purchaseNumber=" + data);
+            window.location = (pathName + "PrintPreview?purchaseNumber=" + data);
         }
     });
 }
