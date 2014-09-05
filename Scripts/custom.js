@@ -64,8 +64,12 @@ $(document).ready(function () {
                     // Populate requestor section:
                     $("#txtReqName").data("requestorid", data.requestor.EmployeeID);
                     $("#txtReqName").val(data.requestor.FirstName + " " + data.requestor.LastName);
+                    $("#lblReqName").text(data.requestor.FirstName + " " + data.requestor.LastName); // mini invoice
+
                     $("#txtReqTitle").val(data.requestor.Title);
                     $("#txtReqEmail").val(data.requestor.Email);
+                    $("#lblReqEmail").text(data.requestor.Email); // mini invoice
+
                     $("#txtOffice").val(data.requestor.Room);
                     $("#txtDepartment").val(data.requestor.Department);
                     $("#txtReqPhone").val(data.requestor.Phone);
@@ -93,8 +97,6 @@ $(document).ready(function () {
         // Populate Invoice 
         $('#lblJustification').text($('#txtJustification').val());
         $("#lblShipAddress").text($('#txtShipAddress').val());
-        $('#lblReqName').text($('#txtReqName').val());
-        $('#lblReqEmail').text($('#txtReqEmail').val());
 
         // Datepickers
         $('#txtDateRequested').datepicker().datepicker('setDate', new Date());
