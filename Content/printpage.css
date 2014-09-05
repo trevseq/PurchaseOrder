@@ -138,7 +138,10 @@ input, textarea, button {
     padding-right: 2.5%;
     padding-top: -5%;
     display: block;
-    position: absolute; } }
+    position: absolute; }
+
+  body {
+    width: auto; } }
 @page {
   size: auto;
   margin: 0mm; }
