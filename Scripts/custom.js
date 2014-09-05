@@ -134,7 +134,7 @@ $(document).ready(function () {
         });
 
         // Delete Row button
-        $(document).delegate("img[src='" + pathName + "Images/delete-32x32.png']", "click", function (e) {
+        $(document).delegate("img[src$='delete-32x32.png']", "click", function (e) {
             $(this).closest("tr").remove();
             UpdateItems();
         });
