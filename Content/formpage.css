@@ -131,18 +131,19 @@ input, textarea, button {
     padding: 10px 15px; } }
 body {
   padding-top: 50px;
-  padding-bottom: 20px; }
+  padding-bottom: 20px;
+  width: 1200px; }
 
 .body-content {
   padding-left: 15px;
   padding-right: 15px;
   margin-top: 2%;
-  width: 1200px; }
+  width: 100%; }
 
 .fixedPos {
   position: fixed;
-  margin-left: 45%;
-  width: 40%;
+  margin-left: 1.5%;
+  display: inline-block;
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
   -ms-transform: translateZ(0);
@@ -150,8 +151,7 @@ body {
   transform: translateZ(0); }
 
 .floatPos {
-  float: left;
-  width: 40%; }
+  float: left; }
 
 #kazlogo {
   height: 150%;
@@ -169,10 +169,10 @@ body {
   width: 100%; }
 
 #mainForm {
-  width: 45%; }
+  width: 50%; }
 
 #miniInvoice {
-  width: 40%; }
+  width: 45%; }
 
 #lblVContactAddress {
   white-space: pre-wrap; }
