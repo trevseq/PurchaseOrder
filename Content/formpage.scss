@@ -23,19 +23,19 @@ body {
 
 .fixedPos {
     position: fixed;
-    margin-left: 35%;
-    width: 700px;
+    margin-left: 45%;
+    width: 40%;
     @include transform(translateZ(0));
 }
 
 .floatPos {
     float: left;
-    width: 700px;
+    width: 40%;
 }
 
 #kazlogo{
-    height: 104px;
-    width: 314px;
+    height: 150%;
+    width: 125%;
 }
 
 .divAddressBox{
@@ -45,20 +45,20 @@ body {
 
 #txtBillAddress{
     height: 80px;
-    width: 330px;
+    width: 100%;
 }
 
 #txtShipAddress{
     height: 80px;
-    width: 330px;
+    width: 100%;
 }
 
 #mainForm{
-    width: 600px;
+    width: 45%;
 }
 
 #miniInvoice{
-    width: 700px;
+    width: 40%;
 }
 
 #lblVContactAddress{

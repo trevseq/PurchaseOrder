@@ -141,8 +141,8 @@ body {
 
 .fixedPos {
   position: fixed;
-  margin-left: 35%;
-  width: 700px;
+  margin-left: 45%;
+  width: 40%;
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
   -ms-transform: translateZ(0);
@@ -151,28 +151,28 @@ body {
 
 .floatPos {
   float: left;
-  width: 700px; }
+  width: 40%; }
 
 #kazlogo {
-  height: 104px;
-  width: 314px; }
+  height: 150%;
+  width: 125%; }
 
 .divAddressBox {
   white-space: pre; }
 
 #txtBillAddress {
   height: 80px;
-  width: 330px; }
+  width: 100%; }
 
 #txtShipAddress {
   height: 80px;
-  width: 330px; }
+  width: 100%; }
 
 #mainForm {
-  width: 600px; }
+  width: 45%; }
 
 #miniInvoice {
-  width: 700px; }
+  width: 40%; }
 
 #lblVContactAddress {
   white-space: pre-wrap; }
