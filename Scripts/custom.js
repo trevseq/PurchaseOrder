@@ -309,7 +309,7 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "GET",
-            url: (pathName + "Edit/GetProductType"),
+            url: (pathName + "Edit/GetProd"),
             dataType: "JSON",
             cache: false,
             success: function (data) {
@@ -408,7 +408,7 @@ function VendDialog(i) {
     var dialog = null;
     dialog = $('#tab1Form').dialog({
         height: 650,
-        width: 438,
+        width: 430,
         modal: true,
         buttons: {
             "Save Edits": function () {
