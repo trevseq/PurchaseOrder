@@ -309,7 +309,7 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "GET",
-            url: (pathName + "Home/GetPaymentTerms"),
+            url: (pathName + "Home/GetProductType"),
             dataType: "JSON",
             cache: false,
             success: function (data) {
