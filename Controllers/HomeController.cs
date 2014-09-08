@@ -42,7 +42,7 @@ namespace PurchaseOrder.Controllers
             };
         }
         /// <summary>
-        /// Handles ajax requests for a specific vendor's contact rep
+        /// Gets requests for a specific vendor's contact rep
         /// </summary>
         /// <param name="VId">Vendor ID</param>
         /// <returns>JsonResult with vendor contact data</returns>
@@ -59,7 +59,7 @@ namespace PurchaseOrder.Controllers
             };
         }
         /// <summary>
-        /// Handles ajax requests for list of payment term types
+        /// Gets requests for list of payment term types
         /// </summary>
         /// <returns>JsonResult with payment terms data</returns>
         public ActionResult GetPaymentTerms()
@@ -74,7 +74,7 @@ namespace PurchaseOrder.Controllers
             };
         }
         /// <summary>
-        /// Handles ajax requests for list of product types
+        /// Gets requests for list of product types
         /// </summary>
         /// <returns>JsonResult with product types data</returns>
         public ActionResult GetProductType()
