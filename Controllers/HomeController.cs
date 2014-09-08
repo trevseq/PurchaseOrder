@@ -15,6 +15,10 @@ namespace PurchaseOrder.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// Gets requests for info about the user from Active Directory and the POAppAccess db table
+        /// </summary>
+        /// <returns>JsonResult with the user's identity, as well as whether or not they are a purchase order administrator.</returns>
         public ActionResult GetRequestor()
         {
            
@@ -25,9 +29,8 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-        
         /// <summary>
-        /// Handles ajax requests for list of vendors
+        /// Gets requests for list of vendors
         /// </summary>
         /// <returns>JsonResult with vendor data</returns>
         public ActionResult GetVendors()
@@ -88,7 +91,23 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-        
+        /// <summary>
+        /// Handles the saving of the form
+        /// </summary>
+        /// <param name="requestorId"></param>
+        /// <param name="vendor"></param>
+        /// <param name="priority"></param>
+        /// <param name="terms"></param>
+        /// <param name="dateRequested"></param>
+        /// <param name="dateRequired"></param>
+        /// <param name="justification"></param>
+        /// <param name="manager"></param>
+        /// <param name="productType"></param>
+        /// <param name="billingAddress"></param>
+        /// <param name="shippingAddress"></param>
+        /// <param name="comment"></param>
+        /// <param name="signedBy"></param>
+        /// <returns>JsonResult with purchase order number</returns>
         public ActionResult SavePOForm(
             int? requestorId,
             int? vendor,
@@ -139,7 +158,18 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-
+        /// <summary>
+        /// Handles the saving of ordered items after the main form is saved.
+        /// </summary>
+        /// <param name="purchaseNumber"></param>
+        /// <param name="product"></param>
+        /// <param name="partNumber"></param>
+        /// <param name="description"></param>
+        /// <param name="quantity"></param>
+        /// <param name="price"></param>
+        /// <param name="shipping"></param>
+        /// <param name="tax"></param>
+        /// <returns>JsonResult success boolean.</returns>
         public ActionResult SaveOrderedItems(
             int purchaseNumber, 
             string product, 
