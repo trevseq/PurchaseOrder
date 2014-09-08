@@ -266,6 +266,8 @@ $(document).ready(function () {
                 
             }
         });
+
+        $('#backToForm').attr("href", pathName);
     }
 
     /*=============== Edit Page ========================*/
