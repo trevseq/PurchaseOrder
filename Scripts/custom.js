@@ -264,11 +264,12 @@ $(document).ready(function () {
 
                     $('#tblItemizedList').find("tbody").append(row);
                 }
-                
+                UpdateItems();
             }
         });
 
         $('#backToForm').attr("href", pathName);
+        
     }
 
     /*=============== Edit Page ========================*/
