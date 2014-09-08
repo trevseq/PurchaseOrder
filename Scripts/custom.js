@@ -2,6 +2,7 @@
 var isValidated = false;
 var urlLower = pathName.toLowerCase();
 
+// clean the page views from the url to be able to use the base url for hyperlinking
 pathName = pathName.replace("default", "");
 pathName = pathName.replace("home", "");
 pathName = pathName.replace("printpreview", "");
@@ -106,7 +107,7 @@ $(document).ready(function () {
         ClearForm();
 
 
-        /*----------- EVENT LISTENERS ------------------------*/
+        /*----------- EVENT HANDLERS ------------------------*/
 
         // Update invoice ship address based on textarea value
         $("#txtShipAddress").blur(function (evt) {
@@ -147,7 +148,7 @@ $(document).ready(function () {
             }
         });
 
-        // Div that acts as a textarea box (for invoice comments)
+        // Editable div that acts as a textarea box (for invoice comments)
         $('.divTxtArea').click(function () {
             if ($(this).data("commented") !== "true") {
                 $(this).text("");
@@ -201,7 +202,7 @@ $(document).ready(function () {
 
     /*=============== Print Page ========================*/
     else if (urlLower.indexOf("printpreview") > -1) {
-        // Get data from server and populate most fields on page
+        // Get data from server and populate fields on page
         var PONumber = GetUrlValue("purchaseNumber");
         $.ajax({
             type: "GET",
@@ -268,6 +269,7 @@ $(document).ready(function () {
             }
         });
 
+        // Button-like link to return to main form page
         $('#backToForm').attr("href", pathName);
         
     }
@@ -276,6 +278,7 @@ $(document).ready(function () {
     else if (urlLower.indexOf("edit") > -1) {
         $('#outerContainer').append("<a id='backToForm' title='Return to form page' href='" + pathName + "' class='btn btn-default pull-right'>Back</a>");
         $('#outerContainer').append("<button id='tab0AddItem' class='btn btn-primary tabSpecific'>Add Vendor</button>");
+        // Nav tabs (vendors, products, terms)
         $('#dbTableTabs').tabs({
             activate: function (event, ui) {
                 $('.tabSpecific').remove();
@@ -307,6 +310,7 @@ $(document).ready(function () {
                 $('#dbTableTabs-1').html("<ol>" + options + "</ol>");
             }
         });
+        // Fetch Product tab content
         $.ajax({
             type: "GET",
             url: (pathName + "Home/GetProductType"),
@@ -321,6 +325,7 @@ $(document).ready(function () {
                 $('#dbTableTabs-2').html("<ol>" + options + "</ol>");
             }
         });
+        // Fetch Terms tab content
         $.ajax({
             type: "GET",
             url: (pathName + "Home/GetPaymentTerms"),
@@ -336,16 +341,20 @@ $(document).ready(function () {
             }
         });
 
-        // Event handlers:
+        /*----------- EVENT HANDLERS ------------------------*/
+        // Opens the vendor that was clicked (for editing/removal)
         $(document).delegate("a[id^='vendLink']", "click", function (e) {
             VendDialog($(e.target).data("id"));
         });
+        // Opens the product that was clicked (for editing/removal)
         $(document).delegate("a[id^='prodLink']", "click", function (e) {
             ProdDialog($(e.target).data("id"));
         });
+        // Opens the term that was clicked (for editing/removal)
         $(document).delegate("a[id^='termLink']", "click", function (e) {
             TermDialog($(e.target).data("id"));
         });
+        // Add item button (works in all three tabs)
         $(document).delegate("button[name='tabAdd']", "click", function (e) {
             if (e.target.id == 'tab0AddItem') {
                 VendDialog(null);
@@ -607,7 +616,7 @@ function AddItems() {
     $('#txtTax').val("");
 }
 
-// Auto-update preview invoice when values change
+// Auto-update preview invoice when values change *also used to update the subtotals & totals of print page invoice*
 function UpdateItems() {
     var totPrice = 0;
     var totShipping = 0;
