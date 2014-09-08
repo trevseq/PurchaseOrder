@@ -149,12 +149,12 @@ $(document).ready(function () {
 
         // Div that acts as a textarea box (for invoice comments)
         $('.divTxtArea').click(function () {
-            if ($(this).data("commented") != "false") {
-                $(this).text('');
+            if ($(this).data("commented") !== "true") {
+                $(this).text("");
             }
         });
         $('.divTxtArea').blur(function () {
-            if ($(this).text() == '') {
+            if ($(this).text() === "") {
                 $(this).data("commented", "false");
                 $(this).text('Comment here...');
             }

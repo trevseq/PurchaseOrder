@@ -157,3 +157,6 @@ input, textarea, button {
 #lblShipAddress {
   white-space: pre-line; }
 
+#backToForm {
+  margin-top: 10px; }
+
