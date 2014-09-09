@@ -121,12 +121,30 @@ namespace PurchaseOrder.Models
             var a = db.POAppAccesses;
             var user = a.Where(e => e.EmployeeID == empID).FirstOrDefault();
 
-            if (user.IsAdmin == true) { return true; }
-            else { return false; }
+            if (user.IsAdmin == true)
+                return true;
+            else if (AdminFromADGroup(empID))
+                return true;
+            else
+                return false;
 
 
 
         }
+
+        public static bool AdminFromADGroup(int empID){
+            bool isAdmin = false;
+            var o = GroupHierarchy("IT Managers");
+            foreach (object[] manager in o)
+            {
+                if (manager[0].Equals(empID))
+                    isAdmin = true;
+                else
+                    isAdmin = false;
+            }
+            return isAdmin;
+        }
+       
         private static object[][] hash;// = new string[][];
         public static object[][] GroupHierarchy(string group)// , UltraTreeNode node
         {
