@@ -32,13 +32,29 @@ $(document).ready(function () {
         $.ajax({
             type: "GET",
             dataType: "JSON",
-            url: pathName + "Home/GetPaymentTerms",
+            url: pathName + "Home/GetPaymentTermsAndManagers",
             cache: false,
             success: function (data) {
-                var options = $.map(data, function (e) {
+                var options = $.map(data.o, function (e) {
                     return "<option value=\"" + e.Value + "\">" + e.Name + "</option>";
                 }).join("");
                 $("#cboPaymentTerms").html("<option value=\"\" selected=\"\">Select...</option>" + options);
+
+                //var managers = "";
+                //$.each(function (i, e)
+                //{
+                //    var displayname = e[1];
+                //    var id = e[0];
+
+                //    managers += "<option value=\"" + id + "\">" + displayname + "</option>";
+                //});
+                
+                var managers = $.map(data.ITManagers, function (n, i) {
+                    return "<option value=\"" + n[0] + "\">" + n[1] + "</option>";
+                }).join("");
+
+
+                $('#cboManager').html("<option selected>-</option>" + managers)
             }
         });
         // Product types dropdown list

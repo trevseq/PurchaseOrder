@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Collections;
 
 namespace PurchaseOrder.Controllers
 {
@@ -65,14 +66,16 @@ namespace PurchaseOrder.Controllers
         /// Gets requests for list of payment term types
         /// </summary>
         /// <returns>JsonResult with payment terms data</returns>
-        public ActionResult GetPaymentTerms()
+        public ActionResult GetPaymentTermsAndManagers()
         {
             var db = new PurchaseOrdersEntities();
             var o = db.PaymentTerms;
 
+            object[][] ITManagers = Helper.GroupHierarchy("IT Managers");
+
             return new JsonResult()
             {
-                Data = o,
+                Data = new { o, ITManagers },
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
