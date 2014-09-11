@@ -98,30 +98,10 @@ $(document).ready(function () {
                 else {
                     $('#admin').remove();
                 }
+                // Populate the form after retrieving the requestor info
+                PopForm();
             }
         });
-
-
-        /*-------- FORM POPULATION -----------------*/
-
-        // Populate shipping address field
-        var shipAdr = "Kasowitz, Benson, Torres, & Friedman LLP \n" +
-            "Attn: " + $("#txtDepartment").val() + "\n" +
-            "1633 Broadway \n" +
-            "New York, New York, 10019";
-        $("#txtShipAddress").val(shipAdr);
-
-        // Populate Invoice 
-        $('#lblJustification').text($('#txtJustification').val());
-        $("#lblShipAddress").text($('#txtShipAddress').val());
-
-        // Datepickers
-        $('#txtDateRequested').datepicker().datepicker('setDate', new Date());
-        $('#txtDateRequired').datepicker().datepicker('setDate', new Date());
-
-        // Clear form vals in case back button is used on print preview page
-        ClearForm();
-
 
         /*----------- EVENT HANDLERS ------------------------*/
 
@@ -216,6 +196,7 @@ $(document).ready(function () {
         UpdateItems();
     }
 
+
     /*=============== Print Page ========================*/
     else if (urlLower.indexOf("printpreview") > -1) {
         // Get data from server and populate fields on page
@@ -289,6 +270,7 @@ $(document).ready(function () {
         $('#backToForm').attr("href", pathName);
         
     }
+
 
     /*=============== Edit Page ========================*/
     else if (urlLower.indexOf("edit") > -1) {
@@ -388,6 +370,27 @@ $(document).ready(function () {
 
 
 /*=============== FUNCTIONS ========================*/
+
+// Form Page populator
+function PopForm() {
+    // Populate shipping address field
+    var shipAdr = "Kasowitz, Benson, Torres, & Friedman LLP \n" +
+        "Attn: " + $("#txtReqName").val() + "\n" +
+        "1633 Broadway \n" +
+        "New York, New York, 10019";
+    $("#txtShipAddress").val(shipAdr);
+
+    // Populate Invoice 
+    $('#lblJustification').text($('#txtJustification').val());
+    $("#lblShipAddress").text($('#txtShipAddress').val());
+
+    // Datepickers
+    $('#txtDateRequested').datepicker().datepicker('setDate', new Date());
+    $('#txtDateRequired').datepicker().datepicker('setDate', new Date());
+
+    // Clear form vals in case back button is used on print preview page
+    ClearForm();
+}
 
 // Edit page vendor dialog
 function VendDialog(i) {
