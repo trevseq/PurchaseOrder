@@ -128,8 +128,6 @@ namespace PurchaseOrder.Models
             else
                 return false;
 
-
-
         }
 
         public static bool AdminFromADGroup(int empID){
