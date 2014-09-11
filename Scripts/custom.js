@@ -135,12 +135,16 @@ $(document).ready(function () {
             $(this).closest("tr").remove();
             UpdateItems();
         });
-        
+
+        // Admin buttons
+        $('#editLink').click(function (e) {
+            location.assign(location.pathname + "/Edit");
+        });
         $('#viewRecordLink').click(function (e) {
             var orderPrompt = prompt("Please enter an order number");
             if (orderPrompt !== null) {
                 orderPrompt = orderPrompt.replace(/\D/gi, "");
-                location.assign("PrintPreview?purchaseNumber=" + orderPrompt);
+                location.assign(location.pathname + "/PrintPreview?purchaseNumber=" + orderPrompt);
             }
         });
 
