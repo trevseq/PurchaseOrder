@@ -66,6 +66,21 @@ namespace PurchaseOrder.Controllers
         /// Gets requests for list of payment term types
         /// </summary>
         /// <returns>JsonResult with payment terms data</returns>
+        public ActionResult GetPaymentTerms()
+        {
+            var db = new PurchaseOrdersEntities();
+            var o = db.PaymentTerms;
+
+            return new JsonResult()
+            {
+                Data = o,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+        /// <summary>
+        /// Gets requests for list of payment terms and IT managers
+        /// </summary>
+        /// <returns>JsonResult object with payment terms and IT managers array</returns>
         public ActionResult GetPaymentTermsAndManagers()
         {
             var db = new PurchaseOrdersEntities();
