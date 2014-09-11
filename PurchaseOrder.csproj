@@ -193,6 +193,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EditController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PrintPreviewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -362,9 +363,11 @@
     <Content Include="Views\PrintPreview\Default.cshtml" />
     <Content Include="Views\Edit\Default.cshtml" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Views\Orders\Default.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

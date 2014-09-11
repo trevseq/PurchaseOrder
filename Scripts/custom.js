@@ -7,6 +7,8 @@ pathName = pathName.replace("default", "");
 pathName = pathName.replace("home", "");
 pathName = pathName.replace("printpreview", "");
 pathName = pathName.replace("edit", "");
+pathName = pathName.replace("order", "");
+pathName = pathName.replace("order/admin", "");
 
 pathName += ((pathName.substring(pathName.length - 1) != "/") ? "/" : "");
 pathName = location.protocol + "//" + location.host + pathName.replace("//", "/");
@@ -14,7 +16,7 @@ pathName = location.protocol + "//" + location.host + pathName.replace("//", "/"
 
 $(document).ready(function () {
     // Form page
-    if (!(urlLower.indexOf("printpreview") > -1) && !(urlLower.indexOf("edit") > -1) && !(urlLower.indexOf("error") > -1)) {
+    if (!(urlLower.indexOf("printpreview") > -1) && !(urlLower.indexOf("edit") > -1) && !(urlLower.indexOf("error") > -1) && !(urlLower.indexOf("order") > -1)) {
         // Vendors dropdown list
         $.ajax({
             type: "GET",
@@ -40,15 +42,6 @@ $(document).ready(function () {
                 }).join("");
                 $("#cboPaymentTerms").html("<option value=\"\" selected=\"\">Select...</option>" + options);
 
-                //var managers = "";
-                //$.each(function (i, e)
-                //{
-                //    var displayname = e[1];
-                //    var id = e[0];
-
-                //    managers += "<option value=\"" + id + "\">" + displayname + "</option>";
-                //});
-                
                 var managers = $.map(data.ITManagers, function (n, i) {
                     return "<option value=\"" + n[0] + "\">" + n[1] + "</option>";
                 }).join("");
@@ -368,6 +361,19 @@ $(document).ready(function () {
                 TermDialog(null);
             }
         });
+    }
+
+
+    /*================ Order Page ================*/
+    else if (urlLower.indexOf("order") > -1) {
+
+
+
+
+
+
+
+
     }
 });
 
