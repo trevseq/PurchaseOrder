@@ -1,0 +1,36 @@
+@import "_mixins.scss";
+@import "_globals.scss";
+
+body{
+    background-color: #C4C4C4;
+}
+
+#outerContainer{
+    background-color: #F3F3F3;
+    width: 50%;
+    height: 90%;
+    //float: left;
+    margin-right: 25%;
+    margin-left: 25%;
+    margin-top: 3.5%;
+    padding: 1%;
+    //overflow-y: scroll;
+    @include boxShadow(10px, 10px, 5px, #888888);
+    @include border-radius(15px);
+}
+
+.centerMe{
+    width: 75%;
+    margin: 0 auto;
+}
+
+.navbar-override{
+    width: 75%;
+    margin-left: 12.5%;
+    @include boxShadow(10px, 10px, 5px, #888888);
+    @include border-radius(15px);
+}
+
+#backToForm{
+    margin-top: 1%;
+}

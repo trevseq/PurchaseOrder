@@ -32,6 +32,14 @@ namespace PurchaseOrder
                 "~/Content/bootstrap.css",
                 "~/Content/editpage.css"));
 
+            bundles.Add(new StyleBundle("~/bundles/orderstyles").Include(
+                "~/Content/bootstrap.css",
+                "~/Content/orderpage.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/adminorderstyles").Include(
+                "~/Content/bootstrap.css",
+                "~/Content/adminorderpage.css"));
+
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = true;
