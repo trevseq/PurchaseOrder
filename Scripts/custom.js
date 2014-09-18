@@ -149,20 +149,20 @@ $(document).ready(function () {
         });
 
         // Editable div that acts as a textarea box (for invoice comments)
-        $('.divTxtArea').click(function () {
-            if ($(this).data("commented") !== "true") {
-                $(this).text("");
-            }
-        });
-        $('.divTxtArea').blur(function () {
-            if ($(this).text() === "") {
-                $(this).data("commented", "false");
-                $(this).text('Comment here...');
-            }
-            else {
-                $(this).data("commented", "true");
-            }
-        });
+        //$('.divTxtArea').click(function () {
+        //    if ($(this).data("commented") !== "true") {
+        //        $(this).text("");
+        //    }
+        //});
+        //$('.divTxtArea').blur(function () {
+        //    if ($(this).text() === "") {
+        //        $(this).data("commented", "false");
+        //        $(this).text('Comment here...');
+        //    }
+        //    else {
+        //        $(this).data("commented", "true");
+        //    }
+        //});
 
         // Vendors dropdown controls
         $('#cboVendors').change(function () {
