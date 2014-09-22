@@ -172,7 +172,7 @@ $(document).ready(function () {
             var address = $("#cboVendors option:selected").data("address");
 
             $('#txtVContactAddress').val(address);
-            $('#txtVContactHyperlink').val($("#cboVendors option:selected").data("site"));
+            $('#txtVContactHyperlink').html("<a href='" + $("#cboVendors option:selected").data("site") + "' title='" + $("#cboVendors option:selected").data("site") + "' >" + $("#cboVendors option:selected").text() + "</a>");
             $('#lblVendors').text($("#cboVendors option:selected").text());
             (address.length > 0) ? $('#lblVContactAddress').text(address) : "";
 
