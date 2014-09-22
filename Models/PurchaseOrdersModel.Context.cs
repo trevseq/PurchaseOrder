@@ -26,11 +26,12 @@ namespace PurchaseOrder.Models
         }
     
         public virtual DbSet<PaymentTerm> PaymentTerms { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Vendor> Vendors { get; set; }
-        public virtual DbSet<Vendors_Contact> Vendors_Contact { get; set; }
         public virtual DbSet<POAppAccess> POAppAccesses { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<PurchaseOrderItem> PurchaseOrderItems { get; set; }
         public virtual DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<Vendors_Contact> Vendors_Contact { get; set; }
     }
 }

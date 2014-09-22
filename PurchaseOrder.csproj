@@ -207,6 +207,9 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>PurchaseOrdersModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductCategory.cs">
+      <DependentUpon>PurchaseOrdersModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PurchaseOrder.cs">
       <DependentUpon>PurchaseOrdersModel.tt</DependentUpon>
     </Compile>
@@ -277,7 +280,6 @@
     <Content Include="Content\Images\ui-icons_454545_256x240.png" />
     <Content Include="Content\Images\ui-icons_888888_256x240.png" />
     <Content Include="Content\Images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Models\PurchaseOrdersModel.edmx.sql" />
     <Content Include="Content\formpage.scss">
       <Compile>True</Compile>
       <Minify>True</Minify>
