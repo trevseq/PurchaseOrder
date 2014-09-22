@@ -81,19 +81,19 @@ namespace PurchaseOrder.Controllers
         /// Gets requests for list of payment terms and IT managers
         /// </summary>
         /// <returns>JsonResult object with payment terms and IT managers array</returns>
-        public ActionResult GetPaymentTermsAndManagers()
-        {
-            var db = new PurchaseOrdersEntities();
-            var o = db.PaymentTerms;
+        //public ActionResult GetPaymentTermsAndManagers()
+        //{
+        //    var db = new PurchaseOrdersEntities();
+        //    var o = db.PaymentTerms;
 
-            object[][] ITManagers = Helper.GroupHierarchy("IT Managers");
+        //    object[][] ITManagers = Helper.GroupHierarchy("IT Managers");
 
-            return new JsonResult()
-            {
-                Data = new { o, ITManagers },
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
-        }
+        //    return new JsonResult()
+        //    {
+        //        Data = new { o, ITManagers },
+        //        JsonRequestBehavior = JsonRequestBehavior.AllowGet
+        //    };
+        //}
         /// <summary>
         /// Gets requests for list of product types
         /// </summary>
@@ -129,16 +129,16 @@ namespace PurchaseOrder.Controllers
         public ActionResult SavePOForm(
             int? requestorId,
             int? vendor,
-            string priority = null,
+            //string priority = null,
             string terms = null,
             string dateRequested = null,
-            string dateRequired = null,
+            //string dateRequired = null,
             string justification = null,
-            string manager = null,
+            //string manager = null,
             string productType = null,
             string billingAddress = null,
             string shippingAddress = null,
-            string comment = null,
+            //string comment = null,
             string signedBy = null)
         {
             var db = new PurchaseOrdersEntities();
@@ -153,18 +153,18 @@ namespace PurchaseOrder.Controllers
             }
 
             po.PurchaseNumber = (pNumber += 1);
-            po.Priority = priority;
+            //po.Priority = priority;
             po.Terms = terms;
             po.DateRequested = DateTime.Parse(dateRequested);
-            po.DateRequired = DateTime.Parse(dateRequired);
+            //po.DateRequired = DateTime.Parse(dateRequired);
             po.Justification = justification;
-            po.Manager = manager;
+            //po.Manager = manager;
             po.RequestorId = requestorId;
             po.Vendor = vendor;
             po.ProductType = productType;
             po.BillingAddress = billingAddress;
             po.ShippingAddress = shippingAddress;
-            po.Comment = comment;
+            //po.Comment = comment;
             po.SignedBy = signedBy;
             po.OrderDate = DateTime.Now;
 

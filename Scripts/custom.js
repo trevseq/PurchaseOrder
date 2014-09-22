@@ -29,34 +29,34 @@ $(document).ready(function () {
             }
         });
         // Payment terms dropdown list
-        $.ajax({
-            type: "GET",
-            dataType: "JSON",
-            url: pathName + "Home/GetPaymentTermsAndManagers",
-            cache: false,
-            success: function (data) {
-                var options = $.map(data.o, function (e) {
-                    return "<option value=\"" + e.Value + "\">" + e.Name + "</option>";
-                }).join("");
-                $("#cboPaymentTerms").html("<option value=\"\" selected=\"\">Select...</option>" + options);
+        //$.ajax({
+        //    type: "GET",
+        //    dataType: "JSON",
+        //    url: pathName + "Home/GetPaymentTermsAndManagers",
+        //    cache: false,
+        //    success: function (data) {
+        //        var options = $.map(data.o, function (e) {
+        //            return "<option value=\"" + e.Value + "\">" + e.Name + "</option>";
+        //        }).join("");
+        //        $("#cboPaymentTerms").html("<option value=\"\" selected=\"\">Select...</option>" + options);
 
-                //var managers = "";
-                //$.each(function (i, e)
-                //{
-                //    var displayname = e[1];
-                //    var id = e[0];
+        //        //var managers = "";
+        //        //$.each(function (i, e)
+        //        //{
+        //        //    var displayname = e[1];
+        //        //    var id = e[0];
 
-                //    managers += "<option value=\"" + id + "\">" + displayname + "</option>";
-                //});
+        //        //    managers += "<option value=\"" + id + "\">" + displayname + "</option>";
+        //        //});
                 
-                var managers = $.map(data.ITManagers, function (n, i) {
-                    return "<option value=\"" + n[0] + "\">" + n[1] + "</option>";
-                }).join("");
+        //        var managers = $.map(data.ITManagers, function (n, i) {
+        //            return "<option value=\"" + n[0] + "\">" + n[1] + "</option>";
+        //        }).join("");
 
 
-                $('#cboManager').html("<option selected>-</option>" + managers)
-            }
-        });
+        //        $('#cboManager').html("<option selected>-</option>" + managers)
+        //    }
+        //});
         // Product types dropdown list
         $.ajax({
             type: "GET",
@@ -390,7 +390,7 @@ function PopForm() {
 
     // Datepickers
     $('#txtDateRequested').datepicker().datepicker('setDate', new Date());
-    $('#txtDateRequired').datepicker().datepicker('setDate', new Date());
+    //$('#txtDateRequired').datepicker().datepicker('setDate', new Date());
 
     // Clear form vals in case back button is used on print preview page
     ClearForm();
@@ -727,32 +727,32 @@ function ValidateInputs() {
 
 // Form submit and ajax calls
 function Submit() {
-    var priority = $('#cboPriority').val();
-    var terms = $('#cboPaymentTerms').val();
+    //var priority = $('#cboPriority').val();
+    var terms = $('#lblPaymentTerms').text();
     var dateRequested = $('#txtDateRequested').val();
-    var dateRequired = $('#txtDateRequired').val();
+    //var dateRequired = $('#txtDateRequired').val();
     var justification = $('#txtJustification').val();
-    var manager = $('#cboManager').val();
+    //var manager = $('#cboManager').val();
     var requestorId = $('#txtReqName').data("requestorid");
     var vendor = $('#cboVendors').val();
     var productType = $('#cboProductType').val();
     var billingAddress = $('#txtBillAddress').val().replace(/(\r\n|\n|\r)/gm, " ");
     var shippingAddress = $('#txtShipAddress').val().replace(/\n/gm, "\\n");
-    var comment = ($('#lblComment').data("commented") == true) ? $('#lblComment').text() : "";
+    //var comment = ($('#lblComment').data("commented") == true) ? $('#lblComment').text() : "";
     var signedBy = $('#txtSig').val();
 
-    var saveParams = "priority=" + priority
-        + "&terms=" + terms
+    var saveParams = //"priority=" + priority
+        + "terms=" + terms
         + "&dateRequested=" + dateRequested
-        + "&dateRequired=" + dateRequired
+        //+ "&dateRequired=" + dateRequired
         + "&justification=" + encodeURIComponent(justification)
-        + "&manager=" + manager
+        //+ "&manager=" + manager
         + "&requestorId=" + requestorId
         + "&vendor=" + vendor
         + "&productType=" + productType
         + "&billingAddress=" + encodeURIComponent(billingAddress)
         + "&shippingAddress=" + encodeURIComponent(shippingAddress)
-        + "&comment=" + encodeURIComponent(comment)
+        //+ "&comment=" + encodeURIComponent(comment)
         + "&signedBy=" + signedBy;
 
     // Save PO form data
