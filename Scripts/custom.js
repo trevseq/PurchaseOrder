@@ -70,6 +70,20 @@ $(document).ready(function () {
                 $("#cboProductType").html("<option value=\"\" selected=\"\">Select...</option>" + options);
             }
         });
+        // Fetch Office info
+        $.ajax({
+            type: "GET",
+            url: (pathName + "Home/GetOffices"),
+            dataType: "JSON",
+            cache: false,
+            success: function (data) {
+                var options = $.map(data, function (e) {
+                    return "<option data-officeid='" + e.OfficeID + "'>" + e.Office + "</option>";
+                });
+                options = options.join("");
+                $('#cboOffice').html(options);
+            }
+        });
         // Fetch requestor info
         $.ajax({
             type: "GET",
@@ -92,6 +106,8 @@ $(document).ready(function () {
                     $("#txtReqPhone").val(data.requestor.Phone);
                     $("#txtReqFax").val(data.requestor.Fax);
 
+                    $("#cboOffice").val(data.requestor.Office);
+
                     if(data.isAdmin !== true)
                         $('#admin').remove();
                 }
@@ -102,6 +118,9 @@ $(document).ready(function () {
                 PopForm();
             }
         });
+
+
+        
 
         /*----------- EVENT HANDLERS ------------------------*/
 
@@ -377,11 +396,39 @@ $(document).ready(function () {
 
 // Form Page populator
 function PopForm() {
+    // Get the office address
+    var offAddr;
+    if ($("#cboOffice").val() === 1)
+        offAddr = "1633 Broadway \n" +
+            "New York, New York, 10019";
+    else if ($("#cboOffice").val() === 2)
+        offAddr = "700 Louisiana Street, \n" +
+            "Suite 2200 \n" +
+            "Houston, Texas, 77002";
+    else if ($("#cboOffice").val() === 3)
+        offAddr = "1349 West Peachtree Street, N.W., \n" +
+            "Suite 1500 \n" +
+            "Atlanta, Georgia, 30309";
+    else if ($("#cboOffice").val() === 4)
+        offAddr = "101 California Street, \n" +
+            "Suite 2300 \n" +
+            "San Francisco, California, 94111";
+    else if ($("#cboOffice").val() === 5)
+        offAddr = "700 Louisiana Street, \n" +
+            "Suite 2200 \n" +
+            "Houston, Texas, 77002";
+    else if ($("#cboOffice").val() === 6)
+        offAddr = "1441 Brickell Avenue, \n" +
+            "Suite 1420 \n" +
+            "Miami, Florida, 33131";
+    else
+        offAddr = "1633 Broadway \n" +
+            "New York, New York, 10019";
+
     // Populate shipping address field
     var shipAdr = "Kasowitz, Benson, Torres, & Friedman LLP \n" +
-        "Attn: " + $("#txtReqName").val() + "\n" +
-        "1633 Broadway \n" +
-        "New York, New York, 10019";
+        "Attn: " + $("#txtReqName").val() + "\n" + offAddr
+
     $("#txtShipAddress").val(shipAdr);
 
     // Populate Invoice 

@@ -85,7 +85,7 @@ namespace PurchaseOrder.Models
                     ",e.[WorkFax]" +
                     ",e.[WorkEmail]" +
                     ",e.[RoomNumber]  " +
-                    "FROM [ADP_Feed].[dbo].[Employees] e " +
+                    "FROM [Employees] e " +
                     "join Departments d on e.Department = d.DepartmentID " +
                     "join Titles t on e.JobTitle = t.TitleID where EmployeeID={0}", u);
 

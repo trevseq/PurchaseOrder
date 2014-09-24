@@ -109,6 +109,31 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+        public ActionResult GetOffices()
+        {
+            dynamic data = null;
+            string query =
+                "SELECT [OfficeID]" +
+                ",[Office]" +
+                "FROM [Offices]";
+
+            SqlDataAdapter adp = new SqlDataAdapter(query, new SqlConnection(ConfigurationManager.ConnectionStrings["PurchaseOrder.Properties.Settings.ADPFeed"].ConnectionString));
+            DataTable tb = new DataTable();
+            adp.Fill(tb);
+            data = (from r in tb.AsEnumerable()
+                    select new
+                    {
+                        OfficeID = r["OfficeID"],
+                        Office = r["Office"]
+                    });
+
+
+            return new JsonResult()
+            {
+                Data = data,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
         /// <summary>
         /// Handles the saving of the form
         /// </summary>
