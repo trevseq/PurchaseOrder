@@ -28,36 +28,7 @@ $(document).ready(function () {
                 $("#cboVendors").html("<option value=\"\" selected=\"\">Select...</option>" + options);
             }
         });
-        // Payment terms dropdown list
-        //$.ajax({
-        //    type: "GET",
-        //    dataType: "JSON",
-        //    url: pathName + "Home/GetPaymentTermsAndManagers",
-        //    cache: false,
-        //    success: function (data) {
-        //        var options = $.map(data.o, function (e) {
-        //            return "<option value=\"" + e.Value + "\">" + e.Name + "</option>";
-        //        }).join("");
-        //        $("#cboPaymentTerms").html("<option value=\"\" selected=\"\">Select...</option>" + options);
-
-        //        //var managers = "";
-        //        //$.each(function (i, e)
-        //        //{
-        //        //    var displayname = e[1];
-        //        //    var id = e[0];
-
-        //        //    managers += "<option value=\"" + id + "\">" + displayname + "</option>";
-        //        //});
-                
-        //        var managers = $.map(data.ITManagers, function (n, i) {
-        //            return "<option value=\"" + n[0] + "\">" + n[1] + "</option>";
-        //        }).join("");
-
-
-        //        $('#cboManager').html("<option selected>-</option>" + managers)
-        //    }
-        //});
-        // Product types dropdown list
+        // Products dropdown list
         $.ajax({
             type: "GET",
             dataType: "JSON",
@@ -166,22 +137,6 @@ $(document).ready(function () {
                 location.assign(location.pathname + "/PrintPreview?purchaseNumber=" + orderPrompt);
             }
         });
-
-        // Editable div that acts as a textarea box (for invoice comments)
-        //$('.divTxtArea').click(function () {
-        //    if ($(this).data("commented") !== "true") {
-        //        $(this).text("");
-        //    }
-        //});
-        //$('.divTxtArea').blur(function () {
-        //    if ($(this).text() === "") {
-        //        $(this).data("commented", "false");
-        //        $(this).text('Comment here...');
-        //    }
-        //    else {
-        //        $(this).data("commented", "true");
-        //    }
-        //});
 
         // Vendors dropdown controls
         $('#cboVendors').change(function () {

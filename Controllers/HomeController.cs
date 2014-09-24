@@ -63,13 +63,13 @@ namespace PurchaseOrder.Controllers
             };
         }
         /// <summary>
-        /// Gets requests for list of payment term types
+        /// Gets requests for list of product types
         /// </summary>
-        /// <returns>JsonResult with payment terms data</returns>
-        public ActionResult GetPaymentTerms()
+        /// <returns>JsonResult with product types data</returns>
+        public ActionResult GetProductType()
         {
             var db = new PurchaseOrdersEntities();
-            var o = db.PaymentTerms;
+            var o = db.ProductCategories;
 
             return new JsonResult()
             {
@@ -77,28 +77,7 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-        /// <summary>
-        /// Gets requests for list of payment terms and IT managers
-        /// </summary>
-        /// <returns>JsonResult object with payment terms and IT managers array</returns>
-        //public ActionResult GetPaymentTermsAndManagers()
-        //{
-        //    var db = new PurchaseOrdersEntities();
-        //    var o = db.PaymentTerms;
-
-        //    object[][] ITManagers = Helper.GroupHierarchy("IT Managers");
-
-        //    return new JsonResult()
-        //    {
-        //        Data = new { o, ITManagers },
-        //        JsonRequestBehavior = JsonRequestBehavior.AllowGet
-        //    };
-        //}
-        /// <summary>
-        /// Gets requests for list of product types
-        /// </summary>
-        /// <returns>JsonResult with product types data</returns>
-        public ActionResult GetProductType()
+        public ActionResult GetProducts()
         {
             var db = new PurchaseOrdersEntities();
             var o = db.Products;
