@@ -217,6 +217,10 @@ $(document).ready(function () {
             });
         });
         UpdateItems();
+        // Updates the shipping info when office is changed
+        //$("#cboOffice").change(function (e) {
+        //    PopForm();
+        //});
     }
 
 
@@ -363,6 +367,7 @@ $(document).ready(function () {
         });
 
         /*----------- EVENT HANDLERS ------------------------*/
+       
         // Opens the vendor that was clicked (for editing/removal)
         $(document).delegate("a[id^='vendLink']", "click", function (e) {
             VendDialog($(e.target).data("id"));
