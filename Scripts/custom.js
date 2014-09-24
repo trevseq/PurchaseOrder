@@ -87,6 +87,7 @@ $(document).ready(function () {
                 }
                 // Populate the form after retrieving the requestor info
                 PopForm();
+                ClearForm();
             }
         });
 
@@ -100,6 +101,18 @@ $(document).ready(function () {
             var id = evt.target.id.replace("txt", "lbl");
             var text = $(evt.target).val()//.replace("\n", "</br>")
             $('#' + id).text(text);
+        });
+
+        // Updates the shipping info when office is changed
+        $("#cboOffice").change(function (e) {
+            PopForm();
+        });
+
+        // Update justification in mini invoice
+        $("#txtJustification").blur(function (evt) {
+            var id = evt.target.id.replace("txt", "lbl");
+            var text = $(evt.target).val().replace(/\n/g, "<br />");
+            $('#' + id).html(text);
         });
 
         // Update invoice labels based on dropdown values
@@ -172,10 +185,7 @@ $(document).ready(function () {
             });
         });
         UpdateItems();
-        // Updates the shipping info when office is changed
-        //$("#cboOffice").change(function (e) {
-        //    PopForm();
-        //});
+        
     }
 
 
@@ -395,12 +405,8 @@ function PopForm() {
     $('#lblJustification').text($('#txtJustification').val());
     $("#lblShipAddress").text($('#txtShipAddress').val());
 
-    // Datepickers
+    // Datepicker
     $('#txtDateRequested').datepicker().datepicker('setDate', new Date());
-    //$('#txtDateRequired').datepicker().datepicker('setDate', new Date());
-
-    // Clear form vals in case back button is used on print preview page
-    ClearForm();
 }
 
 // Edit page vendor dialog
@@ -621,16 +627,14 @@ function TermDialog(i) {
 
 // Add order item to preview invoice when mini form is submitted
 function AddItems() {
-    var rowTotal = parseFloat($('#txtPrice').val()) * parseFloat($('#txtQuantity').val()) + parseFloat($('#txtTax').val()) + parseFloat($('#txtShipping').val());
+    var rowTotal = parseFloat($('#txtPrice').val().replace("$", "")) * parseFloat($('#txtQuantity').val());
     rowTotal = rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     var row = "<tr name='invRow'><td><img src='" + pathName + "/Images/delete-32x32.png'" + "title='Delete this item.' style='height:20px;width:20px;cursor:pointer' /></td>" +
         "<td><span name='spProduct'>" + $('#txtProduct').val() + "</span></td>" +
         "<td style='display:none'><span name='spPartNo'>" + $('#txtPartNo').val() + "</span></td>" +
         "<td style='display:none'><span name='spDescription'>" + $('#txtDescription').val() + "</span></td>" +
         "<td class='text-center'><span name='spQuantity'>" + $('#txtQuantity').val() + "</span></td>" +
-        "<td class='text-right'>$<span name='spPrice'>" + $('#txtPrice').val() + "</span></td>" +
-        "<td class='text-right'>$<span name='spShipping'>" + $('#txtShipping').val() + "</span></td>" +
-        "<td class='text-right'>$<span name='spTax'>" + $('#txtTax').val() + "</span>" +
+        "<td class='text-right'>$<span name='spPrice'>" + $('#txtPrice').val().replace("$", "") + "</span></td>" +
         "<td class='text-right'>$" + rowTotal + "</td></tr>";
     $('#tblItemizedList').find("tbody").append(row);
 
@@ -640,10 +644,8 @@ function AddItems() {
     $('#txtProduct').val("");
     $('#txtDescription').val("");
     $('#txtPartNo').val("");
-    $('#txtPrice').val("");
+    $('#txtPrice').val("$");
     $('#txtQuantity').val("1");
-    $('#txtShipping').val("");
-    $('#txtTax').val("");
 }
 
 // Auto-update preview invoice when values change *also used to update the subtotals & totals of print page invoice*
@@ -653,12 +655,10 @@ function UpdateItems() {
     var totTax = 0;
     $('#tblItemizedList > tbody tr').each(function (i) {
         totPrice += parseFloat($(this).find("span[name='spPrice']").text()) * parseInt($(this).find("span[name='spQuantity']").text());
-        totShipping += parseFloat($(this).find("span[name='spShipping']").text());
-        totTax += parseFloat($(this).find("span[name='spTax']").text());
     });
     $("#subTotal").text("$" + totPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#shipTotal").text("$" + totShipping.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#taxTotal").text("$" + totTax.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $("#shipTotal").text("$0.00");
+    $("#taxTotal").text("$0.00");
     $("#grandTotal").text("$" + (totPrice + totShipping + totTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 }
 
@@ -676,9 +676,7 @@ function ClearForm() {
     $('#txtVContactHyperlink').val("");
 
     // Product section
-    $('#txtTax').val("");
-    $('#txtShipping').val("");
-    $('#txtPrice').val("");
+    $('#txtPrice').val("$");
     $('#txtDescription').val("");
     $('#txtPartNo').val("");
     $('#txtProduct').val("");

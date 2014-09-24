@@ -63,23 +63,10 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2" for="textinput">Price<br /><small><i>(per item)</i></small></label>
-                        <div class="col-sm-2">
-                            <input id="txtPrice" type="number" placeholder="" class="form-control" value="" />
+                        <div class="col-sm-3">
+                            <input id="txtPrice" class="form-control" value="$" />
                         </div>
-                        <label class="col-sm-2" for="textinput">Shipping<br /><small><i>(per item)</i></small></label>
-                        <div class="col-sm-2">
-                            <input id="txtShipping" type="number" placeholder="" class="form-control" value="" />
-                        </div>
-                        <label class="col-sm-2" for="textinput">Tax<br /><small><i>(per item)</i></small></label>
-                        <div class="col-sm-2">
-                            <input id="txtTax" type="number" placeholder="" class="form-control" value="" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-1 col-sm-8">
-                            <p><i>Please do not put $ in the price, shipping, or tax input boxes.</i></p>
-                        </div>
-                        <div class="col-sm-offset-1 col-sm-2">
+                        <div class="col-sm-4 col-sm-offset-3">
                             <div class="pull-right">
                                 <button id="addItem" class="btn btn-primary">Add Item</button>
                             </div>
@@ -320,9 +307,7 @@
                                             <td style="display:none" class="text-center"><strong>Part Number</strong></td>
                                             <td style="display:none" class="text-center"><strong>Description</strong></td>
                                             <td class="text-center"><strong>Quantity</strong></td>
-                                            <td class="text-center"><strong>Cost/Unit</strong></td>
-                                            <td class="text-center"><strong>Shipping</strong></td>
-                                            <td class="text-center"><strong>Tax</strong></td>
+                                            <td class="text-right"><strong>Cost/Unit</strong></td>
                                             <td class="text-right"><strong>Cost</strong></td>
                                         </tr>
                                     </thead>
@@ -336,16 +321,12 @@
                                             <td> </td>
                                             <td> </td>
                                             <td> </td>
-                                            <td> </td>
-                                            <td> </td>
                                         </tr>
                                         <tr>
                                             <td class="thick-line"></td>
                                             <td class="thick-line"></td>
                                             <td style="display:none" class="thick-line"></td>
                                             <td style="display:none" class="thick-line"></td>
-                                            <td class="thick-line"></td>
-                                            <td class="thick-line"></td>
                                             <td class="thick-line"></td>
                                             <td class="thick-line text-center"><strong>Subtotal</strong></td>
                                             <td class="thick-line text-right" id="subTotal"></td>
@@ -356,8 +337,6 @@
                                             <td style="display:none" class="no-line"></td>
                                             <td style="display:none" class="no-line"></td>
                                             <td class="no-line"></td>
-                                            <td class="no-line"></td>
-                                            <td class="no-line"></td>
                                             <td class="no-line text-center"><strong>Shipping</strong></td>
                                             <td class="no-line text-right" id="shipTotal"></td>
                                         </tr>
@@ -366,8 +345,6 @@
                                             <td class="no-line"></td>
                                             <td style="display:none" class="no-line"></td>
                                             <td style="display:none" class="no-line"></td>
-                                            <td class="no-line"></td>
-                                            <td class="no-line"></td>
                                             <td class="no-line"></td>
                                             <td class="no-line text-center"><strong>Tax</strong></td>
                                             <td class="no-line text-right" id="taxTotal"></td>
@@ -378,8 +355,6 @@
                                             <td style="display:none" class="no-line"></td>
                                             <td style="display:none" class="no-line"></td>
                                             <td class="no-line"></td>
-                                            <td class="no-line"></td>
-                                            <td class="no-line"></td>
                                             <td></td>
                                             <td></td>
                                         </tr>
@@ -388,8 +363,6 @@
                                             <td class="no-line"></td>
                                             <td style="display:none" class="no-line"></td>
                                             <td style="display:none" class="no-line"></td>
-                                            <td class="no-line"></td>
-                                            <td class="no-line"></td>
                                             <td class="no-line"></td>
                                             <td class="no-line text-center"><strong>Total</strong></td>
                                             <td class="no-line text-right" id="grandTotal"></td>

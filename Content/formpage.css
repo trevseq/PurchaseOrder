@@ -134,6 +134,15 @@ body {
   padding-bottom: 20px;
   width: 1200px; }
 
+#lblJustification {
+  word-break: break-all;
+  max-height: 50px;
+  overflow-y: auto; }
+
+.panel-body {
+  overflow-y: auto;
+  max-height: 300px; }
+
 .body-content {
   padding-left: 15px;
   padding-right: 15px;
