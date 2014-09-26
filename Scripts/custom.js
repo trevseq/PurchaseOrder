@@ -105,7 +105,8 @@ $(document).ready(function () {
 
         // Updates the shipping info when office is changed
         $("#cboOffice").change(function (e) {
-            PopForm();
+            PopShipAddr();
+            console.log("test")
         });
 
         // Update justification in mini invoice
@@ -365,33 +366,44 @@ $(document).ready(function () {
 
 /*=============== FUNCTIONS ========================*/
 
-// Form Page populator
-function PopForm() {
+function PopShipAddr() {
+    // Clear old shipping value
+    $("#txtShipAddress").val("");
+    // TODO: DON'T HARDCODE THIS vvvvv
     // Get the office address
     var offAddr;
-    if ($("#cboOffice").val() === 1)
-        offAddr = "1633 Broadway \n" +
-            "New York, New York, 10019";
-    else if ($("#cboOffice").val() === 2)
+    if ($("#cboOffice>option:selected").data("officeid") === 2)
         offAddr = "700 Louisiana Street, \n" +
             "Suite 2200 \n" +
             "Houston, Texas, 77002";
-    else if ($("#cboOffice").val() === 3)
+    else if ($("#cboOffice>option:selected").data("officeid") === 3)
         offAddr = "1349 West Peachtree Street, N.W., \n" +
             "Suite 1500 \n" +
             "Atlanta, Georgia, 30309";
-    else if ($("#cboOffice").val() === 4)
+    else if ($("#cboOffice>option:selected").data("officeid") === 4)
         offAddr = "101 California Street, \n" +
             "Suite 2300 \n" +
             "San Francisco, California, 94111";
-    else if ($("#cboOffice").val() === 5)
-        offAddr = "700 Louisiana Street, \n" +
-            "Suite 2200 \n" +
-            "Houston, Texas, 77002";
-    else if ($("#cboOffice").val() === 6)
+    else if ($("#cboOffice>option:selected").data("officeid") === 5)
+        offAddr = "333 Twin Dolphin Drive, \n" +
+            "Suite 200 \n" +
+            "Redwood Shores, California, 94065";
+    else if ($("#cboOffice>option:selected").data("officeid") === 6)
         offAddr = "1441 Brickell Avenue, \n" +
             "Suite 1420 \n" +
             "Miami, Florida, 33131";
+    else if ($("#cboOffice>option:selected").data("officeid") === 7)
+        offAddr = "2029 Century Park East, \n" +
+            "Suite 750 \n" +
+            "Los Angeles, CA 90067";
+    else if ($("#cboOffice>option:selected").data("officeid") === 8)
+        offAddr = "2200 Pennsylvania Avenue NW, \n" +
+            "Suite 680 West \n" +
+            "Washington, DC 20037";
+    else if ($("#cboOffice>option:selected").data("officeid") === 9)
+        offAddr = "One Gateway Center, \n" +
+            "Suite 2600 \n" +
+            "Newark, NJ 07102";
     else
         offAddr = "1633 Broadway \n" +
             "New York, New York, 10019";
@@ -401,10 +413,15 @@ function PopForm() {
         "Attn: " + $("#txtReqName").val() + "\n" + offAddr
 
     $("#txtShipAddress").val(shipAdr);
+    $("#lblShipAddress").text($('#txtShipAddress').val());
+}
+
+// Form Page populator
+function PopForm() {
+    PopShipAddr();
 
     // Populate Invoice 
     $('#lblJustification').text($('#txtJustification').val());
-    $("#lblShipAddress").text($('#txtShipAddress').val());
 
     // Datepicker
     $('#txtDateRequested').datepicker().datepicker('setDate', new Date());
