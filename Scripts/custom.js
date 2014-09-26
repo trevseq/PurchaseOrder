@@ -141,13 +141,13 @@ $(document).ready(function () {
 
         // Admin buttons
         $('#editLink').click(function (e) {
-            location.assign(location.pathname + "/Edit");
+            location.assign(pathName + "/Edit");
         });
         $('#viewRecordLink').click(function (e) {
             var orderPrompt = prompt("Please enter an order number");
             if (orderPrompt !== null) {
                 orderPrompt = orderPrompt.replace(/\D/gi, "");
-                location.assign(location.pathname + "/PrintPreview?purchaseNumber=" + orderPrompt);
+                location.assign(pathName + "/PrintPreview?purchaseNumber=" + orderPrompt);
             }
         });
 
@@ -331,6 +331,7 @@ $(document).ready(function () {
         //    }
         //});
 
+
         /*----------- EVENT HANDLERS ------------------------*/
        
         // Opens the vendor that was clicked (for editing/removal)
@@ -342,9 +343,9 @@ $(document).ready(function () {
             ProdDialog($(e.target).data("id"));
         });
         // Opens the term that was clicked (for editing/removal)
-        $(document).delegate("a[id^='termLink']", "click", function (e) {
-            TermDialog($(e.target).data("id"));
-        });
+        //$(document).delegate("a[id^='termLink']", "click", function (e) {
+        //    TermDialog($(e.target).data("id"));
+        //});
         // Add item button (works in all three tabs)
         $(document).delegate("button[name='tabAdd']", "click", function (e) {
             if (e.target.id == 'tab0AddItem') {
@@ -353,9 +354,9 @@ $(document).ready(function () {
             else if (e.target.id == 'tab1AddItem') {
                 ProdDialog(null);
             }
-            else if (e.target.id == 'tab2AddItem') {
-                TermDialog(null);
-            }
+            //else if (e.target.id == 'tab2AddItem') {
+            //    TermDialog(null);
+            //}
         });
     }
 });
@@ -562,68 +563,68 @@ function ProdDialog(i) {
 }
 
 // Edit page payment terms dialog
-function TermDialog(i) {
-    // Clear vals
-    $("#tNameFull").val("");
-    $("#tNameShort").val("");
+//function TermDialog(i) {
+//    // Clear vals
+//    $("#tNameFull").val("");
+//    $("#tNameShort").val("");
 
-    if (i !== null) {
-        $.ajax({
-            type: "GET",
-            url: (pathName + "Edit/GetTerm?id=" + i),
-            dataType: "JSON",
-            cache: false,
-            success: function (data) {
-                $("#tNameFull").val(data.term.Name);
-                $("#tNameShort").val(data.term.Value);
-            }
-        });
-    }
+//    if (i !== null) {
+//        $.ajax({
+//            type: "GET",
+//            url: (pathName + "Edit/GetTerm?id=" + i),
+//            dataType: "JSON",
+//            cache: false,
+//            success: function (data) {
+//                $("#tNameFull").val(data.term.Name);
+//                $("#tNameShort").val(data.term.Value);
+//            }
+//        });
+//    }
 
-    var dialog = null;
-    dialog = $('#tab3Form').dialog({
-        height: 500,
-        width: 415,
-        modal: true,
-        buttons: {
-            "Save Edits": function () {
-                var params =
-                    "&name=" + $('tNameFull').val() +
-                    "&value=" + $('tNameShort').val();
+//    var dialog = null;
+//    dialog = $('#tab3Form').dialog({
+//        height: 500,
+//        width: 415,
+//        modal: true,
+//        buttons: {
+//            "Save Edits": function () {
+//                var params =
+//                    "&name=" + $('tNameFull').val() +
+//                    "&value=" + $('tNameShort').val();
 
-                $.ajax({
-                    type: "GET",
-                    url: (pathName + "/Home/SaveTerm?id=" + i + params),
-                    dataType: "JSON",
-                    cache: false,
-                    success: function (data) {
-                        alert("The entry was saved successfully.")
-                        $('#tab3Form').dialog("close");
-                    }
-                });
-            },
-            "Delete Entry": function () {
-                var c = confirm("Are you sure you want to delete this payment term?");
-                if (c === true) {
-                    $.ajax({
-                        type: "GET",
-                        url: (pathName + "Edit/RemoveEntry?id=" + i + "&table=terms"),
-                        dataType: "JSON",
-                        cache: false,
-                        success: function (data) {
-                            alert("The entry was deleted successfully.")
-                            $('#tab3Form').dialog("close");
-                        }
-                    });
-                }
-            },
-        },
-        close: function () {
-            //do something here...
-        }
-    });
-    dialog.dialog("open");
-}
+//                $.ajax({
+//                    type: "GET",
+//                    url: (pathName + "/Home/SaveTerm?id=" + i + params),
+//                    dataType: "JSON",
+//                    cache: false,
+//                    success: function (data) {
+//                        alert("The entry was saved successfully.")
+//                        $('#tab3Form').dialog("close");
+//                    }
+//                });
+//            },
+//            "Delete Entry": function () {
+//                var c = confirm("Are you sure you want to delete this payment term?");
+//                if (c === true) {
+//                    $.ajax({
+//                        type: "GET",
+//                        url: (pathName + "Edit/RemoveEntry?id=" + i + "&table=terms"),
+//                        dataType: "JSON",
+//                        cache: false,
+//                        success: function (data) {
+//                            alert("The entry was deleted successfully.")
+//                            $('#tab3Form').dialog("close");
+//                        }
+//                    });
+//                }
+//            },
+//        },
+//        close: function () {
+//            //do something here...
+//        }
+//    });
+//    dialog.dialog("open");
+//}
 
 // Add order item to preview invoice when mini form is submitted
 function AddItems() {

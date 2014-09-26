@@ -134,6 +134,9 @@ body {
   padding-bottom: 20px;
   width: 1200px; }
 
+textarea {
+  resize: none !important; }
+
 #lblJustification {
   word-break: break-all;
   max-height: 50px;
