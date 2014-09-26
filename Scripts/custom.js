@@ -268,7 +268,7 @@ $(document).ready(function () {
     else if (urlLower.indexOf("edit") > -1) {
         $('#outerContainer').append("<a id='backToForm' title='Return to form page' href='" + pathName + "' class='btn btn-default pull-right'>Back</a>");
         $('#outerContainer').append("<button id='tab0AddItem' class='btn btn-primary tabSpecific'>Add Vendor</button>");
-        // Nav tabs (vendors, products, terms)
+        // Nav tabs (vendors, products)
         $('#dbTableTabs').tabs({
             activate: function (event, ui) {
                 $('.tabSpecific').remove();
@@ -278,11 +278,11 @@ $(document).ready(function () {
                     $('#outerContainer').append("<button id='tab0AddItem' name='tabAdd' class='btn btn-primary tabSpecific'>Add Vendor</button>");
                 }
                 else if (activeTab == 1) {
-                    $('#outerContainer').append("<button id='tab1AddItem' name='tabAdd' class='btn btn-primary tabSpecific'>Add Product</button>");
+                    $('#outerContainer').append("<button id='tab1AddItem' name='tabAdd' class='btn btn-primary tabSpecific'>Add Item</button>");
                 }
-                else if (activeTab == 2) {
-                    $('#outerContainer').append("<button id='tab2AddItem' name='tabAdd' class='btn btn-primary tabSpecific'>Add Payment Term</button>");
-                }
+                //else if (activeTab == 2) {
+                //    $('#outerContainer').append("<button id='tab2AddItem' name='tabAdd' class='btn btn-primary tabSpecific'>Add Product</button>");
+                //}
             }
         });
         // Fetch Vendor tab content
@@ -316,20 +316,20 @@ $(document).ready(function () {
             }
         });
         // Fetch Terms tab content
-        $.ajax({
-            type: "GET",
-            url: (pathName + "Home/GetPaymentTerms"),
-            dataType: "JSON",
-            cache: false,
-            success: function (data) {
-                var options = $.map(data, function (e) {
-                    tName = e.Name;
-                    return "<li>" + "<a id='termLink" + e.Id + "' style='cursor: pointer;'  data-id='" + e.Id + "' class='termLink'>" + tName + "</a></li>";
-                });
-                options = options.join("");
-                $('#dbTableTabs-3').html("<ol>" + options + "</ol>");
-            }
-        });
+        //$.ajax({
+        //    type: "GET",
+        //    url: (pathName + "Home/GetPaymentTerms"),
+        //    dataType: "JSON",
+        //    cache: false,
+        //    success: function (data) {
+        //        var options = $.map(data, function (e) {
+        //            tName = e.Name;
+        //            return "<li>" + "<a id='termLink" + e.Id + "' style='cursor: pointer;'  data-id='" + e.Id + "' class='termLink'>" + tName + "</a></li>";
+        //        });
+        //        options = options.join("");
+        //        $('#dbTableTabs-3').html("<ol>" + options + "</ol>");
+        //    }
+        //});
 
         /*----------- EVENT HANDLERS ------------------------*/
        
