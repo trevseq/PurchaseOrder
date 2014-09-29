@@ -20,7 +20,6 @@
 *   MIT License: http://www.opensource.org/licenses/MIT
 */
 (function () {
-
     if (typeof (ko) === undefined) { throw 'Knockout is required, please ensure it is loaded before loading this validation plug-in'; }
 
     var defaults = {
@@ -141,7 +140,6 @@
 
     //#region Public API
     ko.validation = (function () {
-
         var isInitialized = 0;
 
         return {
@@ -200,7 +198,6 @@
 
                     // if object is observable then add it to the list
                     if (ko.isObservable(obj)) {
-
                         //make sure it is validatable object
                         if (!obj.isValid) obj.extend({ validatable: true });
                         validatables.push(obj);
@@ -218,7 +215,6 @@
                     //process recurisvely if it is deep grouping
                     if (level !== 0) {
                         ko.utils.arrayForEach(objValues, function (observable) {
-
                             //but not falsy things and not HTML Elements
                             if (observable && !observable.nodeType) traverse(observable, level + 1);
                         });
@@ -227,7 +223,6 @@
 
                 //if using observables then traverse structure once and add observables
                 if (options.observable) {
-
                     traverse(obj);
 
                     result = ko.computed(function () {
@@ -239,7 +234,6 @@
                         });
                         return errors;
                     });
-
                 } else { //if not using observables then every call to error() should traverse the structure
                     result = function () {
                         var errors = [];
@@ -252,8 +246,6 @@
                         });
                         return errors;
                     };
-
-
                 }
 
                 result.showAllMessages = function (show) { // thanks @heliosPortal
@@ -274,10 +266,10 @@
                 };
                 obj.isAnyMessageShown = function() {
                     var invalidAndModifiedPresent = false;
-                    
+
                     // ensure we have latest changes
                     result();
-                    
+
                     ko.utils.arrayForEach(validatables(), function (observable) {
                         if (!observable.isValid() && observable.isModified()) {
                             invalidAndModifiedPresent = true;
@@ -353,7 +345,7 @@
                     //          params: 2,
                     //          onlyIf: function() {
                     //                      return specialField.IsVisible();
-                    //                  }  
+                    //                  }
                     //      }
                     //  )};
                     //
@@ -528,7 +520,6 @@
 
     ko.validation.rules['step'] = {
         validator: function (val, step) {
-
             // in order to handle steps of .1 & .01 etc.. Modulus won't work
             // if the value is a decimal, so we have to correct for that
             return utils.isEmptyVal(val) || (val * 100) % (step * 100) === 0;
@@ -625,7 +616,6 @@
         message: 'Please make sure the value is unique.'
     };
 
-
     //now register all of these!
     (function () {
         ko.validation.registerExtenders();
@@ -639,7 +629,6 @@
     // this allows us to setup any value binding that internally always
     // performs the same functionality
     ko.bindingHandlers['validationCore'] = (function () {
-
         return {
             init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
                 var config = utils.getConfigOptions(element);
@@ -651,7 +640,6 @@
 
                 // if requested insert message element and apply bindings
                 if (config.insertMessages && utils.isValidatable(valueAccessor())) {
-
                     // insert the <span></span>
                     var validationMessageElement = ko.validation.insertValidationMessage(element);
 
@@ -665,7 +653,6 @@
 
                 // write the html5 attributes if indicated by the config
                 if (config.writeInputAttributes && utils.isValidatable(valueAccessor())) {
-
                     ko.validation.writeInputValidationAttributes(element, valueAccessor);
                 }
 
@@ -679,7 +666,6 @@
                 // hook for future extensibility
             }
         };
-
     }());
 
     // override for KO's default 'value' binding
@@ -687,13 +673,11 @@
         var init = ko.bindingHandlers['value'].init;
 
         ko.bindingHandlers['value'].init = function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-
             init(element, valueAccessor, allBindingsAccessor);
 
             return ko.bindingHandlers['validationCore'].init(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext);
         };
     } ());
-
 
     ko.bindingHandlers['validationMessage'] = { // individual error message, if modified or post binding
         update: function (element, valueAccessor) {
@@ -703,12 +687,12 @@
                 msg = null,
                 isModified = false,
                 isValid = false;
-                
+
             obsv.extend({ validatable: true });
 
             isModified = obsv.isModified();
             isValid = obsv.isValid();
-            
+
             // create a handler to correctly return an error message
             var errorMsgAccessor = function () {
                 if (!config.messagesOnModified || isModified) {
@@ -819,7 +803,6 @@
     // this will remove the validation properties from the Observable object should you need to do that.
     ko.extenders['validatable'] = function (observable, enable) {
         if (enable && !utils.isValidatable(observable)) {
-
             observable.error = null; // holds the error message, we only need one since we stop processing validators when one is invalid
 
             // observable.rules:
@@ -875,7 +858,6 @@
                 delete observable['isModified'];
             };
         } else if (enable === false && utils.isValidatable(observable)) {
-
             if (observable._disposeValidation) {
                 observable._disposeValidation();
             }
@@ -886,7 +868,6 @@
     function validateSync(observable, rule, ctx) {
         //Execute the validator and see if its valid
         if (!rule.validator(observable(), ctx.params === undefined ? true : ctx.params)) { // default param is true, eg. required = true
-
             //not valid, so format the error message and stick it in the 'error' variable
             observable.error = ko.validation.formatMessage(ctx.message || rule.message, ctx.params);
             observable.__valid__(false);
@@ -904,7 +885,6 @@
                 msg = '';
 
             if (!observable.__valid__()) {
-
                 // since we're returning early, make sure we turn this off
                 observable.isValidating(false);
 
@@ -941,7 +921,6 @@
             len = ruleContexts.length; //cache for iterator
 
         for (; i < len; i++) {
-
             //get the Rule Context info to give to the core Rule
             ctx = ruleContexts[i];
 
@@ -955,7 +934,6 @@
             if (rule['async'] || ctx['async']) {
                 //run async validation
                 validateAsync(observable, rule, ctx);
-
             } else {
                 //run normal sync validation
                 if (!validateSync(observable, rule, ctx)) {
@@ -991,7 +969,6 @@
 
     //quick function to override rule messages
     ko.validation.localize = function (msgTranslations) {
-
         var msg, rule;
 
         //loop the properties in the object and assign the msg to the rule
@@ -1031,12 +1008,10 @@
     //override the original applyBindings so that we can ensure all new rules and what not are correctly registered
     var origApplyBindings = ko.applyBindings;
     ko.applyBindings = function (viewModel, rootNode) {
-
         ko.validation.init();
 
         origApplyBindings(viewModel, rootNode);
     };
 
     //#endregion
-
 })();

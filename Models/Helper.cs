@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.DirectoryServices;
 using System.Linq;
-using System.Web;
 
 namespace PurchaseOrder.Models
 {
@@ -21,7 +19,6 @@ namespace PurchaseOrder.Models
 
         public static string GetEmployeeId(string username)
         {
-          
             string s = null;
             if (!string.IsNullOrEmpty(username))
             {
@@ -67,7 +64,7 @@ namespace PurchaseOrder.Models
 
         public static object[] GetRequestorForView(string username)
         {
-            bool isAdmin=false;
+            bool isAdmin = false;
             object requestor = null;
             // Get requestor ID aka(EmployeeID)
             string u = Helper.GetEmployeeId(username);
@@ -110,8 +107,7 @@ namespace PurchaseOrder.Models
                 isAdmin = Helper.AdminCheck(int.Parse(u));
             }
 
-            return new object[]{requestor,isAdmin};
-
+            return new object[] { requestor, isAdmin };
         }
 
         public static bool AdminCheck(int empID)
@@ -127,10 +123,10 @@ namespace PurchaseOrder.Models
                 return true;
             else
                 return false;
-
         }
 
-        public static bool AdminFromADGroup(int empID){
+        public static bool AdminFromADGroup(int empID)
+        {
             bool isAdmin = false;
             var o = GroupHierarchy("IT Managers");
             foreach (object[] manager in o)
@@ -142,8 +138,9 @@ namespace PurchaseOrder.Models
             }
             return isAdmin;
         }
-       
+
         private static object[][] hash;// = new string[][];
+
         public static object[][] GroupHierarchy(string group)// , UltraTreeNode node
         {
             DirectorySearcher srch = new DirectorySearcher(string.Format("(CN={0})", group));
@@ -159,7 +156,7 @@ namespace PurchaseOrder.Models
                 List<string> lt = new List<string>(lstSorted);
                 lt.Sort();
                 hash = new object[lt.Count][];
-                for(int i = 0; i<lt.Count;i++)
+                for (int i = 0; i < lt.Count; i++)
                 {
                     DirectoryEntry gpMemberEntry = new DirectoryEntry("LDAP://" + lt[i]);
                     string groupName = gpMemberEntry.Name.Replace("CN=", "");
@@ -167,38 +164,35 @@ namespace PurchaseOrder.Models
 
                     // if (gpMemberEntry.SchemaClassName != "user")
                     //{
-                        //    s += (groupName + ":{");
-                        //    GroupHierarchy(groupName, n);
-                        //   s += "}";
+                    //    s += (groupName + ":{");
+                    //    GroupHierarchy(groupName, n);
+                    //   s += "}";
                     //}
                     // else
-                   // {
-                       // s += ((s[s.Length - 1] != '{' ? "," : "") + groupName);
-                       // n.Override.NodeAppearance.Image = 2;
-                        try
+                    // {
+                    // s += ((s[s.Length - 1] != '{' ? "," : "") + groupName);
+                    // n.Override.NodeAppearance.Image = 2;
+                    try
+                    {
+                        if (gpMemberEntry.Properties["extensionattribute1"].Count > 0)
                         {
-                            if (gpMemberEntry.Properties["extensionattribute1"].Count > 0)
-                            {
-                                hash[i] = new object[]{gpMemberEntry.Properties["extensionattribute1"][0], gpMemberEntry.Properties["displayname"][0]};
-                               // if (hash.ContainsKey(gpMemberEntry.Properties["extensionattribute1"][0]))
-                                   // Console.Out.WriteLine("duplicate id={0}  username={1}", gpMemberEntry.Properties["extensionattribute1"][0], gpMemberEntry.Properties["givenname"][0]);
-                               // else
-                                   // hash.Add(gpMemberEntry.Properties["extensionattribute1"][0], gpMemberEntry.Properties["displayname"][0]);
-                               // hash
-                            }
+                            hash[i] = new object[] { gpMemberEntry.Properties["extensionattribute1"][0], gpMemberEntry.Properties["displayname"][0] };
+                            // if (hash.ContainsKey(gpMemberEntry.Properties["extensionattribute1"][0]))
+                            // Console.Out.WriteLine("duplicate id={0}  username={1}", gpMemberEntry.Properties["extensionattribute1"][0], gpMemberEntry.Properties["givenname"][0]);
                             // else
-                            // Console.Out.WriteLine("username={0}", gpMemberEntry.Properties["givenname"][0]);
-
+                            // hash.Add(gpMemberEntry.Properties["extensionattribute1"][0], gpMemberEntry.Properties["displayname"][0]);
+                            // hash
                         }
-                        catch
-                        {
-
-                        }
-                   // }
+                        // else
+                        // Console.Out.WriteLine("username={0}", gpMemberEntry.Properties["givenname"][0]);
+                    }
+                    catch
+                    {
+                    }
+                    // }
                 }
             }
             return hash;
-        }       
-
+        }
     }
 }

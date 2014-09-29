@@ -1,8 +1,5 @@
 ﻿using PurchaseOrder.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace PurchaseOrder.Controllers
@@ -28,6 +25,7 @@ namespace PurchaseOrder.Controllers
                 return View("Error");
             }
         }
+
         public ActionResult GetVend(int id)
         {
             var db = new PurchaseOrdersEntities();
@@ -64,6 +62,7 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
         public ActionResult GetProd(int id)
         {
             var db = new PurchaseOrdersEntities();
@@ -172,6 +171,7 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
         public ActionResult SaveProds(int? id, string name)
         {
             bool success = false;
@@ -201,6 +201,7 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
         public ActionResult SaveVend(int? id,
             string name,
             string website,
@@ -242,7 +243,6 @@ namespace PurchaseOrder.Controllers
                         db.Vendors_Contact.Add(newVContact);
                         db.SaveChanges();
                     }
-
                 }
                 else if (id != null)
                 {

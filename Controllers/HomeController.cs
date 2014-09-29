@@ -1,12 +1,10 @@
 ﻿using PurchaseOrder.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
-using System.Collections;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace PurchaseOrder.Controllers
 {
@@ -16,13 +14,13 @@ namespace PurchaseOrder.Controllers
         {
             return View();
         }
+
         /// <summary>
         /// Gets requests for info about the user from Active Directory and the POAppAccess db table
         /// </summary>
         /// <returns>JsonResult with the user's identity, as well as whether or not they are a purchase order administrator.</returns>
         public ActionResult GetRequestor()
         {
-           
             object[] o = Helper.GetRequestorForView(this.User.Identity.Name);
             return new JsonResult()
             {
@@ -30,6 +28,7 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
         /// <summary>
         /// Gets requests for list of vendors
         /// </summary>
@@ -45,6 +44,7 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
         /// <summary>
         /// Gets requests for a specific vendor's contact rep
         /// </summary>
@@ -62,6 +62,7 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
         /// <summary>
         /// Gets requests for list of product types
         /// </summary>
@@ -77,6 +78,7 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
         public ActionResult GetProducts()
         {
             var db = new PurchaseOrdersEntities();
@@ -88,6 +90,7 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
         public ActionResult GetOffices()
         {
             dynamic data = null;
@@ -106,13 +109,13 @@ namespace PurchaseOrder.Controllers
                         Office = r["Office"]
                     });
 
-
             return new JsonResult()
             {
                 Data = data,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
         /// <summary>
         /// Handles the saving of the form
         /// </summary>
@@ -180,6 +183,7 @@ namespace PurchaseOrder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
         /// <summary>
         /// Handles the saving of ordered items after the main form is saved.
         /// </summary>
@@ -193,13 +197,13 @@ namespace PurchaseOrder.Controllers
         /// <param name="tax"></param>
         /// <returns>JsonResult success boolean.</returns>
         public ActionResult SaveOrderedItems(
-            int purchaseNumber, 
-            string product, 
-            string partNumber, 
-            string description, 
-            int quantity, 
-            string price, 
-            string shipping, 
+            int purchaseNumber,
+            string product,
+            string partNumber,
+            string description,
+            int quantity,
+            string price,
+            string shipping,
             string tax)
         {
             bool _success = false;

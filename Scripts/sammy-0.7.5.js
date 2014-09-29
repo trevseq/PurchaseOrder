@@ -13,7 +13,6 @@
     jQuery.sammy = window.Sammy = factory(jQuery);
   }
 })(function($){
-
   var Sammy,
       PATH_REPLACER = "([^\/]+)",
       PATH_NAME_MATCHER = /:([\w\d]+)/g,
@@ -37,7 +36,6 @@
       _template_cache = {},
       _has_history = !!(window.history && history.pushState),
       loggers = [];
-
 
   // `Sammy` (also aliased as $.sammy) is not only the namespace for a
   // number of prototypes, its also a top level method that allows for easy
@@ -135,7 +133,6 @@
   };
 
   $.extend(Sammy.Object.prototype, {
-
     // Escape HTML in string, use in templates to prevent script injection.
     // Also aliased as `h()`
     escapeHTML: _escapeHTML,
@@ -214,7 +211,6 @@
     }
   });
 
-
   // Return whether the event targets this window.
   Sammy.targetIsThisWindow = function targetIsThisWindow(event, tagName) {
     var targetElement = $(event.target).closest(tagName);
@@ -226,7 +222,6 @@
     if (targetWindow === 'top' && window === window.top) { return true; }
     return false;
   };
-
 
   // The DefaultLocationProxy is the default location proxy for all Sammy applications.
   // A location proxy is a prototype that conforms to a simple interface. The purpose
@@ -377,7 +372,6 @@ $.extend(Sammy.DefaultLocationProxy.prototype , {
     }
   });
 
-
   // Sammy.Application is the Base prototype for defining 'applications'.
   // An 'application' is a collection of 'routes' and bound events that is
   // attached to an element when `run()` is called.
@@ -408,7 +402,6 @@ $.extend(Sammy.DefaultLocationProxy.prototype , {
   };
 
   Sammy.Application.prototype = $.extend({}, Sammy.Object.prototype, {
-
     // the four route verbs
     ROUTE_VERBS: ['get','post','put','delete'],
 
@@ -557,7 +550,6 @@ $.extend(Sammy.DefaultLocationProxy.prototype , {
       Sammy.log.apply(Sammy, Array.prototype.concat.apply([this.element_selector],arguments));
     },
 
-
     // `route()` is the main method for defining routes within an application.
     // For great detail on routes, check out:
     // [http://sammyjs.org/docs/routes](http://sammyjs.org/docs/routes)
@@ -590,7 +582,6 @@ $.extend(Sammy.DefaultLocationProxy.prototype , {
 
       // if path is a string turn it into a regex
       if (path.constructor == String) {
-
         // Needs to be explicitly set because IE will maintain the index unless NULL is returned,
         // which means that with two consecutive routes that contain params, the second set of params will not be found and end up in splat instead of params
         // https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/RegExp/lastIndex
@@ -781,7 +772,6 @@ $.extend(Sammy.DefaultLocationProxy.prototype , {
     after: function(callback) {
       return this.bind('event-context-after', callback);
     },
-
 
     // Adds an around filter to the application. around filters are functions
     // that take a single argument `callback` which is the entire route
@@ -1291,7 +1281,6 @@ $.extend(Sammy.DefaultLocationProxy.prototype , {
       return positive ? (verb_matched && path_matched) : !(verb_matched && path_matched);
     },
 
-
     // Delegates to the `location_proxy` to get the current location.
     // See `Sammy.DefaultLocationProxy` for more info on location proxies.
     getLocation: function() {
@@ -1486,7 +1475,6 @@ $.extend(Sammy.DefaultLocationProxy.prototype , {
     _unlisten: function(name, callback) {
       return this.$element().unbind([name, this.eventNamespace()].join('.'), callback);
     }
-
   });
 
   // `Sammy.RenderContext` is an object that makes sequential template loading,
@@ -1516,7 +1504,6 @@ $.extend(Sammy.DefaultLocationProxy.prototype , {
   };
 
   Sammy.RenderContext.prototype = $.extend({}, Sammy.Object.prototype, {
-
     // The "core" of the `RenderContext` object, adds the `callback` to the
     // queue. If the context is `waiting` (meaning an async operation is happening)
     // then the callback will be executed in order, once the other operations are
@@ -1921,7 +1908,6 @@ $.extend(Sammy.DefaultLocationProxy.prototype , {
         return content;
       });
     }
-
   });
 
   // `Sammy.EventContext` objects are created every time a route is run or a
@@ -1964,7 +1950,6 @@ $.extend(Sammy.DefaultLocationProxy.prototype , {
   };
 
   Sammy.EventContext.prototype = $.extend({}, Sammy.Object.prototype, {
-
     // A shortcut to the app's `$element()`
     $element: function() {
       return this.app.$element(_makeArray(arguments).shift());
@@ -2138,7 +2123,6 @@ $.extend(Sammy.DefaultLocationProxy.prototype , {
     toString: function() {
       return "Sammy.EventContext: " + [this.verb, this.path, this.params].join(' ');
     }
-
   });
 
   return Sammy;

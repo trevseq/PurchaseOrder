@@ -1,8 +1,5 @@
 ﻿using PurchaseOrder.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace PurchaseOrder.Controllers
@@ -14,6 +11,7 @@ namespace PurchaseOrder.Controllers
         {
             return View();
         }
+
         public ActionResult GetPrintPreviewData(int purchaseNumber)
         {
             dynamic info = null;

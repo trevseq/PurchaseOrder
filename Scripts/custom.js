@@ -11,7 +11,6 @@ pathName = pathName.replace("edit", "");
 pathName += ((pathName.substring(pathName.length - 1) != "/") ? "/" : "");
 pathName = location.protocol + "//" + location.host + pathName.replace("//", "/");
 
-
 $(document).ready(function () {
     // Form page
     if (!(urlLower.indexOf("printpreview") > -1) && !(urlLower.indexOf("edit") > -1) && !(urlLower.indexOf("error") > -1)) {
@@ -79,7 +78,7 @@ $(document).ready(function () {
 
                     $("#cboOffice").val(data.requestor.Office);
 
-                    if(data.isAdmin !== true)
+                    if (data.isAdmin !== true)
                         $('#admin').remove();
                 }
                 else {
@@ -90,9 +89,6 @@ $(document).ready(function () {
                 ClearForm();
             }
         });
-
-
-        
 
         /*----------- EVENT HANDLERS ------------------------*/
 
@@ -125,7 +121,7 @@ $(document).ready(function () {
         // Add order item button
         $('#addItem').click(function (e) {
             AddItems();
-           e.preventDefault();
+            e.preventDefault();
         });
 
         // Update the totals when the mini invoice is changed
@@ -200,11 +196,9 @@ $(document).ready(function () {
             });
         });
         UpdateItems();
-        
     }
 
-
-    /*=============== Print Page ========================*/
+        /*=============== Print Page ========================*/
     else if (urlLower.indexOf("printpreview") > -1) {
         // Get data from server and populate fields on page
         var PONumber = GetUrlValue("purchaseNumber");
@@ -275,11 +269,9 @@ $(document).ready(function () {
 
         // Button-like link to return to main form page
         $('#backToForm').attr("href", pathName);
-        
     }
 
-
-    /*=============== Edit Page ========================*/
+        /*=============== Edit Page ========================*/
     else if (urlLower.indexOf("edit") > -1) {
         $('#outerContainer').append("<a id='backToForm' title='Return to form page' href='" + pathName + "' class='btn btn-default pull-right'>Back</a>");
         $('#outerContainer').append("<button id='tab0AddItem' class='btn btn-primary tabSpecific'>Add Vendor</button>");
@@ -346,9 +338,8 @@ $(document).ready(function () {
         //    }
         //});
 
-
         /*----------- EVENT HANDLERS ------------------------*/
-       
+
         // Opens the vendor that was clicked (for editing/removal)
         $(document).delegate("a[id^='vendLink']", "click", function (e) {
             VendDialog($(e.target).data("id"));
@@ -375,8 +366,6 @@ $(document).ready(function () {
         });
     }
 });
-
-
 
 /*=============== FUNCTIONS ========================*/
 
@@ -434,7 +423,7 @@ function PopShipAddr() {
 function PopForm() {
     PopShipAddr();
 
-    // Populate Invoice 
+    // Populate Invoice
     $('#lblJustification').text($('#txtJustification').val());
 
     // Datepicker
@@ -671,7 +660,7 @@ function AddItems() {
     $('#tblItemizedList').find("tbody").append(row);
 
     UpdateItems();
-    
+
     // clear form vals
     $('#txtProduct').val("");
     $('#txtDescription').val("");
@@ -825,7 +814,6 @@ function Submit() {
                     + "&price=" + price
                     + "&shipping=" + shipping
                     + "&tax=" + tax;
-
 
                 // Save ordered items
                 $.ajax({
