@@ -126,10 +126,11 @@ $(document).ready(function () {
 
         // Update the totals when the mini invoice is changed
         $("span[name='spPrice']").blur(function (e) {
-            UpdateItems();
+            UpdateItems(e.target.id);
         });
         $("span[name='spQuantity']").blur(function (e) {
-            UpdateItems();
+            alert("quantity blur");
+            UpdateItems(e.target.id);
         });
         $("#taxTotal").blur(function (e) {
             UpdateItems();
@@ -341,7 +342,8 @@ $(document).ready(function () {
     }
 });
 
-/*=============== FUNCTIONS ========================*/
+/*================== FUNCTIONS =====================*/
+/*==================================================*/
 
 function PopShipAddr() {
     // Clear old shipping value
@@ -566,7 +568,7 @@ function AddItems() {
         "<td style='display:none'><span name='spDescription' contenteditable='true'>" + $('#txtDescription').val() + "</span></td>" +
         "<td class='text-center'><span name='spQuantity' contenteditable='true'>" + $('#txtQuantity').val() + "</span></td>" +
         "<td class='text-right'>$<span name='spPrice' contenteditable='true'>" + $('#txtPrice').val().replace("$", "") + "</span></td>" +
-        "<td class='text-right'>$" + rowTotal + "</td></tr>";
+        "<td class='text-right'>$<span name='spRowTotal'>" + rowTotal + "</span></td></tr>";
     $('#tblItemizedList').find("tbody").append(row);
 
     UpdateItems();
@@ -579,9 +581,19 @@ function AddItems() {
     $('#txtQuantity').val("1");
 }
 
+function RecalcRowTotal(eTarget) {
+    var row = $(eTarget).closest($("tr"));
+    var price = parseFloat(row.find("span[name='spPrice']").text());
+    var quantity = parseInt(row.find("span[name='spQuantity']").text());
+
+    row.find($("span[name='spRowTotal']")).text(parseFloat(price * quantity));
+}
+
 // Auto-update preview invoice when values change *also used to update the subtotals & totals of print page invoice*
-function UpdateItems() {
+function UpdateItems(eTarget) {
     if ($('#tblItemizedList > tbody tr').length > 0) {
+        RecalcRowTotal(eTarget);
+
         var totPrice = 0;
         var totShipping = 0;
         var totTax = 0;
