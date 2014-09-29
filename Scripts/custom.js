@@ -761,32 +761,24 @@ function ValidateInputs() {
 
 // Form submit and ajax calls
 function Submit() {
-    //var priority = $('#cboPriority').val();
     var terms = $('#lblPaymentTerms').text();
     var dateRequested = $('#txtDateRequested').val();
-    //var dateRequired = $('#txtDateRequired').val();
     var justification = $('#txtJustification').val();
-    //var manager = $('#cboManager').val();
     var requestorId = $('#txtReqName').data("requestorid");
     var vendor = $('#cboVendors').val();
     var productType = $('#cboProductType').val();
     var billingAddress = $('#txtBillAddress').val().replace(/(\r\n|\n|\r)/gm, " ");
     var shippingAddress = $('#txtShipAddress').val().replace(/\n/gm, "\\n");
-    //var comment = ($('#lblComment').data("commented") == true) ? $('#lblComment').text() : "";
     var signedBy = $('#txtSig').val();
 
-    var saveParams = //"priority=" + priority
-        + "terms=" + terms
+    var saveParams = "terms=" + terms
         + "&dateRequested=" + dateRequested
-        //+ "&dateRequired=" + dateRequired
         + "&justification=" + encodeURIComponent(justification)
-        //+ "&manager=" + manager
         + "&requestorId=" + requestorId
         + "&vendor=" + vendor
         + "&productType=" + productType
         + "&billingAddress=" + encodeURIComponent(billingAddress)
         + "&shippingAddress=" + encodeURIComponent(shippingAddress)
-        //+ "&comment=" + encodeURIComponent(comment)
         + "&signedBy=" + signedBy;
 
     // Save PO form data
