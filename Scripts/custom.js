@@ -125,13 +125,13 @@ $(document).ready(function () {
         });
 
         // Update the totals when the mini invoice is changed
-        $("span[name='spPrice']").blur(function (e) {
-            UpdateItems(e.target.id);
+        $(document).delegate("span[name='spPrice']", "blur", function (e) {
+            UpdateItems();
         });
-        $("span[name='spQuantity']").blur(function (e) {
-            alert("quantity blur");
-            UpdateItems(e.target.id);
+        $(document).delegate("span[name='spQuantity']", "blur", function (e) {
+            UpdateItems();
         });
+
         $("#taxTotal").blur(function (e) {
             UpdateItems();
         });
@@ -581,24 +581,16 @@ function AddItems() {
     $('#txtQuantity').val("1");
 }
 
-function RecalcRowTotal(eTarget) {
-    var row = $(eTarget).closest($("tr"));
-    var price = parseFloat(row.find("span[name='spPrice']").text());
-    var quantity = parseInt(row.find("span[name='spQuantity']").text());
-
-    row.find($("span[name='spRowTotal']")).text(parseFloat(price * quantity));
-}
-
 // Auto-update preview invoice when values change *also used to update the subtotals & totals of print page invoice*
-function UpdateItems(eTarget) {
+function UpdateItems() {
     if ($('#tblItemizedList > tbody tr').length > 0) {
-        RecalcRowTotal(eTarget);
 
         var totPrice = 0;
         var totShipping = 0;
         var totTax = 0;
         $('#tblItemizedList > tbody tr').each(function (i) {
             totPrice += parseFloat($(this).find("span[name='spPrice']").text()) * parseInt($(this).find("span[name='spQuantity']").text());
+            $(this).find("span[name='spRowTotal']").text(parseFloat($(this).find("span[name='spPrice']").text()) * parseInt($(this).find("span[name='spQuantity']").text()));
         });
         $("#subTotal").text("$" + totPrice.toFixed(2));
         totShipping = parseFloat($("#shipTotal").text().replace((/\d(?=(\d{3})+\.)/g, '$&,')));
