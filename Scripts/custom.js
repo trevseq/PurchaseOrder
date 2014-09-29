@@ -348,7 +348,7 @@ $(document).ready(function () {
 function PopShipAddr() {
     // Clear old shipping value
     $("#txtShipAddress").val("");
-    // TODO: DON'T HARDCODE THIS vvvvv
+    // TODO: FIX ADP FEED DB LOCATIONS TABLE SO I DON'T NEED TO HARD CODE THIS!
     // Get the office address
     var offAddr;
     if ($("#cboOffice>option:selected").data("officeid") === 2)
@@ -563,11 +563,11 @@ function AddItems() {
     var rowTotal = parseFloat($('#txtPrice').val().replace("$", "")) * parseFloat($('#txtQuantity').val());
     rowTotal = rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     var row = "<tr name='invRow'><td><img src='" + pathName + "/Images/delete-32x32.png'" + "title='Delete this item.' style='height:20px;width:20px;cursor:pointer' /></td>" +
-        "<td><span name='spProduct' contenteditable='true'>" + $('#txtProduct').val() + "</span></td>" +
-        "<td style='display:none'><span name='spPartNo' contenteditable='true'>" + $('#txtPartNo').val() + "</span></td>" +
-        "<td style='display:none'><span name='spDescription' contenteditable='true'>" + $('#txtDescription').val() + "</span></td>" +
-        "<td class='text-center'><span name='spQuantity' contenteditable='true'>" + $('#txtQuantity').val() + "</span></td>" +
-        "<td class='text-right'>$<span name='spPrice' contenteditable='true'>" + $('#txtPrice').val().replace("$", "") + "</span></td>" +
+        "<td><span name='spProduct' class='editBorder' contenteditable='true'>" + $('#txtProduct').val() + "</span></td>" +
+        "<td style='display:none'><span name='spPartNo' class='editBorder' contenteditable='true'>" + $('#txtPartNo').val() + "</span></td>" +
+        "<td style='display:none'><span name='spDescription' class='editBorder' contenteditable='true'>" + $('#txtDescription').val() + "</span></td>" +
+        "<td class='text-center'><span name='spQuantity' class='editBorder' contenteditable='true'>" + $('#txtQuantity').val() + "</span></td>" +
+        "<td class='text-right'>$<span name='spPrice' class='editBorder' contenteditable='true'>" + $('#txtPrice').val().replace("$", "") + "</span></td>" +
         "<td class='text-right'>$<span name='spRowTotal'>" + rowTotal + "</span></td></tr>";
     $('#tblItemizedList').find("tbody").append(row);
 
