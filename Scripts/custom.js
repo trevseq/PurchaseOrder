@@ -287,9 +287,6 @@ $(document).ready(function () {
                 else if (activeTab == 1) {
                     $('#outerContainer').append("<button id='tab1AddItem' name='tabAdd' class='btn btn-primary tabSpecific'>Add Item</button>");
                 }
-                //else if (activeTab == 2) {
-                //    $('#outerContainer').append("<button id='tab2AddItem' name='tabAdd' class='btn btn-primary tabSpecific'>Add Product</button>");
-                //}
             }
         });
         // Fetch Vendor tab content
@@ -322,21 +319,6 @@ $(document).ready(function () {
                 $('#dbTableTabs-2').html("<ol>" + options + "</ol>");
             }
         });
-        // Fetch Terms tab content
-        //$.ajax({
-        //    type: "GET",
-        //    url: (pathName + "Home/GetPaymentTerms"),
-        //    dataType: "JSON",
-        //    cache: false,
-        //    success: function (data) {
-        //        var options = $.map(data, function (e) {
-        //            tName = e.Name;
-        //            return "<li>" + "<a id='termLink" + e.Id + "' style='cursor: pointer;'  data-id='" + e.Id + "' class='termLink'>" + tName + "</a></li>";
-        //        });
-        //        options = options.join("");
-        //        $('#dbTableTabs-3').html("<ol>" + options + "</ol>");
-        //    }
-        //});
 
         /*----------- EVENT HANDLERS ------------------------*/
 
@@ -348,11 +330,6 @@ $(document).ready(function () {
         $(document).delegate("a[id^='prodLink']", "click", function (e) {
             ProdDialog($(e.target).data("id"));
         });
-        // Opens the term that was clicked (for editing/removal)
-        //$(document).delegate("a[id^='termLink']", "click", function (e) {
-        //    TermDialog($(e.target).data("id"));
-        //});
-        // Add item button (works in all three tabs)
         $(document).delegate("button[name='tabAdd']", "click", function (e) {
             if (e.target.id == 'tab0AddItem') {
                 VendDialog(null);
@@ -360,9 +337,6 @@ $(document).ready(function () {
             else if (e.target.id == 'tab1AddItem') {
                 ProdDialog(null);
             }
-            //else if (e.target.id == 'tab2AddItem') {
-            //    TermDialog(null);
-            //}
         });
     }
 });
