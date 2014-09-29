@@ -128,6 +128,20 @@ $(document).ready(function () {
            e.preventDefault();
         });
 
+        // Update the totals when the mini invoice is changed
+        $("span[name='spPrice']").blur(function (e) {
+            UpdateItems();
+        });
+        $("span[name='spQuantity']").blur(function (e) {
+            UpdateItems();
+        });
+        $("#taxTotal").blur(function (e) {
+            UpdateItems();
+        });
+        $("#shipTotal").blur(function (e) {
+            UpdateItems();
+        });
+
         // Submit form button
         $("#btnSubmit").click(function (e) {
             ValidateInputs();
@@ -648,16 +662,16 @@ function AddItems() {
     var rowTotal = parseFloat($('#txtPrice').val().replace("$", "")) * parseFloat($('#txtQuantity').val());
     rowTotal = rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     var row = "<tr name='invRow'><td><img src='" + pathName + "/Images/delete-32x32.png'" + "title='Delete this item.' style='height:20px;width:20px;cursor:pointer' /></td>" +
-        "<td><span name='spProduct'>" + $('#txtProduct').val() + "</span></td>" +
-        "<td style='display:none'><span name='spPartNo'>" + $('#txtPartNo').val() + "</span></td>" +
-        "<td style='display:none'><span name='spDescription'>" + $('#txtDescription').val() + "</span></td>" +
-        "<td class='text-center'><span name='spQuantity'>" + $('#txtQuantity').val() + "</span></td>" +
-        "<td class='text-right'>$<span name='spPrice'>" + $('#txtPrice').val().replace("$", "") + "</span></td>" +
+        "<td><span name='spProduct' contenteditable='true'>" + $('#txtProduct').val() + "</span></td>" +
+        "<td style='display:none'><span name='spPartNo' contenteditable='true'>" + $('#txtPartNo').val() + "</span></td>" +
+        "<td style='display:none'><span name='spDescription' contenteditable='true'>" + $('#txtDescription').val() + "</span></td>" +
+        "<td class='text-center'><span name='spQuantity' contenteditable='true'>" + $('#txtQuantity').val() + "</span></td>" +
+        "<td class='text-right'>$<span name='spPrice' contenteditable='true'>" + $('#txtPrice').val().replace("$", "") + "</span></td>" +
         "<td class='text-right'>$" + rowTotal + "</td></tr>";
     $('#tblItemizedList').find("tbody").append(row);
 
     UpdateItems();
-
+    
     // clear form vals
     $('#txtProduct').val("");
     $('#txtDescription').val("");
@@ -668,16 +682,24 @@ function AddItems() {
 
 // Auto-update preview invoice when values change *also used to update the subtotals & totals of print page invoice*
 function UpdateItems() {
-    var totPrice = 0;
-    var totShipping = 0;
-    var totTax = 0;
-    $('#tblItemizedList > tbody tr').each(function (i) {
-        totPrice += parseFloat($(this).find("span[name='spPrice']").text()) * parseInt($(this).find("span[name='spQuantity']").text());
-    });
-    $("#subTotal").text("$" + totPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-    $("#shipTotal").text("$0.00");
-    $("#taxTotal").text("$0.00");
-    $("#grandTotal").text("$" + (totPrice + totShipping + totTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    if ($('#tblItemizedList > tbody tr').length > 0) {
+        var totPrice = 0;
+        var totShipping = 0;
+        var totTax = 0;
+        $('#tblItemizedList > tbody tr').each(function (i) {
+            totPrice += parseFloat($(this).find("span[name='spPrice']").text()) * parseInt($(this).find("span[name='spQuantity']").text());
+        });
+        $("#subTotal").text("$" + totPrice.toFixed(2));
+        totShipping = parseFloat($("#shipTotal").text().replace((/\d(?=(\d{3})+\.)/g, '$&,')));
+        totTax = parseFloat($("#taxTotal").text().replace((/\d(?=(\d{3})+\.)/g, '$&,')));
+        $("#grandTotal").text("$" + (totPrice + totShipping + totTax).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    }
+    else {
+        $("#subTotal").text("$0.00")
+        $("#shipTotal").text("0.00")
+        $("#taxTotal").text("0.00")
+        $("#grandTotal").text("$0.00")
+    }
 }
 
 // Clear form vals
