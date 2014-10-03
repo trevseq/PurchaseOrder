@@ -215,7 +215,7 @@ $(document).ready(function () {
                 var terms = data.info.Terms;
                 var justi = data.info.Justification;
                 var shipAddr = data.info.ShippingAddress.replace(/(\\n)/gm, "\n");
-                var com = data.info.Comment;
+                //var com = data.info.Comment;
                 var orderDate = data.info.OrderDate;
                 var addr = data.info.Address1;
                 var cName = data.info.Name;
@@ -228,7 +228,7 @@ $(document).ready(function () {
 
                 $("#invoiceOrderDate").text(orderDate);
                 $('#lblPaymentTerms').text(terms);
-                $('#lblComment').text(com);
+                //$('#lblComment').text(com);
                 $('#lblPONum').text(poNum);
                 $('#lblVendors').text(vendor);
                 $('#lblVContactName').text(cName);
@@ -246,8 +246,8 @@ $(document).ready(function () {
                     var prod = data.subItems[p].Product;
                     var quan = data.subItems[p].Quantity;
                     var price = data.subItems[p].Price;
-                    var tax = data.subItems[p].Tax;
-                    var ship = data.subItems[p].Shipping;
+                    //var tax = data.subItems[p].Tax;
+                    //var ship = data.subItems[p].Shipping;
                     var desc = data.subItems[p].Description;
                     var partNum = data.subItems[p].PartNumber;
                     var rowTotal = parseFloat(price) * parseFloat(quan) + parseFloat(tax) + parseFloat(ship);
@@ -258,8 +258,8 @@ $(document).ready(function () {
                     row += "<td><span name='spDescription'>" + desc + "</span></td>";
                     row += "<td><span name='spQuantity'>" + quan + "</span></td>";
                     row += "<td class='text-right'>$<span name='spPrice'>" + price + "</span></td>";
-                    row += "<td class='text-right'>$<span name='spShipping'>" + ship + "</span></td>";
-                    row += "<td class='text-right'>$<span name='spTax'>" + tax + "</span></td>";
+                    //row += "<td class='text-right'>$<span name='spShipping'>" + ship + "</span></td>";
+                    //row += "<td class='text-right'>$<span name='spTax'>" + tax + "</span></td>";
                     row += "<td class='text-right'>$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
 
                     $('#tblItemizedList').find("tbody").append(row);
@@ -684,6 +684,8 @@ function Submit() {
     var billingAddress = $('#txtBillAddress').val().replace(/(\r\n|\n|\r)/gm, " ");
     var shippingAddress = $('#txtShipAddress').val().replace(/\n/gm, "\\n");
     var signedBy = $('#txtSig').val();
+    var tax = $("#taxTotal").text();
+    var shipping = $("#shipTotal").text();
 
     var saveParams = "terms=" + terms
         + "&dateRequested=" + dateRequested
@@ -693,6 +695,8 @@ function Submit() {
         + "&productType=" + productType
         + "&billingAddress=" + encodeURIComponent(billingAddress)
         + "&shippingAddress=" + encodeURIComponent(shippingAddress)
+        + "&tax=" + tax
+        + "&shipping=" + shipping
         + "&signedBy=" + signedBy;
 
     // Save PO form data
@@ -709,8 +713,6 @@ function Submit() {
                 var description = $(this).find("span[name='spDescription']").text();
                 var quantity = $(this).find("span[name='spQuantity']").text();
                 var price = $(this).find("span[name='spPrice']").text();
-                var shipping = $(this).find("span[name='spShipping']").text();
-                var tax = $(this).find("span[name='spTax']").text();
 
                 var itemParams = "purchaseNumber=" + purchaseNum
                     + "&product=" + product
@@ -718,8 +720,6 @@ function Submit() {
                     + "&description=" + encodeURIComponent(description)
                     + "&quantity=" + quantity
                     + "&price=" + price
-                    + "&shipping=" + shipping
-                    + "&tax=" + tax;
 
                 // Save ordered items
                 $.ajax({

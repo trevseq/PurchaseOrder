@@ -19,7 +19,6 @@ namespace PurchaseOrder.Models
         public string Priority { get; set; }
         public string Terms { get; set; }
         public System.DateTime DateRequested { get; set; }
-        public Nullable<System.DateTime> DateRequired { get; set; }
         public string Justification { get; set; }
         public string Manager { get; set; }
         public Nullable<int> RequestorId { get; set; }
@@ -27,7 +26,8 @@ namespace PurchaseOrder.Models
         public string ProductType { get; set; }
         public string BillingAddress { get; set; }
         public string ShippingAddress { get; set; }
-        public string Comment { get; set; }
+        public Nullable<decimal> Tax { get; set; }
+        public Nullable<decimal> Shipping { get; set; }
         public string SignedBy { get; set; }
         public System.DateTime OrderDate { get; set; }
     }

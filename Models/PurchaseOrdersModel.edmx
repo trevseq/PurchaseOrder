@@ -55,8 +55,6 @@
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="Price" Type="varchar(max)" Nullable="false" />
-          <Property Name="Shipping" Type="varchar(max)" />
-          <Property Name="Tax" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="PurchaseOrders">
           <Key>
@@ -67,7 +65,6 @@
           <Property Name="Priority" Type="varchar(max)" />
           <Property Name="Terms" Type="varchar(max)" />
           <Property Name="DateRequested" Type="datetime" Nullable="false" />
-          <Property Name="DateRequired" Type="datetime" />
           <Property Name="Justification" Type="varchar(max)" />
           <Property Name="Manager" Type="varchar(max)" />
           <Property Name="RequestorId" Type="int" />
@@ -75,7 +72,8 @@
           <Property Name="ProductType" Type="varchar(max)" />
           <Property Name="BillingAddress" Type="varchar(max)" />
           <Property Name="ShippingAddress" Type="varchar(max)" />
-          <Property Name="Comment" Type="varchar(max)" />
+          <Property Name="Tax" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Shipping" Type="decimal" Precision="18" Scale="2" />
           <Property Name="SignedBy" Type="varchar(max)" />
           <Property Name="OrderDate" Type="datetime" Nullable="false" />
         </EntityType>
@@ -130,9 +128,9 @@
           <EntitySet Name="ProductCategories" EntityType="PurchaseOrdersModel.ProductCategory" />
           <EntitySet Name="Products" EntityType="PurchaseOrdersModel.Product" />
           <EntitySet Name="PurchaseOrderItems" EntityType="PurchaseOrdersModel.PurchaseOrderItem" />
-          <EntitySet Name="PurchaseOrders" EntityType="PurchaseOrdersModel.PurchaseOrder" />
           <EntitySet Name="Vendors" EntityType="PurchaseOrdersModel.Vendor" />
           <EntitySet Name="Vendors_Contact" EntityType="PurchaseOrdersModel.Vendors_Contact" />
+          <EntitySet Name="PurchaseOrders" EntityType="PurchaseOrdersModel.PurchaseOrder" />
         </EntityContainer>
         <EntityType Name="PaymentTerm">
           <Key>
@@ -184,29 +182,6 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Shipping" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Tax" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="PurchaseOrder">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PurchaseNumber" Type="Int32" />
-          <Property Name="Priority" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Terms" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="DateRequested" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateRequired" Type="DateTime" Precision="3" />
-          <Property Name="Justification" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Manager" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="RequestorId" Type="Int32" />
-          <Property Name="Vendor" Type="Int32" />
-          <Property Name="ProductType" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="BillingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ShippingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="SignedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Vendor">
           <Key>
@@ -239,7 +214,28 @@
           <Property Name="LastModified" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-      </Schema>
+        <EntityType Name="PurchaseOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseNumber" Type="Int32" />
+          <Property Name="Priority" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Terms" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateRequested" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Justification" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Manager" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RequestorId" Type="Int32" />
+          <Property Name="Vendor" Type="Int32" />
+          <Property Name="ProductType" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BillingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ShippingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Tax" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Shipping" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SignedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -291,35 +287,11 @@
           <EntitySetMapping Name="PurchaseOrderItems">
             <EntityTypeMapping TypeName="PurchaseOrdersModel.PurchaseOrderItem">
               <MappingFragment StoreEntitySet="PurchaseOrderItems">
-                <ScalarProperty Name="Tax" ColumnName="Tax" />
-                <ScalarProperty Name="Shipping" ColumnName="Shipping" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
                 <ScalarProperty Name="Product" ColumnName="Product" />
-                <ScalarProperty Name="PurchaseNumber" ColumnName="PurchaseNumber" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrders">
-            <EntityTypeMapping TypeName="PurchaseOrdersModel.PurchaseOrder">
-              <MappingFragment StoreEntitySet="PurchaseOrders">
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="SignedBy" ColumnName="SignedBy" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="ShippingAddress" ColumnName="ShippingAddress" />
-                <ScalarProperty Name="BillingAddress" ColumnName="BillingAddress" />
-                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
-                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
-                <ScalarProperty Name="RequestorId" ColumnName="RequestorId" />
-                <ScalarProperty Name="Manager" ColumnName="Manager" />
-                <ScalarProperty Name="Justification" ColumnName="Justification" />
-                <ScalarProperty Name="DateRequired" ColumnName="DateRequired" />
-                <ScalarProperty Name="DateRequested" ColumnName="DateRequested" />
-                <ScalarProperty Name="Terms" ColumnName="Terms" />
-                <ScalarProperty Name="Priority" ColumnName="Priority" />
                 <ScalarProperty Name="PurchaseNumber" ColumnName="PurchaseNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -354,6 +326,28 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrders">
+            <EntityTypeMapping TypeName="PurchaseOrdersModel.PurchaseOrder">
+              <MappingFragment StoreEntitySet="PurchaseOrders">
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="SignedBy" ColumnName="SignedBy" />
+                <ScalarProperty Name="Shipping" ColumnName="Shipping" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="ShippingAddress" ColumnName="ShippingAddress" />
+                <ScalarProperty Name="BillingAddress" ColumnName="BillingAddress" />
+                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="RequestorId" ColumnName="RequestorId" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Justification" ColumnName="Justification" />
+                <ScalarProperty Name="DateRequested" ColumnName="DateRequested" />
+                <ScalarProperty Name="Terms" ColumnName="Terms" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="PurchaseNumber" ColumnName="PurchaseNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

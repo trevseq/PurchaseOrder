@@ -21,7 +21,5 @@ namespace PurchaseOrder.Models
         public string Description { get; set; }
         public int Quantity { get; set; }
         public string Price { get; set; }
-        public string Shipping { get; set; }
-        public string Tax { get; set; }
     }
 }

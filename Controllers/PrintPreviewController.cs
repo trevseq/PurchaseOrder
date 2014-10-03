@@ -34,9 +34,11 @@ namespace PurchaseOrder.Controllers
                             p.Terms,
                             p.Justification,
                             p.ShippingAddress,
-                            p.Comment,
+                            //p.Comment,
                             p.OrderDate,
                             p.RequestorId,
+                            p.Tax,
+                            p.Shipping,
                             v.Address1,
                             VendName = v.Name,
                             c.Name,
@@ -52,8 +54,8 @@ namespace PurchaseOrder.Controllers
                                 i.Product,
                                 i.Quantity,
                                 i.Price,
-                                i.Tax,
-                                i.Shipping,
+                                //i.Tax,
+                                //i.Shipping,
                                 i.Description,
                                 i.PartNumber
                             });

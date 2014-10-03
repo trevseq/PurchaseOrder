@@ -145,7 +145,10 @@ namespace PurchaseOrder.Controllers
             string productType = null,
             string billingAddress = null,
             string shippingAddress = null,
+            double tax = 0.00,
+            double shipping = 0.00,
             //string comment = null,
+            
             string signedBy = null)
         {
             var db = new PurchaseOrdersEntities();
@@ -153,7 +156,6 @@ namespace PurchaseOrder.Controllers
             var pNumber = (from n in db.PurchaseOrders
                            orderby n.PurchaseNumber descending
                            select n.PurchaseNumber).FirstOrDefault();
-
             if (pNumber == null)
             {
                 pNumber = 0;
@@ -171,6 +173,8 @@ namespace PurchaseOrder.Controllers
             po.ProductType = productType;
             po.BillingAddress = billingAddress;
             po.ShippingAddress = shippingAddress;
+            po.Tax = tax;
+            po.Shipping = shipping;
             //po.Comment = comment;
             po.SignedBy = signedBy;
             po.OrderDate = DateTime.Now;
@@ -193,8 +197,6 @@ namespace PurchaseOrder.Controllers
         /// <param name="description"></param>
         /// <param name="quantity"></param>
         /// <param name="price"></param>
-        /// <param name="shipping"></param>
-        /// <param name="tax"></param>
         /// <returns>JsonResult success boolean.</returns>
         public ActionResult SaveOrderedItems(
             int purchaseNumber,
@@ -202,9 +204,7 @@ namespace PurchaseOrder.Controllers
             string partNumber,
             string description,
             int quantity,
-            string price,
-            string shipping,
-            string tax)
+            string price)
         {
             bool _success = false;
             try
@@ -218,8 +218,6 @@ namespace PurchaseOrder.Controllers
                 poi.Description = description;
                 poi.Quantity = quantity;
                 poi.Price = price;
-                poi.Shipping = shipping;
-                poi.Tax = tax;
 
                 db.SaveChanges();
                 _success = true;
