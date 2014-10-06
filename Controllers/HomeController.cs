@@ -145,8 +145,8 @@ namespace PurchaseOrder.Controllers
             string productType = null,
             string billingAddress = null,
             string shippingAddress = null,
-            double tax = 0.00,
-            double shipping = 0.00,
+            decimal tax = decimal.MinValue,
+            decimal shipping = decimal.MinValue,
             //string comment = null,
             
             string signedBy = null)
@@ -203,7 +203,7 @@ namespace PurchaseOrder.Controllers
             string product,
             string partNumber,
             string description,
-            int quantity,
+            string quantity,
             string price)
         {
             bool _success = false;

@@ -9,10 +9,10 @@
         <EntityTypeShape EntityType="PurchaseOrdersModel.POAppAccess" Width="1.5" PointX="0.5" PointY="0.625" />
         <EntityTypeShape EntityType="PurchaseOrdersModel.ProductCategory" Width="1.5" PointX="2.75" PointY="2.75" />
         <EntityTypeShape EntityType="PurchaseOrdersModel.Product" Width="1.5" PointX="2.75" PointY="0.625" />
-        <EntityTypeShape EntityType="PurchaseOrdersModel.PurchaseOrderItem" Width="1.5" PointX="5.75" PointY="5" />
         <EntityTypeShape EntityType="PurchaseOrdersModel.Vendor" Width="1.5" PointX="8.75" PointY="0.625" />
         <EntityTypeShape EntityType="PurchaseOrdersModel.Vendors_Contact" Width="1.5" PointX="10.625" PointY="0.625" />
         <EntityTypeShape EntityType="PurchaseOrdersModel.PurchaseOrder" Width="1.5" PointX="5.75" PointY="0.625" />
+        <EntityTypeShape EntityType="PurchaseOrdersModel.PurchaseOrderItem" Width="1.5" PointX="5.625" PointY="5.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

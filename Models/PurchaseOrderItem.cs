@@ -19,7 +19,7 @@ namespace PurchaseOrder.Models
         public string Product { get; set; }
         public string PartNumber { get; set; }
         public string Description { get; set; }
-        public int Quantity { get; set; }
+        public string Quantity { get; set; }
         public string Price { get; set; }
     }
 }

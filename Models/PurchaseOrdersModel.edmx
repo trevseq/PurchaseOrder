@@ -53,7 +53,7 @@
           <Property Name="Product" Type="varchar(max)" />
           <Property Name="PartNumber" Type="varchar(max)" />
           <Property Name="Description" Type="varchar(max)" />
-          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="varchar(max)" Nullable="false" />
           <Property Name="Price" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="PurchaseOrders">
@@ -127,10 +127,10 @@
           <EntitySet Name="POAppAccesses" EntityType="PurchaseOrdersModel.POAppAccess" />
           <EntitySet Name="ProductCategories" EntityType="PurchaseOrdersModel.ProductCategory" />
           <EntitySet Name="Products" EntityType="PurchaseOrdersModel.Product" />
-          <EntitySet Name="PurchaseOrderItems" EntityType="PurchaseOrdersModel.PurchaseOrderItem" />
           <EntitySet Name="Vendors" EntityType="PurchaseOrdersModel.Vendor" />
           <EntitySet Name="Vendors_Contact" EntityType="PurchaseOrdersModel.Vendors_Contact" />
           <EntitySet Name="PurchaseOrders" EntityType="PurchaseOrdersModel.PurchaseOrder" />
+          <EntitySet Name="PurchaseOrderItems" EntityType="PurchaseOrdersModel.PurchaseOrderItem" />
         </EntityContainer>
         <EntityType Name="PaymentTerm">
           <Key>
@@ -170,18 +170,6 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderItem">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PurchaseNumber" Type="Int32" />
-          <Property Name="Product" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PartNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Vendor">
           <Key>
@@ -235,6 +223,18 @@
           <Property Name="SignedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="PurchaseOrderItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseNumber" Type="Int32" />
+          <Property Name="Product" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PartNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -280,19 +280,6 @@
                 <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrderItems">
-            <EntityTypeMapping TypeName="PurchaseOrdersModel.PurchaseOrderItem">
-              <MappingFragment StoreEntitySet="PurchaseOrderItems">
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
-                <ScalarProperty Name="Product" ColumnName="Product" />
-                <ScalarProperty Name="PurchaseNumber" ColumnName="PurchaseNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -347,6 +334,19 @@
                 <ScalarProperty Name="DateRequested" ColumnName="DateRequested" />
                 <ScalarProperty Name="Terms" ColumnName="Terms" />
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="PurchaseNumber" ColumnName="PurchaseNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderItems">
+            <EntityTypeMapping TypeName="PurchaseOrdersModel.PurchaseOrderItem">
+              <MappingFragment StoreEntitySet="PurchaseOrderItems">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
                 <ScalarProperty Name="PurchaseNumber" ColumnName="PurchaseNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

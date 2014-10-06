@@ -189,7 +189,8 @@ $(document).ready(function () {
                     $('#txtVcontactFax').val(data.Fax);
 
                     if (data.Name != null) {
-                        (data.Title != null) ? $('#lblVContactName').text(data.Name + " (" + data.Title + ")") : $('#lblVContactName').text(data.Name);
+                        $('#lblVContactName').text(data.Name);
+                        //(data.Title != null) ? $('#lblVContactName').text(data.Name + " (" + data.Title + ")") : $('#lblVContactName').text(data.Name);
                     }
                     (data.Ext != null) ? $('#lblVContactPhone').text(data.Phone + ":" + data.Ext) : $('#lblVContactPhone').text(data.Phone);
                     (data.Fax != null) ? $('#lblVContactFax').text(data.Fax) : "";
@@ -584,7 +585,6 @@ function AddItems() {
 // Auto-update preview invoice when values change *also used to update the subtotals & totals of print page invoice*
 function UpdateItems() {
     if ($('#tblItemizedList > tbody tr').length > 0) {
-
         var totPrice = 0;
         var totShipping = 0;
         var totTax = 0;
