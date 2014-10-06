@@ -212,7 +212,7 @@ $(document).ready(function () {
             success: function (data) {
                 // Order info: (PO#, terms, justification, shipaddr, vend contact info, et cetera)
                 var poNum = data.info.PurchaseNumber;
-                var priority = data.info.Priority;
+                //var priority = data.info.Priority;
                 var terms = data.info.Terms;
                 var justi = data.info.Justification;
                 var shipAddr = data.info.ShippingAddress.replace(/(\\n)/gm, "\n");
@@ -224,7 +224,9 @@ $(document).ready(function () {
                 var cFax = data.info.Fax;
                 var vendor = data.info.VendName;
                 var reqId = data.info.requestorId;
-
+                var tax = (data.info.Tax === 0 || data.info.Tax === null) ? tax = "0.00" : tax = tax;
+                var shipping = (data.info.Shipping === 0 || data.info.Shipping === null) ? shipping = "0.00" : shipping = shipping;
+                
                 orderDate = parseDate(orderDate);
 
                 $("#invoiceOrderDate").text(orderDate);
@@ -238,6 +240,8 @@ $(document).ready(function () {
                 $('#lblVContactAddress').text(addr);
                 $('#lblShipAddress').text(shipAddr);
                 $('#lblJustification').text(justi);
+                $('#taxTotal').text(tax);
+                $('#shipTotal').text(shipping);
 
                 $('#lblReqName').text(data.req.FirstName + " " + data.req.LastName);
                 $('#lblReqEmail').text(data.req.Email);
@@ -251,14 +255,14 @@ $(document).ready(function () {
                     //var ship = data.subItems[p].Shipping;
                     var desc = data.subItems[p].Description;
                     var partNum = data.subItems[p].PartNumber;
-                    var rowTotal = parseFloat(price) * parseFloat(quan) + parseFloat(tax) + parseFloat(ship);
+                    var rowTotal = parseFloat(price) * parseFloat(quan);// + parseFloat(tax) + parseFloat(ship);
 
                     var row = "<tr name='invRow'>";
                     row += "<td><span name='spProduct'>" + prod + "</span></td>";
                     row += "<td><span name='spPartNo'>" + partNum + "</span></td>";
                     row += "<td><span name='spDescription'>" + desc + "</span></td>";
                     row += "<td><span name='spQuantity'>" + quan + "</span></td>";
-                    row += "<td class='text-right'>$<span name='spPrice'>" + price + "</span></td>";
+                    row += "<td class='text-right'>$<span name='spPrice'>" + parseFloat(price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</span></td>";
                     //row += "<td class='text-right'>$<span name='spShipping'>" + ship + "</span></td>";
                     //row += "<td class='text-right'>$<span name='spTax'>" + tax + "</span></td>";
                     row += "<td class='text-right'>$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
