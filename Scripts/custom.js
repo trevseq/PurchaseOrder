@@ -95,7 +95,6 @@ $(document).ready(function () {
         PopForm();
         ClearForm();
 
-
         /*----------- EVENT HANDLERS ------------------------*/
 
         // Update invoice ship address based on textarea value
