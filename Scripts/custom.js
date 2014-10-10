@@ -84,11 +84,17 @@ $(document).ready(function () {
                 else {
                     $('#admin').remove();
                 }
-                // Populate the form after retrieving the requestor info
-                PopForm();
-                ClearForm();
+            },
+            error: function (data) {
+                $('#admin').remove();
+                alert("Oops! Something went wrong when trying to retrieve your information.");
             }
         });
+
+        // Populate the form after retrieving the requestor info
+        PopForm();
+        ClearForm();
+
 
         /*----------- EVENT HANDLERS ------------------------*/
 
@@ -402,13 +408,12 @@ function PopShipAddr() {
 
 // Form Page populator
 function PopForm() {
-    PopShipAddr();
-
     // Populate Invoice
     $('#lblJustification').text($('#txtJustification').val());
-
     // Datepicker
     $('#txtDateRequested').datepicker().datepicker('setDate', new Date());
+
+    PopShipAddr();
 }
 
 // Edit page vendor dialog
