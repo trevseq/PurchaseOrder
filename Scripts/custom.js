@@ -168,6 +168,22 @@ $(document).ready(function () {
             }
         });
 
+        // Product Category Selection
+        //$('#cboProductType').change(function () {
+        //    $.ajax({
+        //        type: "GET",
+        //        dataType: "JSON",
+        //        url: pathName + "Home/GetProduct",
+        //        cache: false,
+        //        success: function (data) {
+        //            var options = $.map(data, function (e) {
+        //                return "<option value=\"" + e.Id + "\">" + e.Name + "</option>";
+        //            }).join("");
+        //            $("#cboProductType").html("<option value=\"\" selected=\"\">Select...</option>" + options);
+        //        }
+        //    });
+        //});
+
         // Vendors dropdown controls
         $('#cboVendors').change(function () {
             $("input[id^='txtVContact'").val("");
@@ -205,7 +221,7 @@ $(document).ready(function () {
         UpdateItems();
     }
 
-        /*=============== Print Page ========================*/
+    /*=============== Print Page ========================*/
     else if (urlLower.indexOf("printpreview") > -1) {
         // Get data from server and populate fields on page
         var PONumber = GetUrlValue("purchaseNumber");
