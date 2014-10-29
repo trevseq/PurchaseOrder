@@ -149,7 +149,7 @@ namespace PurchaseOrder.Controllers
             decimal tax = decimal.MinValue,
             decimal shipping = decimal.MinValue,
             //string comment = null,
-            
+
             string signedBy = null)
         {
             var db = new PurchaseOrdersEntities();

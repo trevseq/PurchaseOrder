@@ -224,7 +224,7 @@ $(document).ready(function () {
         UpdateItems();
     }
 
-    /*=============== Print Page ========================*/
+        /*=============== Print Page ========================*/
     else if (urlLower.indexOf("printpreview") > -1) {
         // Get data from server and populate fields on page
         var PONumber = GetUrlValue("purchaseNumber");
@@ -250,7 +250,7 @@ $(document).ready(function () {
                 var reqId = data.info.requestorId;
                 var tax = (data.info.Tax === 0 || data.info.Tax === null) ? tax = "0.00" : tax = tax;
                 var shipping = (data.info.Shipping === 0 || data.info.Shipping === null) ? shipping = "0.00" : shipping = shipping;
-                
+
                 orderDate = parseDate(orderDate);
 
                 $("#invoiceOrderDate").text(orderDate);
