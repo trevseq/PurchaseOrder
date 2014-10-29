@@ -169,20 +169,23 @@ $(document).ready(function () {
         });
 
         // Product Category Selection
-        //$('#cboProductType').change(function () {
-        //    $.ajax({
-        //        type: "GET",
-        //        dataType: "JSON",
-        //        url: pathName + "Home/GetProduct",
-        //        cache: false,
-        //        success: function (data) {
-        //            var options = $.map(data, function (e) {
-        //                return "<option value=\"" + e.Id + "\">" + e.Name + "</option>";
-        //            }).join("");
-        //            $("#cboProductType").html("<option value=\"\" selected=\"\">Select...</option>" + options);
-        //        }
-        //    });
-        //});
+        $('#cboProductType').change(function () {
+            var ProdCatId = $('#cboProductType').val();
+            if (ProdCatId > 0) {
+                $.ajax({
+                    type: "GET",
+                    dataType: "JSON",
+                    url: pathName + "Home/GetProduct?Category=" + ProdCatId,
+                    cache: false,
+                    success: function (data) {
+                        var options = $.map(data, function (e) {
+                            return "<option value=\"" + e.Id + "\">" + e.Name + "</option>";
+                        }).join("");
+                        $("#cboProduct").html("<option value=\"\" selected=\"\">Select...</option>" + options);
+                    }
+                });
+            }
+        });
 
         // Vendors dropdown controls
         $('#cboVendors').change(function () {
@@ -575,10 +578,10 @@ function ProdDialog(i) {
                     });
                 }
             },
+            close: function () {
+                //do something here...
+            }
         },
-        close: function () {
-            //do something here...
-        }
     });
     dialog.dialog("open");
 }

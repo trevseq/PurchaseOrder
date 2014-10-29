@@ -79,14 +79,15 @@ namespace PurchaseOrder.Controllers
             };
         }
 
-        public ActionResult GetProducts()
+        public ActionResult GetProducts(int Category)
         {
             var db = new PurchaseOrdersEntities();
-            var o = db.Products;
+            var p = db.Products;
+            var data = p.Where(e => e.ProductCategoryId == Category);
 
             return new JsonResult()
             {
-                Data = o,
+                Data = new { data },
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
