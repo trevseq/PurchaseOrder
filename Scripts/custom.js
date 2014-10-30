@@ -172,14 +172,15 @@ $(document).ready(function () {
         $('#cboProductType').change(function () {
             var ProdCatId = $('#cboProductType').val();
             if (ProdCatId > 0) {
+                $("#cboProduct").html("");
                 $.ajax({
                     type: "GET",
                     dataType: "JSON",
-                    url: pathName + "Home/GetProduct?Category=" + ProdCatId,
+                    url: pathName + "Home/GetProducts?Category=" + ProdCatId,
                     cache: false,
                     success: function (data) {
-                        var options = $.map(data, function (e) {
-                            return "<option value=\"" + e.Id + "\">" + e.Name + "</option>";
+                        var options = $.map(data.data, function (e, i) {
+                            return "<option data-productid=\"" + e.Id + "\">" + e.Name + "</option>";
                         }).join("");
                         $("#cboProduct").html("<option value=\"\" selected=\"\">Select...</option>" + options);
                     }
@@ -197,7 +198,8 @@ $(document).ready(function () {
             $('#txtVContactAddress').val(address);
             $('#txtVContactHyperlink').html("<a href='" + $("#cboVendors option:selected").data("site") + "' title='" + $("#cboVendors option:selected").data("site") + "' >" + $("#cboVendors option:selected").text() + "</a>");
             $('#lblVendors').text($("#cboVendors option:selected").text());
-            (address.length > 0) ? $('#lblVContactAddress').text(address) : "";
+            if (address !== null)
+                (address.length > 0) ? $('#lblVContactAddress').text(address) : "";
 
             // Fetch vendor contact info
             $.ajax({
