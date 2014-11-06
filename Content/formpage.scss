@@ -81,11 +81,14 @@ textarea {
 }
 
 #hdnEditButton{
-    float: left;
+    float: right;
+    margin-right: 4%;
 }
 
 #hdnViewRecordButton{
     float: right;
+    margin-right: 5%;
+    margin-left: -25%;
 }
 
 .editBorder{

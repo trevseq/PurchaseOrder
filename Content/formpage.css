@@ -190,10 +190,13 @@ textarea {
   white-space: pre-wrap; }
 
 #hdnEditButton {
-  float: left; }
+  float: right;
+  margin-right: 4%; }
 
 #hdnViewRecordButton {
-  float: right; }
+  float: right;
+  margin-right: 5%;
+  margin-left: -25%; }
 
 .editBorder {
   border: 1px solid #0094ff; }
