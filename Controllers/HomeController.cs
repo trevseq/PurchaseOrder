@@ -21,7 +21,7 @@ namespace PurchaseOrder.Controllers
         /// <returns>JsonResult with the user's identity, as well as whether or not they are a purchase order administrator.</returns>
         public ActionResult GetRequestor()
         {
-            object[] o = Helper.GetRequestorForView(this.User.Identity.Name);//Environment.UserName
+            object[] o = Helper.GetRequestorForView(this.User.Identity.Name);
             return new JsonResult()
             {
                 Data = new { requestor = o[0], isAdmin = o[1] },

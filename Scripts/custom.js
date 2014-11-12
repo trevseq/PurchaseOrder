@@ -238,11 +238,9 @@ $(document).ready(function () {
             success: function (data) {
                 // Order info: (PO#, terms, justification, shipaddr, vend contact info, et cetera)
                 var poNum = data.info.PurchaseNumber;
-                //var priority = data.info.Priority;
                 var terms = data.info.Terms;
                 var justi = data.info.Justification;
                 var shipAddr = data.info.ShippingAddress.replace(/(\\n)/gm, "\n");
-                //var com = data.info.Comment;
                 var orderDate = data.info.OrderDate;
                 var addr = data.info.Address1;
                 var cName = data.info.Name;
@@ -257,7 +255,6 @@ $(document).ready(function () {
 
                 $("#invoiceOrderDate").text(orderDate);
                 $('#lblPaymentTerms').text(terms);
-                //$('#lblComment').text(com);
                 $('#lblPONum').text(poNum);
                 $('#lblVendors').text(vendor);
                 $('#lblVContactName').text(cName);
@@ -277,11 +274,9 @@ $(document).ready(function () {
                     var prod = data.subItems[p].Product;
                     var quan = data.subItems[p].Quantity;
                     var price = data.subItems[p].Price;
-                    //var tax = data.subItems[p].Tax;
-                    //var ship = data.subItems[p].Shipping;
                     var desc = data.subItems[p].Description;
                     var partNum = data.subItems[p].PartNumber;
-                    var rowTotal = parseFloat(price) * parseFloat(quan);// + parseFloat(tax) + parseFloat(ship);
+                    var rowTotal = parseFloat(price) * parseFloat(quan);
 
                     var row = "<tr name='invRow'>";
                     row += "<td><span name='spProduct'>" + prod + "</span></td>";
@@ -289,8 +284,6 @@ $(document).ready(function () {
                     row += "<td><span name='spDescription'>" + desc + "</span></td>";
                     row += "<td><span name='spQuantity'>" + quan + "</span></td>";
                     row += "<td class='text-right'>$<span name='spPrice'>" + parseFloat(price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</span></td>";
-                    //row += "<td class='text-right'>$<span name='spShipping'>" + ship + "</span></td>";
-                    //row += "<td class='text-right'>$<span name='spTax'>" + tax + "</span></td>";
                     row += "<td class='text-right'>$" + rowTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "</td></tr>";
 
                     $('#tblItemizedList').find("tbody").append(row);
@@ -524,7 +517,7 @@ function VendDialog(i) {
             },
         },
         close: function () {
-            //do something here...
+            //TODO: do something here...
         }
     });
     dialog.dialog("open");
@@ -581,7 +574,7 @@ function ProdDialog(i) {
                 }
             },
             close: function () {
-                //do something here...
+                //TODO: do something here...
             }
         },
     });
@@ -677,25 +670,6 @@ function parseDate(strdate) {
     return d;
 }
 
-// Unused
-function formatAMPM(date) {
-    var d = new Date(parseInt(date.match(/\d{13}/), 10));
-    var strTime = formatAMPMFromDate(d);
-    return strTime;
-}
-
-// Unused
-function formatAMPMFromDate(date) {
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
-    return strTime;
-}
-
 // Validate form input fields before submission
 function ValidateInputs() {
     // Validation here if necessary in future...
@@ -704,6 +678,7 @@ function ValidateInputs() {
 
 // Form submit and ajax calls
 function Submit() {
+    //TODO: finish me!
     var terms = $('#lblPaymentTerms').text();
     var dateRequested = $('#txtDateRequested').val();
     var justification = $('#txtJustification').val();
