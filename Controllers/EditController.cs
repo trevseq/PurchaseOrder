@@ -4,9 +4,14 @@ using System.Web.Mvc;
 
 namespace PurchaseOrder.Controllers
 {
+    // TODO: fill out summaries and add comments!
     public class EditController : Controller
     {
         // GET: Edit
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Default()
         {
             string u = Helper.GetEmployeeId(this.User.Identity.Name);
@@ -26,6 +31,11 @@ namespace PurchaseOrder.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult GetVend(int id)
         {
             var db = new PurchaseOrdersEntities();
@@ -63,6 +73,11 @@ namespace PurchaseOrder.Controllers
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult GetProd(int id)
         {
             var db = new PurchaseOrdersEntities();
@@ -77,6 +92,11 @@ namespace PurchaseOrder.Controllers
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult GetTerm(int id)
         {
             var db = new PurchaseOrdersEntities();
@@ -95,6 +115,12 @@ namespace PurchaseOrder.Controllers
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="table"></param>
+        /// <returns></returns>
         public ActionResult RemoveEntry(int id, string table)
         {
             bool success = false;
@@ -141,6 +167,13 @@ namespace PurchaseOrder.Controllers
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public ActionResult SaveTerm(int? id, string name, string value)
         {
             bool success = false;
@@ -172,6 +205,12 @@ namespace PurchaseOrder.Controllers
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public ActionResult SaveProds(int? id, string name)
         {
             bool success = false;
@@ -202,6 +241,21 @@ namespace PurchaseOrder.Controllers
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="website"></param>
+        /// <param name="address"></param>
+        /// <param name="comments"></param>
+        /// <param name="vendName"></param>
+        /// <param name="vendTitle"></param>
+        /// <param name="vendEmail"></param>
+        /// <param name="vendPhone"></param>
+        /// <param name="vendExt"></param>
+        /// <param name="vendFax"></param>
+        /// <returns></returns>
         public ActionResult SaveVend(int? id,
             string name,
             string website,
